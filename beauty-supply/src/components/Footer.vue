@@ -1,0 +1,125 @@
+<template>
+  <footer class="mt-20 pt-14 border-t-2 border-[#ccc]">
+    <div class="flex justify-start gap-24 px-14 max-xl:px-10 max-sm:px-5">
+      <h3 class="text-4xl text-center">Sydney Beauty <br />Supply</h3>
+      <div class="flex justify-center gap-10">
+        <div class="col">
+          <p class="text-sm mb-4">QUICK LINKS</p>
+          <ul>
+            <li v-for="link in quickLinks" :key="link" class="text-sm mb-3 capitalize">
+              <a href="#">{{ link }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <p class="text-sm mb-4">SUPPORT</p>
+          <ul>
+            <li v-for="support in supports" :key="support" class="text-sm mb-3">
+              <a href="#">{{ support }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <p class="text-sm mb-4">POLICY</p>
+          <ul>
+            <li v-for="policy in policies" :key="policy" class="text-sm mb-3 capitalize">
+              <a href="#">{{ policy }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col">
+          <p class="text-sm mb-4">Follow Us</p>
+          <ul class="grid grid-cols-5">
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faFacebook" size="1x" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faSnapchat" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faTwitter" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faInstagram" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faPinterest" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faYoutube" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faTiktok" />
+              </a>
+            </li>
+            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+              <a href="#">
+                <FontAwesomeIcon :icon="faLinkedin" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="text-center my-3 text-sm">
+      @2025 Sydney Beauty Supply. Design by Haseeb.ur.rehman All Rights Reserved.
+    </p>
+  </footer>
+</template>
+
+<script setup lang="ts">
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faPinterest,
+  faSnapchat,
+  faTiktok,
+  faTwitter,
+  faYoutube,
+} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { ref } from 'vue'
+
+const quickLinks = ref([
+  'home',
+  'hair care',
+  'skin & beauty',
+  'men smartwatches',
+  'clothing',
+  'accessories',
+  'blog',
+])
+
+const supports = ref([
+  'FAQs',
+  'Track Your Order',
+  'Warranty Registration',
+  'Shipping Details',
+  'Terms & Conditions',
+])
+
+const policies = ref([
+  'privacy policy',
+  'warranty policy',
+  'cooperate policy',
+  'registration complaints',
+])
+</script>
+
+<style>
+</style>
