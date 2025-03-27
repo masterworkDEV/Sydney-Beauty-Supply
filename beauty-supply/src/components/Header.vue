@@ -1,27 +1,26 @@
 <template>
   <header
     :class="isActive && 'active'"
-    class="header bg-white fixed right-0 left-0 top-0 py-6 max-sm:py-4 flex flex-wrap items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
+    class="header bg-white fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
   >
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
       <span
-        class="self-center text-xl max-sm:text-[1rem] font-semibold whitespace-nowrap text-black"
-        >Sydney Beauty Supply</span
+        class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-black"
+        :class="isActive && 'text-white'"
+        >M Beauty Supply</span
       >
     </a>
     <nav class="p-1" :class="isActive && 'dark:bg-[#fafafa] rounded'">
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul
-          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 nav-links"
-        >
+        <ul class="nav-links flex justify-center gap-10 max-xl:gap-3">
           <li class="link text-sm transition-all" :class="isActive && 'active dark:text-black  '">
             <a href="#" aria-current="page">Home</a>
           </li>
           <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
-            <a href="#about">Hair care</a>
+            <a href="#about">Hair</a>
           </li>
           <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
-            <a href="#service">Skin & Beauty</a>
+            <a href="#service">Skin</a>
           </li>
           <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
             <a href="#projects">Clothing</a>
@@ -36,16 +35,16 @@
       </div>
     </nav>
     <div class="max-sm:hidden">
-      <ul class="flex items-center gap-5">
+      <ul class="flex items-center gap-5 max-xl:gap-3">
         <li>
-          <FontAwesomeIcon :icon="faSearch" />
+          <FontAwesomeIcon :icon="faSearch" :color="`${isActive ? 'white' : 'black'}`" />
         </li>
         <li>
-          <FontAwesomeIcon :icon="faBagShopping" />
+          <FontAwesomeIcon :icon="faBagShopping" :color="`${isActive ? 'white' : 'black'}`" />
         </li>
         <li class="flex items-end gap-2">
-          <span>NGN</span>
-          <FontAwesomeIcon :icon="faArrowTurnDown" />
+          <small :class="isActive ? 'text-white' : 'text-black'">NGN</small>
+          <FontAwesomeIcon :icon="faArrowDown" :color="`${isActive ? 'white' : 'black'}`" />
         </li>
       </ul>
     </div>
@@ -72,7 +71,7 @@ window.addEventListener('scroll', () => {
 </script>
 <style>
 .header.active {
-  background: linear-gradient(to bottom, #4d454c58, #b394a539, #6a585839);
+  background: linear-gradient(to bottom, #18171858, #0a070939, #08080839);
   backdrop-filter: blur(12px);
 }
 
@@ -86,6 +85,6 @@ window.addEventListener('scroll', () => {
   scale: 0.95;
 }
 .link.active {
-  color: white;
+  color: #fafafa;
 }
 </style>

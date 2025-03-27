@@ -1,9 +1,11 @@
 <template>
-  <footer class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:border-t border-[#ccc]">
+  <footer class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:pt-10 max-sm:border-t border-[#ccc]">
     <div
-      class="flex justify-start gap-24 px-12 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
+      class="flex justify-start gap-24 px-12 max-xl:gap-10 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
     >
-      <h3 class="text-4xl max-sm:text-3xl text-center">Sydney Beauty <br />Supply</h3>
+      <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
+        Sydney Beauty <br />Supply
+      </h3>
       <div class="flex justify-center gap-7 max-sm:grid max-sm:grid-cols-2">
         <div class="col">
           <p class="text-[.8rem] mb-4">QUICK LINKS</p>
@@ -31,7 +33,7 @@
         </div>
 
         <div class="col">
-          <p class="text-[.8rem] mb-4">Follow Us</p>
+          <p class="text-[.8rem] mb-4 uppercase">Follow Us</p>
           <ul class="grid grid-cols-5 max-sm:grid-cols-3">
             <li class="p-2 w-14 flex justify-center border border-[#ccc]">
               <a href="#">
@@ -77,7 +79,7 @@
         </div>
       </div>
     </div>
-    <p class="text-center mt-10 pb-3 text-[.8rem] max-sm:mt-10">
+    <p class="text-center mt-10 pb-3 text-[.8rem] max-sm:text-[.55rem] max-sm:mt-10">
       @2025 Sydney Beauty Supply. Design by Haseeb.ur.rehman All Rights Reserved.
     </p>
   </footer>

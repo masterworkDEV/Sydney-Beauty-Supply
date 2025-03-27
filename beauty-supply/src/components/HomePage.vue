@@ -2,13 +2,13 @@
   <Header />
   <main class="min-h-screen w-full">
     <section class="relative w-full h-screen max-xl:h-auto max-sm:h-[650px]">
-      <img :src="heroImage" alt="Hero image" class="w-full h-full object-center z-0" />
+      <img :src="heroBanner" alt="Hero image" class="w-full h-full object-center z-0" />
       <div
         class="flex items-center absolute right-0 left-0 bottom-0 max-sm:flex-col-reverse max-sm:gap-10"
       >
         <div class="w-full px-12 max-xl:px-7 max-sm:px-5 max-sm:pb-3 max-sm:text-center">
           <h1
-            class="text-6xl uppercase tracking-normal leading-14 max-sm:leading-7 max-lg:text-5xl max-md:text-4xl max-sm:text-3xl"
+            class="text-6xl uppercase tracking-normal max-sm:leading-7 max-xl:text-5xl max-md:text-4xl max-sm:text-3xl"
           >
             Healthy skin <br />
             happy life always
@@ -24,7 +24,7 @@
           </button>
         </div>
         <div class="w-full h-3/4 px-12 max-xl:px-7 max-sm:px-5">
-          <img :src="imageBanner" :alt="imageBanner" class="w-full max-h-[550px] object-cover" />
+          <img :src="imageBanner2" :alt="imageBanner" class="w-full max-h-[550px] object-cover" />
         </div>
       </div>
     </section>
@@ -55,11 +55,13 @@
       </button>
       <div class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 gap-3">
         <div
-          class="card border border-gray-300 pb-1"
+          class="card border border-gray-300 pb-1 hover:shadow-2xl transition-all"
           v-for="product in trendingProducts"
           :key="product.id"
         >
-          <img :src="imageBanner" alt="" />
+          <div class="image w-full">
+            <img :src="imageBanner" alt="" />
+          </div>
           <span class="flex justify-between items-center my-2 mx-2">
             <h6 class="text-sm max-sm:text-[.8rem]">{{ product.title }}</h6>
             <h6
@@ -79,7 +81,9 @@
                 NGN
               </p>
             </span>
-            <button class="bg-black text-white text-[.7rem] rounded-full p-2 max-sm:text-[.55rem]">
+            <button
+              class="bg-black text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90"
+            >
               Add To Cart
             </button>
           </div>
@@ -96,11 +100,13 @@
       </button>
       <div class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 gap-3">
         <div
-          class="card border border-gray-300 pb-1"
+          class="card border border-gray-300 pb-1 hover:shadow-2xl transition-all"
           v-for="product in newArrivalProducts"
           :key="product.id"
         >
-          <img :src="imageBanner" alt="" />
+          <div class="image w-full">
+            <img :src="imageBanner" alt="" />
+          </div>
           <span class="flex justify-between items-center my-2 mx-2">
             <h6 class="text-sm max-sm:text-[.8rem]">{{ product.title }}</h6>
             <h6
@@ -120,7 +126,9 @@
                 NGN
               </p>
             </span>
-            <button class="bg-black text-white text-[.7rem] rounded-full p-2 max-sm:text-[.55rem]">
+            <button
+              class="bg-black text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90"
+            >
               Add To Cart
             </button>
           </div>
@@ -160,19 +168,21 @@
     <div class="mt-20 max-sm:h-screen ml-12 max-xl:ml-7 max-sm:mx-5">
       <div class="flex items-center justify-between h-full max-sm:flex-col max-sm:pt-20">
         <div
-          class="w-[90%] max-sm:w-full border-r-2 border-[#ccc] max-sm:border-l-0 max-sm:border-b-1 max-sm:pb-4"
+          class="w-[90%] max-sm:w-full border-r-2 border-[#ccc] max-sm:border-r-0 max-sm:border-b-1 max-sm:pb-4"
         >
           <img
-            :src="imageBundle"
+            :src="imageBanner"
             alt="Daily skin care bundle"
-            class="w-full h-96 object-cover pr-4 max-sm:pr-0"
+            class="w-full h-96 pr-4 max-sm:pr-0"
           />
         </div>
         <form
           class="w-full h-full flex justify-center flex-col items-center"
           @submit.prevent="subscribe"
         >
-          <h3 class="text-4xl max-sm:text-2xl text-center">Contact Me For More Update</h3>
+          <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
+            Contact Me For More Update
+          </h3>
           <p class="tracking-normal text-sm text-center my-5">
             Sign up now to hear about our latest offers, new products,<br />
             collaborations, all things straight to your inbox.
@@ -185,9 +195,12 @@
               name="email"
               min="8"
               placeholder="Your e-mail"
-              class="border border-[#ccc] p-1 h-10 rounded-md text-[1rem] w-[40%] max-sm:w-2/4"
+              class="border border-[#ccc] p-2 h-10 max-xl:h-8 rounded-md text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
             />
-            <button type="submit" class="bg-black text-white w-24 h-10 p-1 text-[.7rem] rounded-md">
+            <button
+              type="submit"
+              class="bg-black text-white w-24 h-10 max-xl:h-8 p-2 max-xl:p-0 text-[.7rem] rounded-md"
+            >
               SUBSCRIBE
             </button>
           </div>
@@ -211,9 +224,10 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 
 // Static image imports (better for build-time optimization)
-import heroImage from '../assets/images/hero.jpg'
-import imageBanner from '../assets/images/image-banner.jpg'
+import heroBanner from '../assets/images/hero.jpg'
+import imageBanner from '../assets/images/image-banner.png'
 import imageBundle from '../assets/images/bundle.png'
+import imageBanner2 from '../assets/images/image-banner2.jpg'
 
 // Interface for Product Data (BEST PRACTICE)
 interface Product {
@@ -253,6 +267,86 @@ const trendingProducts: Product[] = [
   },
   {
     id: 2,
+    title: 'KERATHIN Hair Mask',
+    description: 'Dry & Damaged Hair Repair',
+    price: 500,
+    originalPrice: 700,
+    discount: 73,
+    currency: 'NGN', // Added currency
+    image: imageBanner, // Use the imported image
+    brand: 'Example Brand',
+    category: 'Hair Care',
+    stock: 100,
+    rating: 4.5,
+    ingredients: ['Keratin', 'Argan Oil'],
+    benefits: ['Repair', 'Hydrate'],
+  },
+  {
+    id: 3,
+    title: 'KERATHIN Hair Mask',
+    description: 'Dry & Damaged Hair Repair',
+    price: 500,
+    originalPrice: 700,
+    discount: 73,
+    currency: 'NGN', // Added currency
+    image: imageBanner, // Use the imported image
+    brand: 'Example Brand',
+    category: 'Hair Care',
+    stock: 100,
+    rating: 4.5,
+    ingredients: ['Keratin', 'Argan Oil'],
+    benefits: ['Repair', 'Hydrate'],
+  },
+  {
+    id: 3,
+    title: 'KERATHIN Hair Mask',
+    description: 'Dry & Damaged Hair Repair',
+    price: 500,
+    originalPrice: 700,
+    discount: 73,
+    currency: 'NGN', // Added currency
+    image: imageBanner, // Use the imported image
+    brand: 'Example Brand',
+    category: 'Hair Care',
+    stock: 100,
+    rating: 4.5,
+    ingredients: ['Keratin', 'Argan Oil'],
+    benefits: ['Repair', 'Hydrate'],
+  },
+  {
+    id: 3,
+    title: 'KERATHIN Hair Mask',
+    description: 'Dry & Damaged Hair Repair',
+    price: 500,
+    originalPrice: 700,
+    discount: 73,
+    currency: 'NGN', // Added currency
+    image: imageBanner, // Use the imported image
+    brand: 'Example Brand',
+    category: 'Hair Care',
+    stock: 100,
+    rating: 4.5,
+    ingredients: ['Keratin', 'Argan Oil'],
+    benefits: ['Repair', 'Hydrate'],
+  },
+  {
+    id: 3,
+    title: 'KERATHIN Hair Mask',
+    description: 'Dry & Damaged Hair Repair',
+    price: 500,
+    originalPrice: 700,
+    discount: 73,
+    currency: 'NGN', // Added currency
+    image: imageBanner, // Use the imported image
+    brand: 'Example Brand',
+    category: 'Hair Care',
+    stock: 100,
+    rating: 4.5,
+    ingredients: ['Keratin', 'Argan Oil'],
+    benefits: ['Repair', 'Hydrate'],
+  },
+  {
+    id: 3,
     title: 'KERATHIN Hair Mask',
     description: 'Dry & Damaged Hair Repair',
     price: 500,
@@ -334,6 +428,86 @@ const newArrivalProducts: Product[] = [
     ingredients: ['New Ingredient 1', 'New Ingredient 2'],
     benefits: ['Benefit 1', 'Benefit 2'],
   },
+  {
+    id: 6,
+    title: 'New Arrival 3',
+    description: 'Description of New Arrival 3',
+    price: 600,
+    originalPrice: 800,
+    discount: 25,
+    currency: 'NGN',
+    image: imageBanner,
+    brand: 'New Brand',
+    category: 'Skincare',
+    stock: 50,
+    rating: 4.8,
+    ingredients: ['New Ingredient 1', 'New Ingredient 2'],
+    benefits: ['Benefit 1', 'Benefit 2'],
+  },
+  {
+    id: 6,
+    title: 'New Arrival 3',
+    description: 'Description of New Arrival 3',
+    price: 600,
+    originalPrice: 800,
+    discount: 25,
+    currency: 'NGN',
+    image: imageBanner,
+    brand: 'New Brand',
+    category: 'Skincare',
+    stock: 50,
+    rating: 4.8,
+    ingredients: ['New Ingredient 1', 'New Ingredient 2'],
+    benefits: ['Benefit 1', 'Benefit 2'],
+  },
+  {
+    id: 6,
+    title: 'New Arrival 3',
+    description: 'Description of New Arrival 3',
+    price: 600,
+    originalPrice: 800,
+    discount: 25,
+    currency: 'NGN',
+    image: imageBanner,
+    brand: 'New Brand',
+    category: 'Skincare',
+    stock: 50,
+    rating: 4.8,
+    ingredients: ['New Ingredient 1', 'New Ingredient 2'],
+    benefits: ['Benefit 1', 'Benefit 2'],
+  },
+  {
+    id: 6,
+    title: 'New Arrival 3',
+    description: 'Description of New Arrival 3',
+    price: 600,
+    originalPrice: 800,
+    discount: 25,
+    currency: 'NGN',
+    image: imageBanner,
+    brand: 'New Brand',
+    category: 'Skincare',
+    stock: 50,
+    rating: 4.8,
+    ingredients: ['New Ingredient 1', 'New Ingredient 2'],
+    benefits: ['Benefit 1', 'Benefit 2'],
+  },
+  {
+    id: 6,
+    title: 'New Arrival 3',
+    description: 'Description of New Arrival 3',
+    price: 600,
+    originalPrice: 800,
+    discount: 25,
+    currency: 'NGN',
+    image: imageBanner,
+    brand: 'New Brand',
+    category: 'Skincare',
+    stock: 50,
+    rating: 4.8,
+    ingredients: ['New Ingredient 1', 'New Ingredient 2'],
+    benefits: ['Benefit 1', 'Benefit 2'],
+  },
 ]
 
 const productCategories = [
@@ -376,5 +550,15 @@ const subscribe = () => {
 <style>
 .line-through {
   text-decoration: line-through;
+}
+
+.card > .image {
+  overflow: hidden;
+}
+.card img {
+  transition: 0.25s ease-in-out;
+}
+.card:hover .image > img {
+  scale: 1.2;
 }
 </style>
