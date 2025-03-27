@@ -229,7 +229,6 @@ import imageBanner from '../assets/images/image-banner.png'
 import imageBundle from '../assets/images/bundle.png'
 import imageBanner2 from '../assets/images/image-banner2.jpg'
 
-// Interface for Product Data (BEST PRACTICE)
 interface Product {
   id: number
   title: string
@@ -247,7 +246,6 @@ interface Product {
   benefits: string[]
 }
 
-// Refactor product data into separate variables (BEST PRACTICE)
 const trendingProducts: Product[] = [
   {
     id: 1,
@@ -530,15 +528,15 @@ const subscribe = () => {
     return
   }
 
-  // Simulate a subscription process (replace with your actual API call)
+
   setTimeout(() => {
-    // Simulate success or failure
+
     const success = Math.random() > 0.2 // 80% chance of success
 
     if (success) {
       subscriptionMessage.value = 'Thank you for subscribing!'
       subscriptionStatus.value = 'success'
-      email.value = '' // Clear the input
+      email.value = '' 
     } else {
       subscriptionMessage.value = 'Sorry, there was an error. Please try again.'
       subscriptionStatus.value = 'error'
