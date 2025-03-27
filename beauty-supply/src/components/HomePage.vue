@@ -193,7 +193,7 @@
               v-model="email"
               type="email"
               name="email"
-              min="8"
+              min="6"
               placeholder="Your e-mail"
               class="border border-[#ccc] p-2 h-10 max-xl:h-8 rounded-md text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
             />
