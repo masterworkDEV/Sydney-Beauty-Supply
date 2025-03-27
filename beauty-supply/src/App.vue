@@ -8,5 +8,15 @@ import HomePage from './components/HomePage.vue'
   </div>
 </template>
 
-<style scoped>
+<style >
+html {
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+body {
+  background: #fafafa;
+  width: 100%;
+  height: 100vh;
+}
 </style>

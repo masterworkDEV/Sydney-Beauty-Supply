@@ -1,36 +1,38 @@
 <template>
-  <footer class="mt-20 pt-14 border-t-2 border-[#ccc]">
-    <div class="flex justify-start gap-24 px-14 max-xl:px-10 max-sm:px-5">
-      <h3 class="text-4xl text-center">Sydney Beauty <br />Supply</h3>
-      <div class="flex justify-center gap-10">
+  <footer class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:border-t border-[#ccc]">
+    <div
+      class="flex justify-start gap-24 px-12 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
+    >
+      <h3 class="text-4xl max-sm:text-3xl text-center">Sydney Beauty <br />Supply</h3>
+      <div class="flex justify-center gap-7 max-sm:grid max-sm:grid-cols-2">
         <div class="col">
-          <p class="text-sm mb-4">QUICK LINKS</p>
+          <p class="text-[.8rem] mb-4">QUICK LINKS</p>
           <ul>
-            <li v-for="link in quickLinks" :key="link" class="text-sm mb-3 capitalize">
+            <li v-for="link in quickLinks" :key="link" class="text-[.8rem] mb-3 capitalize">
               <a href="#">{{ link }}</a>
             </li>
           </ul>
         </div>
         <div class="col">
-          <p class="text-sm mb-4">SUPPORT</p>
+          <p class="text-[.8rem] mb-4">SUPPORT</p>
           <ul>
-            <li v-for="support in supports" :key="support" class="text-sm mb-3">
+            <li v-for="support in supports" :key="support" class="text-[.8rem] mb-3">
               <a href="#">{{ support }}</a>
             </li>
           </ul>
         </div>
         <div class="col">
-          <p class="text-sm mb-4">POLICY</p>
+          <p class="text-[.8rem] mb-4">POLICY</p>
           <ul>
-            <li v-for="policy in policies" :key="policy" class="text-sm mb-3 capitalize">
+            <li v-for="policy in policies" :key="policy" class="text-[.8rem] mb-3 capitalize">
               <a href="#">{{ policy }}</a>
             </li>
           </ul>
         </div>
 
         <div class="col">
-          <p class="text-sm mb-4">Follow Us</p>
-          <ul class="grid grid-cols-5">
+          <p class="text-[.8rem] mb-4">Follow Us</p>
+          <ul class="grid grid-cols-5 max-sm:grid-cols-3">
             <li class="p-2 w-14 flex justify-center border border-[#ccc]">
               <a href="#">
                 <FontAwesomeIcon :icon="faFacebook" size="1x" />
@@ -75,7 +77,7 @@
         </div>
       </div>
     </div>
-    <p class="text-center my-3 text-sm">
+    <p class="text-center mt-10 pb-3 text-[.8rem] max-sm:mt-10">
       @2025 Sydney Beauty Supply. Design by Haseeb.ur.rehman All Rights Reserved.
     </p>
   </footer>
