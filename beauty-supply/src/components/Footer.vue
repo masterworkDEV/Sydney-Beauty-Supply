@@ -6,7 +6,7 @@
       <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
         Sydney Beauty <br />Supply
       </h3>
-      <div class="flex justify-center gap-7 max-sm:grid max-sm:grid-cols-2">
+      <div class="flex justify-center gap-10 max-sm:grid max-sm:grid-cols-2">
         <div class="col">
           <p class="text-[.8rem] mb-4">QUICK LINKS</p>
           <ul>
@@ -46,43 +46,43 @@
 
         <div class="col">
           <p class="text-[.8rem] mb-4 uppercase">Follow Us</p>
-          <ul class="grid grid-cols-5 max-sm:grid-cols-3">
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+          <ul class="grid grid-cols-5 max-sm:grid-cols-3 max-sm:flex max-sm:flex-wrap">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faFacebook" size="1x" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faSnapchat" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faTwitter" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faInstagram" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faPinterest" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faYoutube" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faTiktok" />
               </a>
             </li>
-            <li class="p-2 w-14 flex justify-center border border-[#ccc]">
+            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
               <a href="#">
                 <FontAwesomeIcon :icon="faLinkedin" />
               </a>

@@ -3,6 +3,7 @@
     :class="isActive && 'active'"
     class="header bg-white fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
   >
+    <button @click="handleMenu" class="hidden absolute right-3 max-sm:block">menu</button>
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
       <span
         class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-black"
@@ -49,6 +50,11 @@
       </ul>
     </div>
   </div>
+  <div
+    v-if="isMenu"
+    class="hidden max-sm:block w-3/4 h-full bg-white fixed top-0 right-0 left-0 z-40"
+  ></div>
+  <div v-if="isMenu" class="hidden max-sm:block fixed w-full h-full bg-[rgb(0,0,0,0.5)] z-20"></div>
 </template>
 <script setup lang="ts">
 import {
@@ -62,12 +68,19 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faArrowTurnDown } from '@fortawesome/free-solid-svg-icons/faArrowTurnDown'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 import { ref } from 'vue'
 
-const isActive = ref<'true' | 'false' | false>(false)
+const isActive = ref<'true' | false>(false)
+const isMenu = ref<'true' | false>(false)
+
 window.addEventListener('scroll', () => {
   window.scrollY > 590 ? (isActive.value = 'true') : (isActive.value = false)
 })
+
+const handleMenu = () => {
+  isMenu.value = 'true'
+}
 </script>
 <style>
 .header.active {

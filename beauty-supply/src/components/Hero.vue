@@ -16,7 +16,7 @@
           clean, effective products
         </p>
         <button
-          class="bg-amber-950 text-white w-36 p-2.5 text-sm max-sm:text-[.8rem] rounded-full max-xl:w-32 max-xl:p-2 max-md:w-30"
+          class="bg-amber-950 text-white w-36 p-2.5 text-sm max-sm:text-[.8rem] rounded-full max-xl:w-32 max-xl:p-2 max-md:w-30 hover:text-black hover:bg-white hover:shadow transition-all"
         >
           Shop Now
         </button>

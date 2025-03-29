@@ -1,8 +1,8 @@
 <template>
   <section class="mt-20 max-sm:h-screen ml-12 max-xl:ml-7 max-sm:mx-5">
-    <div class="flex items-center justify-between h-full max-sm:flex-col max-sm:pt-20">
+    <div class="flex items-center justify-between h-full max-sm:flex-col max-sm:pt-10">
       <div
-        class="w-[90%] max-sm:w-full border-r-2 border-[#ccc] max-sm:border-r-0 max-sm:border-b-1 max-sm:pb-4"
+        class="w-[90%] max-xl:w-3/4 max-sm:w-full border-r-2 border-[#ccc] max-sm:border-r-0 max-sm:border-b-1 max-sm:pb-4"
       >
         <img
           :src="imageBanner"
@@ -17,7 +17,9 @@
         <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
           Contact Me For More Update
         </h3>
-        <p class="tracking-normal text-sm text-center my-5">
+        <p
+          class="tracking-normal text-sm text-center max-xl:px-2 my-5 max-sm:text-[.8rem] max-sm:px-0"
+        >
           Sign up now to hear about our latest offers, new products,<br />
           collaborations, all things straight to your inbox.
         </p>
@@ -29,11 +31,11 @@
             name="email"
             min="6"
             placeholder="Your e-mail"
-            class="border border-[#ccc] p-2 h-10 max-xl:h-8 rounded-md text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
+            class="border border-[#ccc] p-2 h-10 max-xl:h-8 rounded text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
           />
           <button
             type="submit"
-            class="bg-black text-white w-24 h-10 max-xl:h-8 p-2 max-xl:p-0 text-[.7rem] rounded-md"
+            class="bg-black text-white w-24 h-10 max-xl:h-8 p-2 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded"
           >
             SUBSCRIBE
           </button>
@@ -52,6 +54,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
+// static image
+
+import imageBanner from '../assets/images/image-banner.png'
 
 const email = ref('')
 const subscriptionMessage = ref('')
