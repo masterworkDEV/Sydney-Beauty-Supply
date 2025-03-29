@@ -1,5 +1,5 @@
 <template>
-  <header
+  <div
     :class="isActive && 'active'"
     class="header bg-white fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
   >
@@ -7,20 +7,20 @@
       <span
         class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-black"
         :class="isActive && 'text-white'"
-        >M Beauty Supply</span
+        >MBS</span
       >
     </a>
-    <nav class="p-1" :class="isActive && 'dark:bg-[#fafafa] rounded'">
+    <nav class="p-1" :class="isActive && 'bg-[#fafafa] rounded'">
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="nav-links flex justify-center gap-10 max-xl:gap-3">
+        <ul class="nav-links flex justify-center gap-10 max-xl:gap-5">
           <li class="link text-sm transition-all" :class="isActive && 'active dark:text-black  '">
             <a href="#" aria-current="page">Home</a>
           </li>
           <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
-            <a href="#about">Hair</a>
+            <a href="#about">Hair Care</a>
           </li>
           <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
-            <a href="#service">Skin</a>
+            <a href="#service">Skin & Beauty</a>
           </li>
           <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
             <a href="#projects">Clothing</a>
@@ -48,7 +48,7 @@
         </li>
       </ul>
     </div>
-  </header>
+  </div>
 </template>
 <script setup lang="ts">
 import {
@@ -64,9 +64,9 @@ import { faArrowTurnDown } from '@fortawesome/free-solid-svg-icons/faArrowTurnDo
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref } from 'vue'
 
-const isActive = ref(null)
+const isActive = ref<'true' | 'false' | false>(false)
 window.addEventListener('scroll', () => {
-  window.scrollY > 590 ? (isActive.value = true) : (isActive.value = null)
+  window.scrollY > 590 ? (isActive.value = 'true') : (isActive.value = false)
 })
 </script>
 <style>
@@ -85,6 +85,6 @@ window.addEventListener('scroll', () => {
   scale: 0.95;
 }
 .link.active {
-  color: #fafafa;
+  color: #333;
 }
 </style>

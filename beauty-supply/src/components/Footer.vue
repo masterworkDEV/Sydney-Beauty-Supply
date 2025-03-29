@@ -10,7 +10,11 @@
         <div class="col">
           <p class="text-[.8rem] mb-4">QUICK LINKS</p>
           <ul>
-            <li v-for="link in quickLinks" :key="link" class="text-[.8rem] mb-3 capitalize">
+            <li
+              v-for="link in quickLinks"
+              :key="link"
+              class="text-[.8rem] mb-3 capitalize hover:underline hover:opacity-95"
+            >
               <a href="#">{{ link }}</a>
             </li>
           </ul>
@@ -18,7 +22,11 @@
         <div class="col">
           <p class="text-[.8rem] mb-4">SUPPORT</p>
           <ul>
-            <li v-for="support in supports" :key="support" class="text-[.8rem] mb-3">
+            <li
+              v-for="support in supports"
+              :key="support"
+              class="text-[.8rem] mb-3 hover:underline hover:opacity-95"
+            >
               <a href="#">{{ support }}</a>
             </li>
           </ul>
@@ -26,7 +34,11 @@
         <div class="col">
           <p class="text-[.8rem] mb-4">POLICY</p>
           <ul>
-            <li v-for="policy in policies" :key="policy" class="text-[.8rem] mb-3 capitalize">
+            <li
+              v-for="policy in policies"
+              :key="policy"
+              class="text-[.8rem] mb-3 capitalize hover:underline hover:opacity-95"
+            >
               <a href="#">{{ policy }}</a>
             </li>
           </ul>
@@ -125,5 +137,3 @@ const policies = ref([
 ])
 </script>
 
-<style>
-</style>
