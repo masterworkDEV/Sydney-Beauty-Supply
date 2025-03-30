@@ -4,7 +4,7 @@
       class="flex justify-start gap-24 px-12 max-xl:gap-10 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
     >
       <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
-        Sydney Beauty <br />Supply
+        Master Beauty <br />Supply
       </h3>
       <div class="flex justify-center gap-10 max-sm:grid max-sm:grid-cols-2">
         <div class="col">

@@ -31,11 +31,11 @@
             name="email"
             min="6"
             placeholder="Your e-mail"
-            class="border border-[#ccc] p-2 h-10 max-xl:h-8 rounded text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
+            class="border border-[#ccc] h-10 max-xl:h-8 rounded text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
           />
           <button
             type="submit"
-            class="bg-black text-white w-24 h-10 max-xl:h-8 p-2 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded"
+            class="bg-black text-white w-24 h-10 max-xl:h-8 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded"
           >
             SUBSCRIBE
           </button>
