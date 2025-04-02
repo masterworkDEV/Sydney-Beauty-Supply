@@ -102,15 +102,8 @@
   ></div>
 </template>
 <script setup lang="ts">
-import {
-  faArrowDown,
-  faBagShopping,
-  faSearch,
-  faTarpDroplet,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faBagShopping, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 import { ref } from 'vue'
 
 const isActive = ref<'true' | false>(false)
