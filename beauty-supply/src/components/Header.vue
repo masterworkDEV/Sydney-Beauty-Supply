@@ -3,7 +3,9 @@
     :class="isActive && 'active'"
     class="header bg-white fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
   >
-    <button class="menu-btn hidden absolute right-3 max-sm:block hover:border">
+    <button
+      class="menu-btn hidden absolute right-3 max-sm:block hover:border active:animate__animated animate__fadeIn"
+    >
       <FontAwesomeIcon
         :icon="faTimes"
         v-if="isMenu"
@@ -92,9 +94,12 @@
   </div>
   <div
     v-if="isMenu"
-    class="hidden max-sm:block w-3/4 h-full bg-white fixed top-10 right-0 z-40"
+    class="hidden max-sm:block w-3/4 h-full bg-white fixed top-10 right-0 z-40 animate__animated animate__slideInRight animate__delay-0s"
   ></div>
-  <div v-if="isMenu" class="hidden max-sm:block fixed w-full h-full bg-[rgb(0,0,0,0.5)] z-20"></div>
+  <div
+    v-if="isMenu"
+    class="hidden max-sm:block fixed w-full h-full bg-[rgb(0,0,0,0.5)] z-20 animate__animated animate__fadeIn"
+  ></div>
 </template>
 <script setup lang="ts">
 import {
