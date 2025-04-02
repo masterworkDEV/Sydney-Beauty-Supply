@@ -103,17 +103,12 @@
 </template>
 <script setup lang="ts">
 import {
-  faArrowAltCircleDown,
   faArrowDown,
-  faArrowDown19,
-  faArrowDownAZ,
   faBagShopping,
-  faHamburger,
   faSearch,
   faTarpDroplet,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons'
-import { faArrowTurnDown } from '@fortawesome/free-solid-svg-icons/faArrowTurnDown'
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { ref } from 'vue'
