@@ -2,16 +2,15 @@
   <section class="relative w-full h-[85vh] max-xl:h-auto max-sm:mt-10 max-sm:h-[550px]">
     <img :src="heroBanner" alt="Hero image" class="w-full h-full object-center z-0" />
     <div
-      class="flex items-center absolute right-0 left-0 bottom-0 max-sm:flex-col-reverse max-sm:gap-5"
+      class="flex justify-between items-center absolute right-0 left-0 bottom-0 max-sm:flex-col-reverse max-sm:gap-5"
     >
       <div
-        class="w-full px-12 max-xl:px-7 max-sm:px-5 max-sm:pb-7 max-sm:text-center animate__animated animate__fadeInLeft"
+        class="w-full pl-12 max-xl:px-7 max-sm:px-5 max-sm:pb-7 max-sm:text-center animate__animated animate__fadeInLeft"
       >
         <h1
-          class="animate__animated animate__fadeIn animate__delay-2s text-6xl uppercase tracking-normal max-sm:leading-7 max-xl:text-5xl max-md:text-4xl"
+          class="animate__animated animate__fadeIn animate__delay-2s text-6xl uppercase tracking-normal max-xl:text-5xl max-md:text-4xl"
         >
-          Healthy skin <br />
-          happy life always
+          Healthy skin happy life always
         </h1>
         <p
           class="tracking-normal my-3 text-sm animate__animated animate__fadeInUp animate__delay-3s"
@@ -26,12 +25,12 @@
         </button>
       </div>
       <div
-        class="w-full h-3/4 px-12 max-xl:px-7 max-sm:px-5 animate__animated animate__fadeInRight animate__delay-1s"
+        class="w-full h-3/4 max-sm:px-5 animate__animated animate__fadeInRight max-sm:animate__fadeIn"
       >
         <img
           :src="imageBanner2"
           :alt="imageBanner"
-          class="w-full max-h-[700px] max-sm:max-h-[400px] object-cover"
+          class="w-full max-h-full max-sm:max-h-[400px] object-cover"
         />
       </div>
     </div>

@@ -7,6 +7,16 @@
       <span class="text-[1rem] max-sm:text-sm"> Trending Now </span>
       <small class="text-blue-600 text-[.7rem]"> View all </small>
     </button>
+
+    <div v-if="useStore.isLoading">
+      <p>loading please wait...</p>
+    </div>
+    <div v-else-if="useStore.error">
+      <p class="text-center text-red-500 my-5">{{ useStore.errorMessage }}</p>
+    </div>
+    <div v-if="!trendingProducts">
+      <p>Oops no product! was found, kindly reload or check your network</p>
+    </div>
     <div class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3">
       <ProductCard :product-data="trendingProducts" />
     </div>
@@ -14,11 +24,10 @@
 </template>
 
 <script setup lang="ts">
-// prod card
-import ProductCard from './ProductCard.vue'
+import { dataStore } from '../stores/dataStore'
 
-// <!-- static images -->
-import imageBanner from '../assets/images/image-banner.png'
+// product card
+import ProductCard from './ProductCard.vue'
 
 interface Product {
   id: number
@@ -37,135 +46,7 @@ interface Product {
   benefits: string[]
 }
 
-const trendingProducts: Product[] = [
-  {
-    id: 1,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 2,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 3,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 3,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 3,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 3,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 3,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-  {
-    id: 3,
-    title: 'KERATHIN Hair Mask',
-    description: 'Dry & Damaged Hair Repair',
-    price: 500,
-    originalPrice: 700,
-    discount: 73,
-    currency: 'NGN', // Added currency
-    image: imageBanner, // Use the imported image
-    brand: 'Example Brand',
-    category: 'Hair Care',
-    stock: 100,
-    rating: 4.5,
-    ingredients: ['Keratin', 'Argan Oil'],
-    benefits: ['Repair', 'Hydrate'],
-  },
-]
+const useStore = dataStore()
+const trendingProducts: Product[] = useStore.products
 </script>
 

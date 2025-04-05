@@ -64,7 +64,7 @@ const subscriptionMessage = ref('')
 const subscriptionStatus = ref<'success' | 'error' | null>(null) // Added type
 
 const subscribe = () => {
-  // Basic email validation (you'd use a better library in production)
+  // Basic email validation (use a better library in production)
   if (!email.value.includes('@')) {
     subscriptionMessage.value = 'Please enter a valid email address.'
     subscriptionStatus.value = 'error'

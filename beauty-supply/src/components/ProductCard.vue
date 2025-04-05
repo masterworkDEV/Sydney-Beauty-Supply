@@ -1,3 +1,5 @@
+<!-- reusable card -->
+
 <template>
   <div
     class="card border border-gray-300 pb-1 hover:shadow-2xl transition-all"
@@ -12,7 +14,7 @@
       <h6
         class="flex justify-center items-center bg-red-700 text-white p-0.5 text-[.7rem] max-sm:text-[.5rem] uppercase"
       >
-        {{ product.discount }}% off
+        20%% off
       </h6>
     </span>
     <p class="text-gray-600 mb-5 ml-4 text-sm max-sm:text-[.7rem] max-sm:mb-2">
@@ -22,12 +24,13 @@
       <span>
         <h6 class="text-sm max-sm:text-[.8rem]">{{ product.price }} NGN</h6>
         <p class="text-gray-500 text-sm">
-          <span class="line-through max-sm:text-[.55rem]">{{ product.originalPrice }}</span>
+          <span class="line-through max-sm:text-[.55rem]">{{ (product.price * 150) / 100 }}</span>
           NGN
         </p>
       </span>
       <button
         class="bg-black text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90"
+        @click="useCart.addToCart(product)"
       >
         Add To Cart
       </button>
@@ -35,7 +38,11 @@
   </div>
 </template>
 
+
 <script setup lang='ts'>
+import { useAddToCart } from '@/stores/addToCart'
+const useCart = useAddToCart()
+
 const props = defineProps({
   productData: {
     type: Object,

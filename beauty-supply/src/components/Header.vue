@@ -146,9 +146,17 @@ const handleMenuClose = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: none;
 }
+
 .menu-btn > svg {
   width: 80%;
   height: 100%;
+}
+
+@media (max-width: 700px) {
+  .menu-btn {
+    display: block;
+  }
 }
 </style>
