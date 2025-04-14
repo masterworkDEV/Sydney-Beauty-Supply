@@ -3,7 +3,7 @@
 <template>
   <div
     class="card border border-gray-300 pb-1 hover:shadow-2xl transition-all"
-    v-for="product in props.productData"
+    v-for="product in productData"
     :key="product.id"
   >
     <div class="image w-full">
@@ -41,14 +41,24 @@
 
 <script setup lang='ts'>
 import { useAddToCart } from '@/stores/addToCart'
+import { computed } from 'vue'
 const useCart = useAddToCart()
-
 const props = defineProps({
-  productData: {
-    type: Object,
+  products: {
+    type: Array,
     required: true,
   },
 })
+
+interface Products {
+  id: number
+  title: string
+  image: string
+  description: string[]
+  price: number
+  discount: number
+}
+const productData: Products[] = computed(() => props.products)
 </script>
 
 <style>

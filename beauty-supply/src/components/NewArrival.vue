@@ -12,15 +12,11 @@
       <p>loading please wait...</p>
     </div>
     <div v-else-if="useStore.error">
-      <p class="text-center text-red-500 my-5 max-sm:text-sm">{{ useStore.errorMessage }}</p>
+      <p class="text-center my-5 text-sm">{{ useStore.errorMessage }}</p>
     </div>
-    <div v-if="!newArrivalProducts">
-      <p class="text-center text-red-500 my-5 max-sm:text-sm">
-        Oops no product! was found, kindly reload or check youru network
-      </p>
-    </div>
+
     <div v-else class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3">
-      <ProductCard :product-data="newArrivalProducts" />
+      <ProductCard :products="newArrival" />
     </div>
   </section>
 </template>
@@ -32,6 +28,6 @@ import { dataStore } from '../stores/dataStore'
 import ProductCard from './ProductCard.vue'
 
 const useStore = dataStore()
-const newArrivalProducts = computed(() => useStore.products)
+const newArrival = computed(() => useStore.products)
 </script>
 

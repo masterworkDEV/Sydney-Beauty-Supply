@@ -24,9 +24,7 @@
           Shop Now
         </button>
       </div>
-      <div
-        class="w-full h-3/4 max-sm:px-5 animate__animated animate__fadeInRight max-sm:animate__fadeIn"
-      >
+      <div class="w-full h-3/4 max-sm:px-5 animate__animated animate__fadeIn">
         <img
           :src="imageBanner2"
           :alt="imageBanner"
@@ -37,38 +35,9 @@
   </section>
 
   <!-- category list -->
-
-  <div class="flex justify-center text-center items-center">
-    <div class="category mt-16 max-sm:mt-12 max-sm:overflow-x-scroll max-sm:max-w-3/4">
-      <ul class="flex justify-center items-center gap-10">
-        <li
-          class="flex items-center flex-col text-center"
-          v-for="(category, index) in productCategories"
-          :key="index"
-        >
-          <img
-            :src="imageBanner"
-            alt=""
-            class="w-12 h-12 max-sm:w-10 max-sm:h-10 object-cover rounded-full"
-          />
-          <p class="my-2 text-[.8rem] max-sm:text-[.7rem]">{{ category }}</p>
-        </li>
-      </ul>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
-// productCategories
-
-const productCategories = [
-  'Natural Oil',
-  'Textured Hair care',
-  'Glow up',
-  'Comfort Wear',
-  'Beauty tools',
-]
-
 // static images
 import heroBanner from '../assets/images/hero.jpg'
 import imageBanner2 from '../assets/images/image-banner2.png'

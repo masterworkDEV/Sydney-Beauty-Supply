@@ -7,21 +7,66 @@
           <img :src="imageBundle" alt="Daily skin care bundle" class="w-full h-96" />
         </div>
 
-        <div class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96">
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
+        <div
+          v-if="useStore.isLoading"
+          class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96"
+        >
+          <p>Loading</p>
+          <p>Loading</p>
+          <p>Loading</p>
+          <p>Loading</p>
+        </div>
+        <div
+          v-else-if="useStore.error"
+          class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96"
+        >
+          <p>Loading...</p>
+          <p>Loading...</p>
+          <p>Loading...</p>
+          <p>Loading...</p>
+        </div>
+
+        <div v-else class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96">
+          <img
+            class="h-[6rem] w-full"
+            v-for="product in productShowCase.slice(10, 14)"
+            :key="product.id"
+            :src="product.image"
+            :alt="product.title"
+          />
         </div>
       </div>
     </div>
     <div class="mt-20 mx-12 max-xl:mx-7 max-sm:hidden">
       <div class="flex justify-between max-sm:flex-col-reverse gap-10 max-h-96">
-        <div class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96">
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
-          <img :src="imageBanner" alt="" class="h-[6rem] w-full" />
+        <div
+          class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96"
+          v-if="useStore.isLoading"
+        >
+          <div>
+            <p>Loading</p>
+            <p>Loading</p>
+            <p>Loading</p>
+            <p>Loading</p>
+          </div>
+        </div>
+        <div
+          v-else-if="useStore.error"
+          class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96"
+        >
+          <p>Loading...</p>
+          <p>Loading...</p>
+          <p>Loading...</p>
+          <p>Loading...</p>
+        </div>
+        <div class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96" v-else>
+          <img
+            v-for="product in productShowCase.slice(5, 9)"
+            :key="product.id"
+            :src="product.image"
+            :alt="product.title"
+            class="h-[6rem] w-full"
+          />
         </div>
         <div class="w-full h-full flex justify-end">
           <img :src="imageBundle" alt="Daily skin care bundle" class="w-full h-96" />
@@ -32,6 +77,19 @@
 </template>
 
 <script setup lang="ts">
-import imageBanner from '../assets/images/image-banner.png'
+import { dataStore } from '@/stores/dataStore'
+
+const useStore = dataStore()
+
+interface Products {
+  id: number
+  title: string
+  image: string
+}
+const productShowCase: Products[] = computed(() => useStore.products)
+// console.log(productShowCase)
+
+// static image
 import imageBundle from '../assets/images/bundle.png'
+import { computed } from 'vue'
 </script>

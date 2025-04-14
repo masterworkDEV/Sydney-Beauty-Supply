@@ -4,6 +4,7 @@
   </header>
   <main class="min-h-screen w-full">
     <Hero />
+    <select-category />
     <TrendingNow />
     <NewArrival />
     <ShowCase />
@@ -16,6 +17,7 @@
 // imported components
 import Header from './Header.vue'
 import Hero from './Hero.vue'
+import SelectCategory from './SelectCategory.vue'
 import TrendingNow from './TrendingNow.vue'
 import NewArrival from './NewArrival.vue'
 import ShowCase from './ShowCase.vue'

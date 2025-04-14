@@ -6,13 +6,7 @@
     <button
       class="menu-btn hidden absolute right-3 max-sm:block hover:border active:animate__animated animate__fadeIn"
     >
-      <FontAwesomeIcon
-        :icon="faTimes"
-        v-if="isMenu"
-        :color="`${isActive ? 'white' : 'black'}`"
-        @click="handleMenuClose"
-        stroke-width="1"
-      />
+      <FontAwesomeIcon :icon="faTimes" v-if="isMenu" @click="handleMenuClose" stroke-width="1" />
 
       <svg
         viewBox="0 0 24 24"
@@ -26,22 +20,17 @@
         <g id="SVGRepo_iconCarrier">
           <path
             d="M4 7L7 7M20 7L11 7"
-            :stroke="`${isActive ? 'white' : 'black'}`"
+            stroke=" black"
             stroke-width="2"
             stroke-linecap="round"
           ></path>
           <path
             d="M20 17H17M4 17L13 17"
-            :stroke="`${isActive ? 'white' : 'black'}`"
+            stroke="black"
             stroke-width="2"
             stroke-linecap="round"
           ></path>
-          <path
-            d="M4 12H7L20 12"
-            :stroke="`${isActive ? 'white' : 'black'}`"
-            stroke-width="2"
-            stroke-linecap="round"
-          ></path>
+          <path d="M4 12H7L20 12" stroke="black" stroke-width="2" stroke-linecap="round"></path>
         </g>
       </svg>
     </button>
@@ -49,11 +38,10 @@
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
       <span
         class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-black"
-        :class="isActive && 'text-white'"
         >MBS</span
       >
     </a>
-    <nav class="p-1" :class="isActive && 'bg-[#fafafa] rounded max-sm:hidden'">
+    <nav class="p-1" :class="isActive && 'bg-[#f1f1f1] rounded max-sm:hidden'">
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="nav-links flex justify-center gap-10 max-xl:gap-5">
           <li class="link text-sm transition-all" :class="isActive && 'active dark:text-black  '">
@@ -80,22 +68,24 @@
     <div class="max-sm:hidden">
       <ul class="flex items-center gap-5 max-xl:gap-3">
         <li>
-          <FontAwesomeIcon :icon="faSearch" :color="`${isActive ? 'white' : 'black'}`" />
+          <FontAwesomeIcon :icon="faSearch" />
         </li>
         <li>
-          <FontAwesomeIcon :icon="faBagShopping" :color="`${isActive ? 'white' : 'black'}`" />
+          <FontAwesomeIcon :icon="faBagShopping" />
         </li>
         <li class="flex items-end gap-2">
-          <small :class="isActive ? 'text-white' : 'text-black'">NGN</small>
-          <FontAwesomeIcon :icon="faArrowDown" :color="`${isActive ? 'white' : 'black'}`" />
+          <small>NGN</small>
+          <FontAwesomeIcon :icon="faArrowDown" />
         </li>
       </ul>
     </div>
   </div>
-  <div
-    v-if="isMenu"
-    class="hidden max-sm:block w-3/4 h-full bg-white fixed top-10 right-0 z-40 animate__animated animate__slideInRight animate__delay-0s"
-  ></div>
+  <transition name="menu">
+    <div
+      v-if="isMenu"
+      class="hidden max-sm:block w-3/4 h-full bg-white fixed top-10 right-0 z-40"
+    ></div>
+  </transition>
   <div
     v-if="isMenu"
     class="hidden max-sm:block fixed w-full h-full bg-[rgb(0,0,0,0.5)] z-20 animate__animated animate__fadeIn"
@@ -123,7 +113,6 @@ const handleMenuClose = () => {
 </script>
 <style>
 .header.active {
-  background: linear-gradient(to bottom, #18171858, #0a070939, #08080839);
   backdrop-filter: blur(12px);
 }
 
@@ -133,11 +122,29 @@ const handleMenuClose = () => {
   font-size: 0.8rem;
 }
 .link:hover {
-  text-decoration: underline pink 2px;
+  text-decoration: underline grey 2px;
   scale: 0.95;
 }
 .link.active {
   color: #333;
+}
+
+.menu-enter-active {
+  transition: all 0.25s ease;
+  transition-delay: 100ms;
+}
+.menu-leave-active {
+  transition: all 0.3s ease;
+}
+
+.menu-enter-from {
+  transform: translateX(400px);
+  opacity: 0;
+}
+
+.menu-leave-to {
+  opacity: 0.2;
+  transform: translateX(400px);
 }
 
 .menu-btn {
