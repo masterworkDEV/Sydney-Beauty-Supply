@@ -14,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+
 // imported components
 import Header from './Header.vue'
 import Hero from './Hero.vue'
@@ -23,6 +25,8 @@ import NewArrival from './NewArrival.vue'
 import ShowCase from './ShowCase.vue'
 import Contact from './Contact.vue'
 import Footer from './Footer.vue'
+
+onMounted(() => window.addEventListener('scroll', () => window.scrollBy({ top: 0 })))
 </script>
 
 <style>

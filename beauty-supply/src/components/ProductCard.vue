@@ -1,13 +1,13 @@
 <!-- reusable card -->
 
 <template>
-  <div
-    class="card border border-gray-300 pb-1 hover:shadow-2xl transition-all"
+  <article
+    class="card w-full max-h-80 overflow-auto border border-gray-300 pb-1 hover:shadow-2xl transition-all"
     v-for="product in productData"
     :key="product.id"
   >
-    <div class="image w-full">
-      <img :src="product.image" alt="" />
+    <div class="image w-full h-2/4">
+      <img :src="product.image" :alt="product.title" class="w-full h-full object-cover" />
     </div>
     <span class="flex justify-between items-center my-2 mx-2">
       <h6 class="text-sm max-sm:text-[.8rem]">{{ product.title }}</h6>
@@ -17,9 +17,17 @@
         20%% off
       </h6>
     </span>
-    <p class="text-gray-600 mb-5 ml-4 text-sm max-sm:text-[.7rem] max-sm:mb-2">
-      {{ product.description }}
+    <p
+      class="text-gray-600 mb-5 ml-4 text-sm max-sm:text-[.7rem] max-sm:mb-2"
+      @click="handleSeeMore(product.id)"
+    >
+      {{
+        seeMoreStates[product.id]
+          ? product.description.concat('...see less')
+          : product.description.slice(0, 25).concat('...see more')
+      }}
     </p>
+
     <div class="flex justify-between items-center mx-2">
       <span>
         <h6 class="text-sm max-sm:text-[.8rem]">{{ product.price }} NGN</h6>
@@ -35,14 +43,17 @@
         Add To Cart
       </button>
     </div>
-  </div>
+  </article>
 </template>
 
 
 <script setup lang='ts'>
 import { useAddToCart } from '@/stores/addToCart'
-import { computed } from 'vue'
+import { computed, ref, reactive } from 'vue'
+
 const useCart = useAddToCart()
+const seeMoreStates = reactive<{ [key: number]: boolean }>({})
+
 const props = defineProps({
   products: {
     type: Array,
@@ -59,7 +70,14 @@ interface Products {
   discount: number
 }
 const productData: Products[] = computed(() => props.products)
+
+const handleSeeMore = (productId: number) => {
+  seeMoreStates[productId] = !seeMoreStates[productId]
+}
 </script>
 
 <style>
+.card::-webkit-scrollbar {
+  display: none;
+}
 </style>

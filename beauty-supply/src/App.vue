@@ -1,18 +1,18 @@
-<script setup lang="ts">
-import HomePage from './components/HomePage.vue'
-</script>
-
 <template>
   <div class="app">
     <HomePage />
   </div>
 </template>
 
+<script setup lang="ts">
+import HomePage from './components/HomePage.vue'
+</script>
+
 <style >
 html {
-  scroll-behavior: smooth;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
+  scroll-behavior: smooth;
 }
 body {
   background: #fafafa;

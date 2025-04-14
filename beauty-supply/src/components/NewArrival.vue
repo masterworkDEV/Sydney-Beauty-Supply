@@ -28,6 +28,6 @@ import { dataStore } from '../stores/dataStore'
 import ProductCard from './ProductCard.vue'
 
 const useStore = dataStore()
-const newArrival = computed(() => useStore.products)
+const newArrival = computed(() => useStore.products || [])
 </script>
 

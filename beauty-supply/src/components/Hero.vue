@@ -18,11 +18,16 @@
           Transform your skincare routine with <br />
           clean, effective products
         </p>
-        <button
-          class="shop-btn animate__animated animate__fadeInUp animate__delay-4s bg-amber-950 text-white w-36 p-2.5 text-sm max-sm:text-[.8rem] rounded-full max-xl:w-32 hover:text-black hover:bg-white hover:shadow transition-all"
+        <a
+          href="#shop"
+          class="shop-btn hover:text-black hover:bg-white hover:shadow transition-all"
         >
-          Shop Now
-        </button>
+          <button
+            class="animate__animated animate__fadeInUp animate__delay-4s text-sm max-sm:text-[.8rem] rounded-full bg-amber-950 text-white w-40 p-3"
+          >
+            Shop Now
+          </button>
+        </a>
       </div>
       <div class="w-full h-3/4 max-sm:px-5 animate__animated animate__fadeIn">
         <img

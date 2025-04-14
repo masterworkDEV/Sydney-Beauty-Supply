@@ -1,6 +1,6 @@
 <template>
   <!-- trending product -->
-  <section class="mt-20 ml-12 max-xl:ml-7 max-sm:mx-5 max-sm:mt-16">
+  <section class="mt-20 ml-12 max-xl:ml-7 max-sm:mx-5 max-sm:mt-16" id="shop">
     <button
       class="bg-gray-100 border border-gray-300 w-full text-start p-2 flex items-center gap-10 max-sm:p-1"
     >
@@ -31,6 +31,6 @@ const useStore = dataStore()
 
 // if there are trending products, we can directly filter them out (useStore.products.filter()) with the filter high order array function. But since that's not the case
 
-const trendingProducts = computed(() => useStore.products)
+const trendingProducts = computed(() => useStore.products || [])
 </script>
 
