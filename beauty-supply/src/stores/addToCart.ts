@@ -1,10 +1,11 @@
 import Cart from '@/components/Cart.vue'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 interface Cart {
   id: number
   quantity: number
+  message: string
+  notification: string
 }
 export const useAddToCart = defineStore('add-to-cart', () => {
   let cart: Cart[] = []

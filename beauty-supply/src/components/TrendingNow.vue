@@ -8,15 +8,18 @@
       <small class="text-blue-600 text-[.7rem]"> View all </small>
     </button>
 
-    <div v-if="useStore.isLoading">
-      <p>loading please wait...</p>
+    <div
+      v-if="useStore.isLoading"
+      class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3"
+    >
+      <LoadingCard v-for="loader in new Array(10)" :key="loader" />
     </div>
     <div v-else-if="useStore.error">
       <p class="text-center my-5 text-sm">{{ useStore.errorMessage }}</p>
     </div>
 
     <div class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3">
-      <ProductCard :products="trendingProducts" />
+      <ProductCard :products="trendingProducts.slice(10, 20)" />
     </div>
   </section>
 </template>
@@ -26,6 +29,7 @@ import { computed, watch } from 'vue'
 import { dataStore } from '../stores/dataStore'
 // product card
 import ProductCard from './ProductCard.vue'
+import LoadingCard from './LoadingCard.vue'
 
 const useStore = dataStore()
 

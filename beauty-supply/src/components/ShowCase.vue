@@ -11,24 +11,18 @@
           v-if="useStore.isLoading"
           class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96"
         >
-          <p>Loading</p>
-          <p>Loading</p>
-          <p>Loading</p>
-          <p>Loading</p>
+          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
         </div>
         <div
           v-else-if="useStore.error"
           class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96"
         >
-          <p>Loading...</p>
-          <p>Loading...</p>
-          <p>Loading...</p>
-          <p>Loading...</p>
+          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
         </div>
 
         <div v-else class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96">
           <img
-            class="h-[6rem] w-full"
+            class="h-24 w-full object-cover"
             v-for="product in productShowCase.slice(10, 14)"
             :key="product.id"
             :src="product.image"
@@ -43,21 +37,13 @@
           class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96"
           v-if="useStore.isLoading"
         >
-          <div>
-            <p>Loading</p>
-            <p>Loading</p>
-            <p>Loading</p>
-            <p>Loading</p>
-          </div>
+          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
         </div>
         <div
           v-else-if="useStore.error"
           class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96"
         >
-          <p>Loading...</p>
-          <p>Loading...</p>
-          <p>Loading...</p>
-          <p>Loading...</p>
+          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
         </div>
         <div class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96" v-else>
           <img
@@ -65,7 +51,7 @@
             :key="product.id"
             :src="product.image"
             :alt="product.title"
-            class="h-[6rem] w-full"
+            class="h-24 w-full object-cover"
           />
         </div>
         <div class="w-full h-full flex justify-end">
@@ -78,6 +64,7 @@
 
 <script setup lang="ts">
 import { dataStore } from '@/stores/dataStore'
+import LoadingCard from './LoadingCard.vue'
 
 const useStore = dataStore()
 

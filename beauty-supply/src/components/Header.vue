@@ -41,25 +41,25 @@
         >MBS</span
       >
     </a>
-    <nav class="p-1" :class="isActive && 'bg-[#f1f1f1] rounded max-sm:hidden'">
+    <nav class="p-1">
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="nav-links flex justify-center gap-10 max-xl:gap-5">
-          <li class="link text-sm transition-all" :class="isActive && 'active dark:text-black  '">
+          <li class="link text-sm transition-all">
             <a href="#" aria-current="page">Home</a>
           </li>
-          <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
+          <li class="link text-sm">
             <a href="#about">Hair Care</a>
           </li>
-          <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
+          <li class="link text-sm">
             <a href="#service">Skin & Beauty</a>
           </li>
-          <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
+          <li class="link text-sm">
             <a href="#projects">Clothing</a>
           </li>
-          <li class="link text-sm" :class="isActive && 'active dark:text-black   '">
+          <li class="link text-sm">
             <a href="#contact">Accessories</a>
           </li>
-          <li class="link text-sm" :class="isActive && 'active dark:text-black  '">
+          <li class="link text-sm">
             <a href="#contact">Specialty</a>
           </li>
         </ul>
@@ -80,11 +80,49 @@
       </ul>
     </div>
   </div>
+
+  <!-- mobile -->
   <transition name="menu">
-    <div
-      v-if="isMenu"
-      class="hidden max-sm:block w-3/4 h-full bg-white fixed top-10 right-0 z-40"
-    ></div>
+    <div v-if="isMenu" class="hidden max-sm:block w-3/4 h-full bg-white fixed top-10 right-0 z-40">
+      <ul class="my-5 mx-5">
+        <li
+          class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+          @click="isMenu = !isMenu"
+        >
+          <a href="#" aria-current="page">Home</a>
+        </li>
+        <li
+          class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+          @click="isMenu = !isMenu"
+        >
+          <a href="#about">Hair Care</a>
+        </li>
+        <li
+          @click="isMenu = !isMenu"
+          class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+        >
+          <a href="#service">Skin & Beauty</a>
+        </li>
+        <li
+          @click="isMenu = !isMenu"
+          class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+        >
+          <a href="#projects">Clothing</a>
+        </li>
+        <li
+          @click="isMenu = !isMenu"
+          class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+        >
+          <a href="#contact">Accessories</a>
+        </li>
+        <li
+          @click="isMenu = !isMenu"
+          class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+        >
+          <a href="#contact">Specialty</a>
+        </li>
+      </ul>
+    </div>
   </transition>
   <div
     v-if="isMenu"
@@ -114,6 +152,7 @@ const handleMenuClose = () => {
 <style>
 .header.active {
   backdrop-filter: blur(12px);
+  box-shadow: 0px 3px 4px #dddddd82;
 }
 
 .link {
@@ -124,9 +163,6 @@ const handleMenuClose = () => {
 .link:hover {
   text-decoration: underline grey 2px;
   scale: 0.95;
-}
-.link.active {
-  color: #333;
 }
 
 .menu-enter-active {

@@ -71,18 +71,20 @@ const subscribe = () => {
     return
   }
 
-  setTimeout(() => {
-    const success = Math.random() > 0.2 // 80% chance of success
+  const success = Math.random() > 0.2 // 80% chance of success
 
-    if (success) {
-      subscriptionMessage.value = 'Thank you for subscribing!'
-      subscriptionStatus.value = 'success'
-      email.value = ''
-    } else {
-      subscriptionMessage.value = 'Sorry, there was an error. Please try again.'
-      subscriptionStatus.value = 'error'
-    }
-  }, 2000)
+  if (success) {
+    subscriptionMessage.value = 'Thank you for subscribing!'
+    subscriptionStatus.value = 'success'
+    email.value = ''
+  } else {
+    subscriptionMessage.value = 'Sorry, there was an error. Please try again.'
+    subscriptionStatus.value = 'error'
+  }
+  // clear after 3 sec
+  setTimeout(() => {
+    subscriptionMessage.value = ''
+  }, 3000)
 }
 </script>
 
