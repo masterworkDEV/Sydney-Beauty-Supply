@@ -1,6 +1,11 @@
 <template>
   <section class="relative w-full h-[85vh] max-xl:h-auto max-sm:mt-10 max-sm:h-[550px]">
-    <img :src="heroBanner" alt="Hero image" class="w-full h-full object-center z-0" />
+    <img
+      :src="heroBanner"
+      alt="Hero image"
+      class="w-full h-full object-center z-0"
+      loading="lazy"
+    />
     <div
       class="flex justify-between items-center absolute right-0 left-0 bottom-0 max-sm:flex-col-reverse max-sm:gap-5"
     >
@@ -34,6 +39,7 @@
           :src="imageBanner2"
           :alt="imageBanner"
           class="w-full max-h-full max-sm:max-h-[400px] object-cover"
+          loading="lazy"
         />
       </div>
     </div>

@@ -5,8 +5,8 @@
   <main class="min-h-screen w-full">
     <Hero />
     <select-category />
-    <TrendingNow />
-    <NewArrival />
+    <component :is="TrendingNow" />
+    <component :is="NewArrival" />
     <ShowCase />
     <Contact />
   </main>
@@ -14,14 +14,28 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 
-// imported components
+// Lazy loading these components
+const TrendingNow = defineAsyncComponent({
+  loader: () => import('../components/TrendingNow.vue'),
+  loadingComponent: () => import('../components/LoadingCard.vue'),
+  errorComponent: () => import('../components/Error.vue'),
+  delay: 500,
+  timeout: 3000,
+})
+const NewArrival = defineAsyncComponent({
+  loader: () => import('../components/NewArrival.vue'),
+  loadingComponent: () => import('../components/LoadingCard.vue'),
+  errorComponent: () => import('../components/Error.vue'),
+  delay: 500,
+  timeout: 3000,
+})
+
+// Other components
 import Header from './Header.vue'
 import Hero from './Hero.vue'
 import SelectCategory from './SelectCategory.vue'
-import TrendingNow from './TrendingNow.vue'
-import NewArrival from './NewArrival.vue'
 import ShowCase from './ShowCase.vue'
 import Contact from './Contact.vue'
 import Footer from './Footer.vue'

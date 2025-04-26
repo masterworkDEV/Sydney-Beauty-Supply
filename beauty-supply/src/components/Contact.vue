@@ -31,6 +31,7 @@
             name="email"
             min="6"
             placeholder="Your e-mail"
+            required
             class="border border-[#ccc] h-10 max-xl:h-8 rounded text-[1rem] w-[40%] max-xl:w-2/4 max-xl:p-0 placeholder:pl-3 placeholder:text-sm"
           />
           <button

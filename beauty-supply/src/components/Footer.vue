@@ -47,44 +47,13 @@
         <div class="col">
           <p class="text-[.8rem] mb-4 uppercase">Follow Us</p>
           <ul class="grid grid-cols-5 max-sm:grid-cols-3 max-sm:flex max-sm:flex-wrap">
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
+            <li
+              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-gray-300 hover:has-[a]:scale-[1.1] overflow-hidden transition"
+              v-for="icon in icons"
+              :key="icon.icon"
+            >
               <a href="#">
-                <FontAwesomeIcon :icon="faFacebook" size="1x" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faSnapchat" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faTwitter" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faInstagram" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faPinterest" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faYoutube" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faTiktok" />
-              </a>
-            </li>
-            <li class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10">
-              <a href="#">
-                <FontAwesomeIcon :icon="faLinkedin" />
+                <FontAwesomeIcon :icon="icon.icon" size="1x" />
               </a>
             </li>
           </ul>
@@ -134,6 +103,30 @@ const policies = ref([
   'warranty policy',
   'cooperate policy',
   'registration complaints',
+])
+
+const icons = ref([
+  {
+    icon: faFacebook,
+  },
+  {
+    icon: faInstagram,
+  },
+  {
+    icon: faPinterest,
+  },
+  {
+    icon: faSnapchat,
+  },
+  {
+    icon: faTiktok,
+  },
+  {
+    icon: faTwitter,
+  },
+  {
+    icon: faYoutube,
+  },
 ])
 </script>
 

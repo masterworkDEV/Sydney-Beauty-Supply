@@ -8,13 +8,13 @@ const API_URL = import.meta.env.VITE_API_URL
 export const dataStore = defineStore('data', () => {
   const products = ref([])
   const isLoading = ref<'true' | false>(false)
-  const error = ref<'true' | false>(false)
+  const error = ref<'true' | 'false' | null>(null)
   const errorMessage = ref<string | null>(null)
 
   const fetchProducts = async () => {
     isLoading.value = 'true'
-    error.value = false
-    errorMessage.value = null
+    error.value = null
+    errorMessage.value = ''
     try {
       const response = await axios.get(`${API_URL}/products`)
       products.value = response.data
