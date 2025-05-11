@@ -5,7 +5,10 @@
 </template>
 
 <script setup lang='ts'>
+import { onMounted } from 'vue'
 import { useAddToCart } from '@/stores/addToCart'
 const useCart = useAddToCart()
-console.log(useCart.cart.length)
+onMounted(() => {
+  console.log(useCart.cart)
+})
 </script>

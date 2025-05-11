@@ -1,6 +1,6 @@
 <template>
   <!-- showcase -->
-  <section class="max-sm:py-20">
+  <section class="max-sm:py-20 min-h-96">
     <div class="mt-20 mx-12 max-xl:mx-7 max-sm:mx-5">
       <div class="flex justify-center gap-10 max-h-96 max-sm:flex-col max-sm:gap-10">
         <div class="w-full h-full">
@@ -9,15 +9,12 @@
 
         <div
           v-if="useStore.isLoading"
-          class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96"
+          class="grid grid-cols-2 place-items-center gap-5 max-sm:w-full"
         >
           <LoadingCard v-for="loader in new Array(4)" :key="loader" />
         </div>
-        <div
-          v-else-if="useStore.error"
-          class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96"
-        >
-          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
+        <div v-else-if="useStore.error" class="grid grid-cols-2 place-items-center w-full">
+          <LoadingCard v-for="loader in new Array(2)" :key="loader" />
         </div>
 
         <div v-else class="grid grid-cols-2 place-items-center gap-5 w-[90%] max-sm:w-full h-96">
@@ -33,17 +30,11 @@
     </div>
     <div class="mt-20 mx-12 max-xl:mx-7 max-sm:hidden">
       <div class="flex justify-between max-sm:flex-col-reverse gap-10 max-h-96">
-        <div
-          class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96"
-          v-if="useStore.isLoading"
-        >
-          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
+        <div class="grid grid-cols-2 w-full" v-if="useStore.isLoading">
+          <LoadingCard v-for="loader in new Array(2)" :key="loader" />
         </div>
-        <div
-          v-else-if="useStore.error"
-          class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96"
-        >
-          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
+        <div v-else-if="useStore.error" class="grid grid-cols-2 place-items-center w-full">
+          <LoadingCard v-for="loader in new Array(2)" :key="loader" />
         </div>
         <div class="grid grid-cols-2 gap-5 place-items-center w-[90%] h-96" v-else>
           <img

@@ -1,11 +1,7 @@
 <template>
   <section class="relative w-full h-[85vh] max-xl:h-auto max-sm:mt-10 max-sm:h-[550px]">
-    <img
-      :src="heroBanner"
-      alt="Hero image"
-      class="w-full h-full object-center z-0"
-      loading="lazy"
-    />
+    <img v-lazy="heroBanner" alt="Hero image" class="w-full h-full object-center z-0" />
+
     <div
       class="flex justify-between items-center absolute right-0 left-0 bottom-0 max-sm:flex-col-reverse max-sm:gap-5"
     >
@@ -23,12 +19,9 @@
           Transform your skincare routine with <br />
           clean, effective products
         </p>
-        <a
-          href="#shop"
-          class="shop-btn hover:text-black hover:bg-white hover:shadow transition-all"
-        >
+        <a href="#shop" class="shop-btn hover:shadow">
           <button
-            class="animate__animated animate__fadeInUp animate__delay-4s text-sm max-sm:text-[.8rem] rounded-full bg-amber-950 text-white w-40 p-3"
+            class="animate__animated animate__fadeInUp animate__delay-4s text-sm max-sm:text-[.8rem] rounded-full bg-amber-950 text-white hover:text-black w-40 p-3 hover:bg-white transition-all"
           >
             Shop Now
           </button>

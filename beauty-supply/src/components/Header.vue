@@ -6,31 +6,45 @@
     <button
       class="menu-btn hidden absolute right-3 max-sm:block hover:border active:animate__animated animate__fadeIn"
     >
-      <FontAwesomeIcon :icon="faTimes" v-if="isMenu" @click="handleMenuClose" stroke-width="1" />
-
       <svg
-        viewBox="0 0 24 24"
-        fill="none"
+        v-if="isMenu"
+        @click="handleMenuClose"
+        viewBox="0 0 512 512"
+        version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        v-else
-        @click="handleMenuOpen"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        fill="#000000"
       >
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
-          <path
-            d="M4 7L7 7M20 7L11 7"
-            stroke=" black"
-            stroke-width="2"
-            stroke-linecap="round"
-          ></path>
-          <path
-            d="M20 17H17M4 17L13 17"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-          ></path>
-          <path d="M4 12H7L20 12" stroke="black" stroke-width="2" stroke-linecap="round"></path>
+          <title>cancel</title>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="work-case" fill="#000000" transform="translate(91.520000, 91.520000)">
+              <polygon
+                id="Close"
+                points="328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48"
+              ></polygon>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <!-- else -->
+
+      <svg
+        v-else
+        @click="handleMenuOpen"
+        viewBox="0 0 24 24"
+        fill="#000"
+        stroke="#000"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path d="M5 6.5H19V8H5V6.5Z" fill="#0000"></path>
+          <path d="M5 16.5H19V18H5V16.5Z" fill="#0000"></path>
+          <path d="M5 11.5H19V13H5V11.5Z" fill="#0000"></path>
         </g>
       </svg>
     </button>
@@ -38,7 +52,7 @@
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
       <span
         class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-black"
-        >MBS</span
+        >Blem</span
       >
     </a>
     <nav class="p-1">

@@ -2,17 +2,20 @@
 
 <template>
   <article
-    class="card w-full max-h-80 overflow-auto border border-gray-300 pb-1 hover:shadow-2xl transition-all"
+    class="card bg-white w-full h-72 max-sm:h-80 border border-gray-300 pb-1 hover:shadow-2xl shadow-lg transition-all"
     v-for="product in productData"
     :key="product.id"
+    :class="seeMoreStates[product.id] && 'max-h-[50rem] h-full max-sm:max-h-[70rem] max-sm:h-full'"
   >
-    <div class="image w-full h-2/4">
-      <img :src="product.image" :alt="product.title" class="w-full h-full object-cover" />
+    <div class="image w-full h-[40%]">
+      <img :src="product.image" :alt="product.title" class="w-full h-full object-contain" />
     </div>
     <span class="flex justify-between items-center my-2 mx-2">
-      <h6 class="text-sm max-sm:text-[.8rem]">{{ product.title }}</h6>
+      <h6 class="text-sm max-sm:text-[.7rem]">
+        {{ product.title.length < 30 ? product.title : product.title.slice(0, 30).concat('...') }}
+      </h6>
       <h6
-        class="flex justify-center items-center bg-red-700 text-white p-0.5 text-[.7rem] max-sm:text-[.5rem] uppercase"
+        class="flex justify-center items-center bg-red-700 text-white p-0.5 text-[.5rem] max-sm:text-[.45rem] uppercase"
       >
         20%% off
       </h6>
@@ -24,20 +27,22 @@
       {{
         seeMoreStates[product.id]
           ? product.description.concat('...see less')
-          : product.description.slice(0, 25).concat('...see more')
+          : product.description.slice(0, 40).concat('...see more')
       }}
     </p>
 
-    <div class="flex justify-between items-center mx-2">
+    <div
+      class="flex justify-between items-center mx-2 max-sm:flex-col max-sm:items-start max-sm:gap-2"
+    >
       <span>
         <h6 class="text-sm max-sm:text-[.8rem]">{{ product.price }} NGN</h6>
         <p class="text-gray-500 text-sm">
-          <span class="line-through max-sm:text-[.55rem]">{{ (product.price * 150) / 100 }}</span>
+          <span class="line-through max-sm:text-[.5rem]">{{ (product.price * 150) / 100 }}</span>
           NGN
         </p>
       </span>
       <button
-        class="bg-black text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90"
+        class="bg-black text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 max-sm:w-full max-sm:rounded-sm"
         @click="useCart.addToCart(product)"
       >
         Add To Cart
@@ -65,11 +70,12 @@ interface Products {
   id: number
   title: string
   image: string
-  description: string[]
+  description: string
   price: number
   discount: number
 }
-const productData: Products[] = computed(() => props.products)
+
+const productData: Products[] = computed(() => [...props.products])
 
 const handleSeeMore = (productId: number) => {
   seeMoreStates[productId] = !seeMoreStates[productId]
