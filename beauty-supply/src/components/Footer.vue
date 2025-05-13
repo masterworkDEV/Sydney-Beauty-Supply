@@ -13,7 +13,7 @@
             <li
               v-for="link in quickLinks"
               :key="link"
-              class="text-[.8rem] mb-3 capitalize hover:underline hover:opacity-95"
+              class="quick-links text-[.8rem] mb-3 capitalize"
             >
               <a href="#">{{ link }}</a>
             </li>
@@ -22,11 +22,7 @@
         <div class="col">
           <p class="text-[.8rem] mb-4">SUPPORT</p>
           <ul>
-            <li
-              v-for="support in supports"
-              :key="support"
-              class="text-[.8rem] mb-3 hover:underline hover:opacity-95"
-            >
+            <li v-for="support in supports" :key="support" class="quick-links text-[.8rem] mb-3">
               <a href="#">{{ support }}</a>
             </li>
           </ul>
@@ -37,7 +33,7 @@
             <li
               v-for="policy in policies"
               :key="policy"
-              class="text-[.8rem] mb-3 capitalize hover:underline hover:opacity-95"
+              class="quick-links text-[.8rem] mb-3 capitalize"
             >
               <a href="#">{{ policy }}</a>
             </li>
@@ -48,7 +44,7 @@
           <p class="text-[.8rem] mb-4 uppercase">Follow Us</p>
           <ul class="grid grid-cols-5 max-sm:grid-cols-3 max-sm:flex max-sm:flex-wrap">
             <li
-              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-gray-300 hover:has-[a]:scale-[1.1] overflow-hidden transition"
+              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-amber-950 hover:has-[a]:scale-[1.1] overflow-hidden transition"
               v-for="icon in icons"
               :key="icon.icon"
             >
@@ -130,3 +126,9 @@ const icons = ref([
 ])
 </script>
 
+<style scoped>
+.quick-links:hover {
+  text-decoration: underline rgba(40, 7, 7, 0.737) 2px;
+  opacity: 0.9;
+}
+</style>

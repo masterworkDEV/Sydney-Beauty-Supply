@@ -36,7 +36,7 @@
           />
           <button
             type="submit"
-            class="bg-black text-white w-24 h-10 max-xl:h-8 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded"
+            class="bg-amber-950 text-white w-24 h-10 max-xl:h-8 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded hover:opacity-95 cursor-pointer"
           >
             SUBSCRIBE
           </button>

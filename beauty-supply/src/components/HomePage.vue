@@ -2,7 +2,7 @@
   <header>
     <Header />
   </header>
-  <main class="min-h-screen w-full">
+  <main>
     <Hero />
     <select-category />
     <TrendingNow />
@@ -26,7 +26,7 @@ import ShowCase from './ShowCase.vue'
 import Contact from './Contact.vue'
 import Footer from './Footer.vue'
 
-onMounted(() => window.addEventListener('scroll', () => window.scrollBy({ top: 0 })))
+// onMounted(() => window.addEventListener('scroll', () => window.scrollBy({ top: 0 })))
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center text-center items-center">
-    <div class="category mt-16 max-sm:mt-12 max-sm:overflow-x-scroll max-sm:max-w-3/4">
-      <ul class="flex justify-center items-center gap-10">
+    <div class="category mt-16 max-sm:mt-0 max-sm:overflow-x-scroll max-sm:max-w-3/4">
+      <ul class="flex justify-center items-center gap-10 px-10">
         <li
           class="flex items-center flex-col text-center"
           v-for="(category, index) in productCategories"

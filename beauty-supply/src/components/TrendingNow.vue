@@ -19,7 +19,7 @@
     </div>
 
     <div class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3">
-      <ProductCard :products="trendingProducts.slice(10, 20)" />
+      <ProductCard :products="trendingProducts.slice(12, 20).reverse()" />
     </div>
   </section>
 </template>

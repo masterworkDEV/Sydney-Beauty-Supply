@@ -9,6 +9,6 @@ import { onMounted } from 'vue'
 import { useAddToCart } from '@/stores/addToCart'
 const useCart = useAddToCart()
 onMounted(() => {
-  console.log(useCart.cart)
+  console.log(useCart.cart.length)
 })
 </script>

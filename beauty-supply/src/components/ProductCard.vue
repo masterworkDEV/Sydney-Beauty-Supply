@@ -2,12 +2,12 @@
 
 <template>
   <article
-    class="card bg-white w-full h-72 max-sm:h-80 border border-gray-300 pb-1 hover:shadow-2xl shadow-lg transition-all"
+    class="card bg-white w-full h-80 max-sm:h-[350px] border border-gray-300 pb-1 hover:shadow-2xl shadow-lg transition-all"
     v-for="product in productData"
     :key="product.id"
-    :class="seeMoreStates[product.id] && 'max-h-[50rem] h-full max-sm:max-h-[70rem] max-sm:h-full'"
+    :class="seeMoreStates[product.id] && 'max-h-[40rem] h-full  max-sm:h-full overflow-auto'"
   >
-    <div class="image w-full h-[40%]">
+    <div class="image w-full h-2/4">
       <img :src="product.image" :alt="product.title" class="w-full h-full object-contain" />
     </div>
     <span class="flex justify-between items-center my-2 mx-2">
@@ -34,7 +34,7 @@
     <div
       class="flex justify-between items-center mx-2 max-sm:flex-col max-sm:items-start max-sm:gap-2"
     >
-      <span>
+      <span class="max-sm:flex gap-2">
         <h6 class="text-sm max-sm:text-[.8rem]">{{ product.price }} NGN</h6>
         <p class="text-gray-500 text-sm">
           <span class="line-through max-sm:text-[.5rem]">{{ (product.price * 150) / 100 }}</span>
