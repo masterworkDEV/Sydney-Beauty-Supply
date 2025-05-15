@@ -46,7 +46,7 @@
             <li
               class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-amber-950 hover:has-[a]:scale-[1.1] overflow-hidden transition"
               v-for="icon in icons"
-              :key="icon.icon"
+              :key="icon"
             >
               <a href="#">
                 <FontAwesomeIcon :icon="icon.icon" size="1x" />
