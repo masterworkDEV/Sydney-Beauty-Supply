@@ -7,11 +7,8 @@
           <img :src="imageBundle" alt="Daily skin care bundle" class="w-full h-96" />
         </div>
 
-        <div
-          v-if="useStore.isLoading"
-          class="grid grid-cols-2 place-items-center gap-5 max-sm:w-full"
-        >
-          <LoadingCard v-for="loader in new Array(4)" :key="loader" />
+        <div v-if="useStore.isLoading" class="grid grid-cols-2 place-items-center gap-5 w-full">
+          <LoadingCard v-for="loader in new Array(2)" :key="loader" />
         </div>
         <div v-else-if="useStore.error" class="grid grid-cols-2 place-items-center w-full">
           <LoadingCard v-for="loader in new Array(2)" :key="loader" />

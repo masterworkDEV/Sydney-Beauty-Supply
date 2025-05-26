@@ -43,7 +43,7 @@
         <img
           :src="imageBanner2"
           :alt="imageBanner"
-          class="w-full max-h-full max-sm:max-h-[400px] object-cover opacity-90 max-sm:hidden"
+          class="w-full max-h-full max-sm:max-h-[400px] object-cover max-sm:hidden"
           loading="lazy"
         />
       </div>

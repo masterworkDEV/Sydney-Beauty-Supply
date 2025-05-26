@@ -1,6 +1,7 @@
 import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import router from './routes/router'
 import App from './App.vue'
 import VueLazyload from 'vue-lazyload'
 
@@ -25,4 +26,5 @@ app.use(VueLazyload, {
   // ... other options
 })
 
+app.use(router)
 app.mount('#app')

@@ -1,11 +1,15 @@
 <template>
+  <Header />
   <div class="app">
-    <HomePage />
+    <RouterView />
   </div>
+  <Footer />
 </template>
 
 <script setup lang="ts">
-import HomePage from './components/HomePage.vue'
+import HomePage from './pages/HomePage.vue'
+import Header from '././components/Header.vue'
+import Footer from '././components/Footer.vue'
 </script>
 
 <style >

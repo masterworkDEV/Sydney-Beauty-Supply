@@ -8,7 +8,9 @@
     :class="seeMoreStates[product.id] && 'max-h-[40rem] h-full  max-sm:h-full overflow-auto'"
   >
     <div class="image w-full h-2/4">
-      <img :src="product.image" :alt="product.title" class="w-full h-full object-contain" />
+      <RouterLink :to="{ name: 'product-details', params: { productID: product.id } }">
+        <img :src="product.image" :alt="product.title" class="w-full h-full object-contain" />
+      </RouterLink>
     </div>
     <span class="flex justify-between items-center my-2 mx-2">
       <h6 class="text-sm max-sm:text-[.7rem]">
@@ -42,7 +44,7 @@
         </p>
       </span>
       <button
-        class="bg-black text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 max-sm:w-full max-sm:rounded-sm"
+        class="bg-amber-950 text-white text-[.65rem] rounded-full p-2 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 max-sm:w-full max-sm:rounded-sm"
         @click="useCart.addToCart(product)"
       >
         Add To Cart

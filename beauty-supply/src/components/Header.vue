@@ -60,11 +60,12 @@
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul class="nav-links flex justify-center gap-10 max-xl:gap-5">
             <li class="link text-sm transition-all">
-              <a href="#" aria-current="page">Home</a>
+              <router-link to="/" aria-current="page">Home</router-link>
             </li>
             <li class="link text-sm">
-              <a href="#about">Hair Care</a>
+              <a href="#shop">Hair Care</a>
             </li>
+
             <li class="link text-sm">
               <a href="#service">Skin & Beauty</a>
             </li>
@@ -110,40 +111,40 @@
         v-if="isMenu"
         class="hidden max-sm:block w-3/4 h-full bg-white fixed top-[45px] right-0 z-40"
       >
-        <ul class="my-5 mx-5">
+        <ul class="my-10 mx-5">
           <li
-            class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp"
             @click="isMenu = !isMenu"
           >
             <a href="#" aria-current="page">Home</a>
           </li>
           <li
-            class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
             @click="isMenu = !isMenu"
           >
             <a href="#about">Hair Care</a>
           </li>
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
           >
             <a href="#service">Skin & Beauty</a>
           </li>
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
           >
             <a href="#projects">Clothing</a>
           </li>
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp animate__delay-1s"
           >
             <a href="#contact">Accessories</a>
           </li>
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-5 active:scale-105 active:bg-gray-100 active:text-white transition-all"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp animate__delay-2s"
           >
             <a href="#contact">Specialty</a>
           </li>
@@ -153,12 +154,12 @@
 
     <div
       v-if="isMenu"
-      class="hidden max-sm:block fixed w-full h-full top-[45px] bg-[rgba(34,24,24,0.5)] z-20 animate__animated animate__fadeIn"
+      class="hidden max-sm:block fixed w-full h-full top-[45px] bg-[rgba(34,24,24,0.7)] z-20 animate__animated animate__fadeIn"
     ></div>
 
     <!-- Cart Modal -->
     <transition name="menu">
-      <div v-if="cartModal" class="w-1/4 h-full bg-white fixed top-0 right-0 z-40">
+      <div v-if="cartModal" class="w-1/4 h-full bg-white fixed top-0 right-0 z-40 max-sm:hidden">
         <button
           @click="cartModal = !cartModal"
           class="close-cart-modal bg-gray-300 w-6 h-6 m-2 flex items-center justify-center rounded-sm hover:bg-gray-200 transition-all"
