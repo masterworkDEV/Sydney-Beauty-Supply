@@ -79,8 +79,75 @@
       </div>
     </div>
 
-    <div class="mx-12 mt-10 flex gap-5">
+    <div class="mx-12 mt-10">
       <h2 class="text-2xl text-wrap">Customers Review</h2>
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">4.5</span>
+        <span class="flex items-center gap-1">
+          <FontAwesomeIcon :icon="faStar" />
+          <FontAwesomeIcon :icon="faStar" />
+          <FontAwesomeIcon :icon="faStar" />
+          <FontAwesomeIcon :icon="faStar" />
+          <FontAwesomeIcon :icon="faStarHalf" />
+        </span>
+      </div>
+      <small class="">Based on 156 reveiws</small>
+      <!-- lines -->
+
+      <ul class="my-5 flex flex-col gap-3">
+        <li class="flex items-center gap-3">
+          <FontAwesomeIcon :icon="faStar" />
+          <div class="bg-gray-200 h-2 w-[40%]"></div>
+          <span class="text-sm">140</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <FontAwesomeIcon :icon="faStar" />
+          <div class="bg-gray-200 h-2 w-[40%]"></div>
+          <span class="text-sm">7</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <FontAwesomeIcon :icon="faStar" />
+          <div class="bg-gray-200 h-2 w-[40%]"></div>
+          <span class="text-sm">12</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <FontAwesomeIcon :icon="faStar" />
+          <div class="bg-gray-200 h-2 w-[40%]"></div>
+          <span class="text-sm"> 10</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <FontAwesomeIcon :icon="faStar" />
+          <div class="bg-gray-200 h-2 w-[40%]"></div>
+          <span class="text-sm">6</span>
+        </li>
+      </ul>
+      <!--  Reviews and questions-->
+      <div>
+        <div class="flex items-center gap-10">
+          <span class="border-b-5 border-gray-200">Reviews {156} </span>
+          <span> Questions</span>
+        </div>
+
+        <!-- buttons -->
+        <div class="mt-5 mb-10 flex justify-between items-center">
+          <button
+            class="flex items-center justify-center gap-3 p-3 border border-gray-400 bg-gray-200"
+          >
+            <FontAwesomeIcon :icon="faFilter" size="sm" />
+            <span class="text-sm">Fliters</span>
+          </button>
+          <button
+            class="flex items-center justify-center gap-3 p-3 border border-gray-400 bg-gray-200"
+          >
+            <FontAwesomeIcon :icon="faPen" size="sm" />
+            <span class="text-sm">Write a review</span>
+          </button>
+        </div>
+        <!-- reviews -->
+        <div class="gap-3 border-b border-gray-300 pb-1">
+          <span class="text-sm">166 reviews</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -91,7 +158,15 @@ import { dataStore } from '@/stores/dataStore'
 import { useRoute, RouterLink } from 'vue-router'
 import axios, { AxiosResponse } from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faArrowRight, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRight,
+  faMinus,
+  faPlus,
+  faStar,
+  faStarHalf,
+  faFilter,
+  faPen,
+} from '@fortawesome/free-solid-svg-icons'
 
 //  use product card
 import ProductCard from '@/components/ProductCard.vue'

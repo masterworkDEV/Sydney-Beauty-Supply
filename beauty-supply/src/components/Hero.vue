@@ -1,8 +1,6 @@
 <template>
   <section class="relative w-full h-[85vh] max-xl:h-auto max-sm:mt-10 max-sm:h-96">
-    <div
-      class="flex justify-between items-center w-full relative max-sm:flex-col-reverse max-sm:gap-5"
-    >
+    <div class="h-full items-center w-full relative max-sm:flex-col-reverse max-sm:gap-5">
       <video
         :src="videoFirst"
         loop
@@ -16,7 +14,7 @@
       ></div>
 
       <div
-        class="w-full h-full pl-12 max-xl:px-7 max-sm:px-5 max-sm:py-14 max-sm:text-center animate__animated animate__fadeInLeft"
+        class="w-full h-full pt-52 text-center max-xl:px-7 max-sm:px-5 max-sm:py-14 max-sm:text-center animate__animated animate__fadeInLeft"
       >
         <h1
           class="animate__animated animate__fadeIn animate__delay-2s text-6xl max-2xl:text-5xl uppercase tracking-normal max-xl:text-4xl max-md:text-4xl text-white"
@@ -36,16 +34,6 @@
             Shop Now
           </button>
         </a>
-      </div>
-      <div
-        class="w-full h-3/4 max-sm:px-5 animate__animated animate__fadeIn animate__delay-5s z-10"
-      >
-        <img
-          :src="imageBanner2"
-          :alt="imageBanner"
-          class="w-full max-h-full max-sm:max-h-[400px] object-cover max-sm:hidden"
-          loading="lazy"
-        />
       </div>
     </div>
   </section>
