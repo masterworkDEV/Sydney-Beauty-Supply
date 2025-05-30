@@ -136,7 +136,8 @@
 
         <div class="text-xs"><b>156 reviews</b></div>
 
-        <!-- comments -->
+        <!--
+        this will be in a review component. ##refractoring as soon as am done with the UI and interaction .-->
         <div class="flex justify-between border-t border-gray-300">
           <div class="flex items-start gap-16 w-[80%] mt-5">
             <div>
