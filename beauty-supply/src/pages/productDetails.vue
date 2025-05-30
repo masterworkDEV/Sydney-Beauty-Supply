@@ -14,6 +14,14 @@
       </div>
 
       <div class="w-full">
+        <ul class="flex gap-1">
+          <li v-for="icon in Array(4)" :key="icon">
+            <FontAwesomeIcon :icon="faStar" />
+          </li>
+          <span>
+            <small class="text-gray-700 underline text-xs">(156 reviews)</small>
+          </span>
+        </ul>
         <h2 class="text-2xl text-wrap">{{ product?.title }}</h2>
         <h4 class="my-2 text-xl">
           <b> ${{ product?.price }}</b>
@@ -80,51 +88,33 @@
     </div>
 
     <div class="mx-12 mt-10">
-      <h2 class="text-2xl text-wrap">Customers Review</h2>
+      <h2 class="text-xl text-wrap">Customers Review</h2>
       <div class="flex items-center gap-2">
         <span class="text-2xl">4.5</span>
-        <span class="flex items-center gap-1">
-          <FontAwesomeIcon :icon="faStar" />
-          <FontAwesomeIcon :icon="faStar" />
-          <FontAwesomeIcon :icon="faStar" />
-          <FontAwesomeIcon :icon="faStar" />
-          <FontAwesomeIcon :icon="faStarHalf" />
-        </span>
+
+        <ul class="flex items-center gap-1">
+          <li v-for="icon in Array(4)" :key="icon">
+            <FontAwesomeIcon :icon="faStar" />
+          </li>
+          <li>
+            <FontAwesomeIcon :icon="faStarHalf" />
+          </li>
+        </ul>
       </div>
       <small class="">Based on 156 reveiws</small>
       <!-- lines -->
 
       <ul class="my-5 flex flex-col gap-3">
-        <li class="flex items-center gap-3">
+        <li v-for="(icon, index) in Array(5)" :key="index" class="flex items-center gap-3">
           <FontAwesomeIcon :icon="faStar" />
           <div class="bg-gray-200 h-2 w-[40%]"></div>
-          <span class="text-sm">140</span>
-        </li>
-        <li class="flex items-center gap-3">
-          <FontAwesomeIcon :icon="faStar" />
-          <div class="bg-gray-200 h-2 w-[40%]"></div>
-          <span class="text-sm">7</span>
-        </li>
-        <li class="flex items-center gap-3">
-          <FontAwesomeIcon :icon="faStar" />
-          <div class="bg-gray-200 h-2 w-[40%]"></div>
-          <span class="text-sm">12</span>
-        </li>
-        <li class="flex items-center gap-3">
-          <FontAwesomeIcon :icon="faStar" />
-          <div class="bg-gray-200 h-2 w-[40%]"></div>
-          <span class="text-sm"> 10</span>
-        </li>
-        <li class="flex items-center gap-3">
-          <FontAwesomeIcon :icon="faStar" />
-          <div class="bg-gray-200 h-2 w-[40%]"></div>
-          <span class="text-sm">6</span>
+          <span class="text-xs">140</span>
         </li>
       </ul>
       <!--  Reviews and questions-->
       <div>
         <div class="flex items-center gap-10">
-          <span class="border-b-5 border-gray-200">Reviews {156} </span>
+          <span class="border-b-5 border-gray-200 text-[1rem]">Reviews {156} </span>
           <span> Questions</span>
         </div>
 
@@ -143,9 +133,130 @@
             <span class="text-sm">Write a review</span>
           </button>
         </div>
-        <!-- reviews -->
-        <div class="gap-3 border-b border-gray-300 pb-1">
-          <span class="text-sm">166 reviews</span>
+
+        <div class="text-xs"><b>156 reviews</b></div>
+
+        <!-- comments -->
+        <div class="flex justify-between border-t border-gray-300">
+          <div class="flex items-start gap-16 w-[80%] mt-5">
+            <div>
+              <small><b>Godwin Kelvin</b></small>
+              <small class="flex items-center gap-2 mt-2">
+                <p>Verified Buyer</p>
+                <FontAwesomeIcon :icon="faCheckCircle" />
+              </small>
+              <div class="card flex gap-3 mt-2">
+                <img
+                  :src="product?.image"
+                  :alt="product?.title"
+                  class="w-16 h-17 border border-gray-300 object-cover"
+                />
+                <div class="flex flex-col justify-center items-start">
+                  <small class="my-2">
+                    <b> Reviewing</b>
+                  </small>
+                  <small class="text-xs">{{ product?.title }}</small>
+                </div>
+              </div>
+            </div>
+            <div>
+              <ul class="flex gap-1">
+                <li v-for="icon in Array(5)" :key="icon">
+                  <FontAwesomeIcon :icon="faStar" />
+                </li>
+              </ul>
+              <p class="my-2 text-sm">Nice Products!</p>
+              <p class="text-xs">Nice and quality products are sold here. I'd recommend!</p>
+            </div>
+          </div>
+          <div class="text-end w-full mt-5">
+            <small class="text-xs">{{ todayString }} </small>
+            <div class="flex justify-end items-center gap-3 mt-20 border-b pb-3">
+              <small class="text-xs">Was this helpful? </small>
+              <ol class="flex gap-4">
+                <li class="flex items-center gap-1">
+                  <FontAwesomeIcon :icon="faThumbsUp" size="xs" />
+                  <small>0</small>
+                </li>
+                <li class="flex items-center gap-1">
+                  <FontAwesomeIcon :icon="faThumbsDown" size="xs" />
+                  <small>0</small>
+                </li>
+              </ol>
+            </div>
+            <!-- Website Comments -->
+            <div class="my-5 flex text-start items-start gap-3">
+              <img
+                :src="product?.image"
+                :alt="product?.title"
+                class="h-10 w-10 rounded-full border border-gray-300"
+              />
+              <div class="">
+                <div class="flex justify-between">
+                  <h5 class="text-xs my-2"><b> Cosmetica </b></h5>
+                  <small class="text-xs">{{ todayString }} </small>
+                </div>
+                <p class="text-[.7rem]">
+                  We're building Nola, an app designed to revolutionize the way you learn. Get ready
+                  for interactive quizzes, personalized study plans, and a suite of tools to help
+                  you master any subject. Stay tuned for updates!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- comments -->
+        <div class="flex justify-between border-t border-gray-300">
+          <div class="flex items-start gap-16 w-[80%] mt-5">
+            <div>
+              <small><b>Ibukun Benjamin</b></small>
+              <small class="flex items-center gap-2 mt-2">
+                <p>Verified Buyer</p>
+                <FontAwesomeIcon :icon="faCheckCircle" />
+              </small>
+              <div class="card flex gap-3 mt-2">
+                <img
+                  :src="product?.image"
+                  :alt="product?.title"
+                  class="w-16 h-17 border border-gray-300 object-cover"
+                />
+                <div class="flex flex-col justify-center items-start">
+                  <small class="my-2">
+                    <b> Reviewing</b>
+                  </small>
+                  <small class="text-xs">{{ product?.title }}</small>
+                </div>
+              </div>
+            </div>
+            <div>
+              <ul class="flex gap-1">
+                <li v-for="icon in Array(3)" :key="icon">
+                  <FontAwesomeIcon :icon="faStar" />
+                </li>
+                <li>
+                  <FontAwesomeIcon :icon="faStarHalf" />
+                </li>
+              </ul>
+              <p class="my-2 text-sm">Love!</p>
+              <p class="text-xs">So nice and i love this color. Cosmetica never disappoints!</p>
+            </div>
+          </div>
+          <div class="text-end w-full mt-5">
+            <small class="text-xs">{{ todayString }} </small>
+            <div class="flex justify-end items-center gap-3 mt-20 border-b pb-3">
+              <small class="text-xs">Was this helpful? </small>
+              <ol class="flex gap-4">
+                <li class="flex items-center gap-1">
+                  <FontAwesomeIcon :icon="faThumbsUp" size="xs" />
+                  <small>3</small>
+                </li>
+                <li class="flex items-center gap-1">
+                  <FontAwesomeIcon :icon="faThumbsDown" size="xs" />
+                  <small>0</small>
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -166,6 +277,9 @@ import {
   faStarHalf,
   faFilter,
   faPen,
+  faCheckCircle,
+  faThumbsUp,
+  faThumbsDown,
 } from '@fortawesome/free-solid-svg-icons'
 
 //  use product card
@@ -221,6 +335,13 @@ const handleIsExpanded = () => {
   isExpanded.value = !isExpanded.value
   console.log(isExpanded.value)
 }
+
+// get date
+
+const nowTimestamp = Date.now()
+
+const today = new Date(nowTimestamp)
+const todayString = today.toLocaleDateString() // e.g., "5/30/2025" (format depends on locale)
 </script>
 
 <style>

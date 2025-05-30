@@ -52,8 +52,8 @@
 
       <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
         <span
-          class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-black"
-          >Blem</span
+          class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-pink-900"
+          >Costmetica</span
         >
       </a>
       <nav class="p-1">
