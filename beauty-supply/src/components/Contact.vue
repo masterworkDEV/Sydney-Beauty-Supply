@@ -36,7 +36,7 @@
           />
           <button
             type="submit"
-            class="bg-amber-950 text-white w-24 h-10 max-xl:h-8 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded hover:opacity-95 cursor-pointer"
+            class="bg-yellow-600 text-white w-24 h-10 max-xl:h-8 max-xl:p-0 text-[.7rem] max-sm:w-20 rounded hover:opacity-95 cursor-pointer"
           >
             SUBSCRIBE
           </button>
@@ -58,7 +58,7 @@ import { ref } from 'vue'
 
 // static image
 
-import imageBanner from '../assets/images/image-banner.png'
+import imageBanner from '../assets/images/female.png'
 
 const email = ref('')
 const subscriptionMessage = ref('')

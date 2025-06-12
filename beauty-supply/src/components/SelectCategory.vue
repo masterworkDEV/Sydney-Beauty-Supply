@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center text-center items-center">
-    <div class="category mt-16 max-sm:mt-0 max-sm:overflow-x-scroll max-sm:max-w-3/4">
+  <div class="flex justify-center text-center items-center my-14 max-xl:my-10 max-sm:my-5">
+    <div class="category max-sm:overflow-x-scroll max-sm:max-w-3/4">
       <ul class="flex justify-center items-center gap-10 px-10">
         <li
           class="flex items-center flex-col text-center"
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 // static images
-import imageBanner from '../assets/images/image-banner.png'
+import imageBanner from '../assets/images/showcase2.jpg'
 
 // productCategories
 const productCategories = [

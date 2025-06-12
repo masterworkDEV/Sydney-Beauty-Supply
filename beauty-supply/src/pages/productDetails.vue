@@ -1,16 +1,49 @@
 <template>
-  <div class="min-h-screen w-full mt-20">
-    <nav class="flex items-center gap-5 ml-12">
-      <small class="flex items-center gap-5">
+  <!-- loading -->
+
+  <div
+    v-if="isLoading"
+    class="min-h-screen flex flex-col items-center text-center justify-center gap-2"
+  >
+    <LoadingCircle />
+    <p class="text-center">Loading...</p>
+  </div>
+
+  <!-- if there is an error show error -->
+  <div v-else-if="error" class="min-h-screen flex items-center text-center justify-center">
+    <p class="text-center">Something went wrong cannot fetch product at this time{{ error }}</p>
+    <a href="/">Go back home</a>
+  </div>
+
+  <main class="min-h-screen w-full mt-22 max-xl:mt-18 max-sm:mt-16" v-else>
+    <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
+      <small class="flex items-center gap-2">
         <RouterLink to="/">Home</RouterLink>
-        <FontAwesomeIcon :icon="faArrowRight" />
+
+        <!-- arrow right -->
+        <svg
+          class="w-3 h-3"
+          fill="#000000"
+          viewBox="0 0 32 32"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="1"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M8.489 31.975c-0.271 0-0.549-0.107-0.757-0.316-0.417-0.417-0.417-1.098 0-1.515l14.258-14.264-14.050-14.050c-0.417-0.417-0.417-1.098 0-1.515s1.098-0.417 1.515 0l14.807 14.807c0.417 0.417 0.417 1.098 0 1.515l-15.015 15.022c-0.208 0.208-0.486 0.316-0.757 0.316z"
+            ></path>
+          </g>
+        </svg>
       </small>
       <small>Shop</small>
     </nav>
 
-    <div class="mx-12 mt-10 flex gap-5">
-      <div class="w-full static">
-        <img :src="product?.image" :alt="product?.title" />
+    <!-- else just display data -->
+    <div class="mx-12 mt-7 flex gap-5 max-xl:mx-7 max-sm:mx-5 max-sm:flex-col">
+      <div class="w-full max-h-[525px] max-sm:h-96 static">
+        <img :src="product?.image" :alt="product?.title" class="h-full w-full" />
       </div>
 
       <div class="w-full">
@@ -48,11 +81,17 @@
         <div class="mt-6 mb-2 text-gray-600 uppercase">Quantity</div>
 
         <div class="flex items-center text-center">
-          <button class="w-10 h-10 border border-gray-200">
+          <button
+            class="w-10 h-10 border border-gray-200"
+            @click="cartStore.decreaseCartQuantity(product)"
+          >
             <FontAwesomeIcon :icon="faMinus" />
           </button>
           <input type="text" class="w-10 h-10 text-center" value="1" />
-          <button class="w-10 h-10 border border-gray-200 bg-[#f1f1f1]">
+          <button
+            class="w-10 h-10 border border-gray-200 bg-[#f1f1f1]"
+            @click="cartStore.increaseCartQuantity(product)"
+          >
             <FontAwesomeIcon :icon="faPlus" />
           </button>
         </div>
@@ -82,12 +121,21 @@
 
         <h2 class="text-2xl text-wrap">Complete This Look</h2>
         <div class="flex gap-5 w-full mt-5 overflow-auto">
-          <ProductCard :products="store.products.slice(2, 4)" />
+          <ProductCard
+            v-for="product in store.products?.slice(2, 4)"
+            :key="product.id"
+            :id="product.id"
+            :description="product.description"
+            :discount="product.discount"
+            :image="product.image"
+            :price="product.price"
+            :title="product.title"
+          />
         </div>
       </div>
     </div>
 
-    <div class="mx-12 mt-10">
+    <div class="mx-12 mt-10 max-xl:mx-7 max-sm:mx-5">
       <h2 class="text-xl text-wrap">Customers Review</h2>
       <div class="flex items-center gap-2">
         <span class="text-2xl">4.5</span>
@@ -104,30 +152,32 @@
       <small class="">Based on 156 reveiws</small>
       <!-- lines -->
 
-      <ul class="my-5 flex flex-col gap-3">
+      <ul class="my-5 flex flex-col gap-3 max-sm:gap-2">
         <li v-for="(icon, index) in Array(5)" :key="index" class="flex items-center gap-3">
           <FontAwesomeIcon :icon="faStar" />
-          <div class="bg-gray-200 h-2 w-[40%]"></div>
+          <div class="bg-gray-200 h-2 w-[40%] max-sm:h-1.5 max-sm:w-full"></div>
           <span class="text-xs">140</span>
         </li>
       </ul>
       <!--  Reviews and questions-->
       <div>
         <div class="flex items-center gap-10">
-          <span class="border-b-5 border-gray-200 text-[1rem]">Reviews {156} </span>
+          <span class="border-b-5 max-sm:border-b-3 border-gray-200 text-[1rem]"
+            >Reviews {156}
+          </span>
           <span> Questions</span>
         </div>
 
         <!-- buttons -->
         <div class="mt-5 mb-10 flex justify-between items-center">
           <button
-            class="flex items-center justify-center gap-3 p-3 border border-gray-400 bg-gray-200"
+            class="flex items-center justify-center gap-3 p-3 max-sm:p-2.5 border border-gray-400 bg-gray-200"
           >
             <FontAwesomeIcon :icon="faFilter" size="sm" />
             <span class="text-sm">Fliters</span>
           </button>
           <button
-            class="flex items-center justify-center gap-3 p-3 border border-gray-400 bg-gray-200"
+            class="flex items-center justify-center gap-3 p-3 max-sm:p-2.5 border border-gray-400 bg-gray-200"
           >
             <FontAwesomeIcon :icon="faPen" size="sm" />
             <span class="text-sm">Write a review</span>
@@ -139,7 +189,9 @@
         <!--
         this will be in a review component. ##refractoring as soon as am done with the UI and interaction .-->
         <div class="flex justify-between border-t border-gray-300">
-          <div class="flex items-start gap-16 w-[80%] mt-5">
+          <div
+            class="flex items-start gap-16 w-[80%] mt-5 max-sm:gap-5 max-sm:flex-col max-sm:w-full"
+          >
             <div>
               <small><b>Godwin Kelvin</b></small>
               <small class="flex items-center gap-2 mt-2">
@@ -150,10 +202,10 @@
                 <img
                   :src="product?.image"
                   :alt="product?.title"
-                  class="w-16 h-17 border border-gray-300 object-cover"
+                  class="w-16 h-17 border border-gray-300 object-cover max-sm:w-10 max-sm:h-10"
                 />
                 <div class="flex flex-col justify-center items-start">
-                  <small class="my-2">
+                  <small class="my-2 max-sm:my-0">
                     <b> Reviewing</b>
                   </small>
                   <small class="text-xs">{{ product?.title }}</small>
@@ -190,7 +242,7 @@
               <img
                 :src="product?.image"
                 :alt="product?.title"
-                class="h-10 w-10 rounded-full border border-gray-300"
+                class="h-10 w-10 max-sm:w-7 max-sm:h-7 rounded-full border border-gray-300"
               />
               <div class="">
                 <div class="flex justify-between">
@@ -207,11 +259,13 @@
           </div>
         </div>
         <!-- comments -->
-        <div class="flex justify-between border-t border-gray-300">
-          <div class="flex items-start gap-16 w-[80%] mt-5">
+        <div class="flex justify-between border-t border-gray-300 max-sm:flex-col">
+          <div
+            class="flex items-start gap-16 w-[80%] mt-5 max-sm:gap-5 max-sm:flex-col max-sm:w-full"
+          >
             <div>
               <small><b>Ibukun Benjamin</b></small>
-              <small class="flex items-center gap-2 mt-2">
+              <small class="flex items-center gap-2 mt-2 max-sm:mt-0">
                 <p>Verified Buyer</p>
                 <FontAwesomeIcon :icon="faCheckCircle" />
               </small>
@@ -219,10 +273,10 @@
                 <img
                   :src="product?.image"
                   :alt="product?.title"
-                  class="w-16 h-17 border border-gray-300 object-cover"
+                  class="w-16 h-17 border border-gray-300 object-cover max-sm:w-10 max-sm:h-10"
                 />
                 <div class="flex flex-col justify-center items-start">
-                  <small class="my-2">
+                  <small class="my-2 max-sm:mt-0">
                     <b> Reviewing</b>
                   </small>
                   <small class="text-xs">{{ product?.title }}</small>
@@ -261,12 +315,13 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { dataStore } from '@/stores/dataStore'
+import { useCart } from '@/stores/cartController'
 import { useRoute, RouterLink } from 'vue-router'
 import axios, { AxiosResponse } from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -283,11 +338,13 @@ import {
   faThumbsDown,
 } from '@fortawesome/free-solid-svg-icons'
 
-//  use product card
+//  Components
 import ProductCard from '@/components/ProductCard.vue'
+import LoadingCircle from '@/components/LoadingCircle.vue'
 
 // store
 const store = dataStore()
+const cartStore = useCart()
 
 // Define the Product interface
 interface Product {
@@ -299,7 +356,7 @@ interface Product {
 }
 
 // Fetch product by id
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL: string = import.meta.env.VITE_API_URL as string
 const route = useRoute()
 const product = ref<Product | null>(null)
 const isLoading = ref<boolean>(false)
@@ -342,7 +399,7 @@ const handleIsExpanded = () => {
 const nowTimestamp = Date.now()
 
 const today = new Date(nowTimestamp)
-const todayString = today.toLocaleDateString() // e.g., "5/30/2025" (format depends on locale)
+const todayString = today.toLocaleDateString()
 </script>
 
 <style>

@@ -4,7 +4,7 @@
       class="flex justify-start gap-24 px-12 max-xl:gap-10 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
     >
       <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
-        Master Beauty <br />Supply
+        Cosmetica Beauty <br />Supply
       </h3>
       <div class="flex justify-center gap-10 max-sm:grid max-sm:grid-cols-2">
         <div class="col">
@@ -44,7 +44,7 @@
           <p class="text-[.8rem] mb-4 uppercase">Follow Us</p>
           <ul class="grid grid-cols-5 max-sm:grid-cols-3 max-sm:flex max-sm:flex-wrap">
             <li
-              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-amber-950 hover:has-[a]:scale-[1.1] overflow-hidden transition"
+              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-yellow-600 hover:has-[a]:scale-[1.1] overflow-hidden transition"
               v-for="icon in icons"
               :key="icon"
             >
@@ -57,7 +57,7 @@
       </div>
     </div>
     <p class="text-center mt-10 pb-3 text-[.8rem] max-sm:text-[.55rem] max-sm:mt-10">
-      @2025 Sydney Beauty Supply. Design by Haseeb.ur.rehman All Rights Reserved.
+      @2025 Cosmetica Beauty Supply. Design by Haseeb.ur.rehman All Rights Reserved.
     </p>
   </footer>
 </template>
@@ -128,7 +128,7 @@ const icons = ref([
 
 <style scoped>
 .quick-links:hover {
-  text-decoration: underline rgba(40, 7, 7, 0.737) 2px;
+  text-decoration: underline goldenrod 2px;
   opacity: 0.9;
 }
 </style>

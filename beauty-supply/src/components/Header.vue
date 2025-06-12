@@ -9,7 +9,7 @@
       >
         <svg
           v-if="isMenu"
-          @click="handleMenuClose"
+          @click="isMenu = !isMenu"
           viewBox="0 0 512 512"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@
 
         <svg
           v-else
-          @click="handleMenuOpen"
+          @click="isMenu = !isMenu"
           viewBox="0 0 24 24"
           fill="#000"
           stroke="#000"
@@ -50,15 +50,15 @@
         </svg>
       </button>
 
-      <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
         <span
-          class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-pink-900"
+          class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-yellow-600"
           >Costmetica</span
         >
       </a>
       <nav class="p-1">
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul class="nav-links flex justify-center gap-10 max-xl:gap-5">
+          <ul class="nav-links flex justify-center gap-10 max-xl:gap-2">
             <li class="link text-sm transition-all">
               <router-link to="/" aria-current="page">Home</router-link>
             </li>
@@ -67,7 +67,7 @@
             </li>
 
             <li class="link text-sm">
-              <a href="#service">Skin & Beauty</a>
+              <a href="#service">Skin </a>
             </li>
             <li class="link text-sm">
               <a href="#projects">Clothing</a>
@@ -75,14 +75,11 @@
             <li class="link text-sm">
               <a href="#contact">Accessories</a>
             </li>
-            <li class="link text-sm">
-              <a href="#contact">Specialty</a>
-            </li>
           </ul>
         </div>
       </nav>
       <div class="max-sm:hidden">
-        <ul class="flex items-center gap-5 max-xl:gap-3">
+        <ul class="flex items-center gap-5">
           <li>
             <FontAwesomeIcon
               :icon="faSearch"
@@ -91,21 +88,44 @@
             />
           </li>
           <li
-            @click="handleCartModal"
-            class="cursor-pointer hover:scale-110 transition-all"
+            @click="cartModal = !cartModal"
+            class="relative cursor-pointer hover:scale-110 flex items-center justify-center gap-1 transition-all"
+            :class="
+              Object.values(cart.cartItems).reduce((acc, product) => {
+                return acc + product.quantity
+              }, 0) &&
+              ' scale-110 animate__animated animate__delay-5s animate-bounce hover:animate-none'
+            "
             title="Cart"
           >
             <FontAwesomeIcon :icon="faBagShopping" />
+            <div
+              class="absolute p-1 right-[-20%] top-0 bg-red-500 rounded-full"
+              v-if="
+                Object.values(cart.cartItems).reduce((acc, product) => {
+                  return acc + product.quantity
+                }, 0)
+              "
+            ></div>
           </li>
-          <li class="flex items-end gap-2 cursor-pointer">
-            <small>NGN</small>
-            <FontAwesomeIcon :icon="faArrowDown" />
+          <li class="flex items-center gap-2 cursor-pointer">
+            <small>Sign up</small>
+            <button
+              class="w-20 max-lg:w-14 max-lg:p-2.5 cursor-pointer flex justify-center text-center bg-black text-white p-3 rounded-full hover:opacity-80"
+            >
+              <small> Login </small>
+            </button>
           </li>
         </ul>
       </div>
     </div>
 
     <!-- mobile -->
+    <div
+      v-if="isMenu"
+      class="hidden max-sm:block fixed w-full h-full top-[45px] bg-[rgba(34,24,24,0.7)] z-20 animate__animated animate__fadeIn"
+    ></div>
+
     <transition name="menu">
       <div
         v-if="isMenu"
@@ -116,7 +136,7 @@
             class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp"
             @click="isMenu = !isMenu"
           >
-            <a href="#" aria-current="page">Home</a>
+            <router-link to="/"> Home </router-link>
           </li>
           <li
             class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
@@ -140,70 +160,69 @@
             @click="isMenu = !isMenu"
             class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp animate__delay-1s"
           >
-            <a href="#contact">Accessories</a>
+            <a href="#contact"> Accessories </a>
           </li>
+
           <li
             @click="isMenu = !isMenu"
             class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp animate__delay-2s"
           >
-            <a href="#contact">Specialty</a>
+            <Router-link to="/cart-store"> Shopping Cart </Router-link>
           </li>
         </ul>
       </div>
     </transition>
 
-    <div
-      v-if="isMenu"
-      class="hidden max-sm:block fixed w-full h-full top-[45px] bg-[rgba(34,24,24,0.7)] z-20 animate__animated animate__fadeIn"
-    ></div>
-
-    <!-- Cart Modal -->
-    <transition name="menu">
-      <div v-if="cartModal" class="w-1/4 h-full bg-white fixed top-0 right-0 z-40 max-sm:hidden">
-        <button
-          @click="cartModal = !cartModal"
-          class="close-cart-modal bg-gray-300 w-6 h-6 m-2 flex items-center justify-center rounded-sm hover:bg-gray-200 transition-all"
-        >
-          <FontAwesomeIcon :icon="faTimes" />
-        </button>
-      </div>
-    </transition>
-    <div
-      v-if="cartModal"
-      class="fixed w-full h-full bg-[rgba(34,24,24,0.5)] z-20 animate__animated animate__fadeIn"
-    ></div>
-    <!--  -->
+    <!-- cartModal -->
+    <Overlay v-if="cartModal" />
+    <CartModal
+      :cart-modal="cartModal"
+      @handle-cart-modal-state="cartModal = !cartModal"
+      @delete-cart-item="cart.deleteFromCart"
+    />
   </header>
 </template>
 <script setup lang="ts">
+import { ref, computed } from 'vue'
+
+// fontawesome
 import { faArrowDown, faBagShopping, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { ref } from 'vue'
 
-const isActive = ref<'true' | false>(false)
-const isMenu = ref<'true' | false>(false)
-const cartModal = ref<'true' | false>(false)
+// cart store
+import { useCart } from '@/stores/cartController'
 
+// Components
+import Overlay from './Overlay.vue'
+import CartModal from './CartModal.vue'
+import ProductCard from './ProductCard.vue'
+
+//  use cart store...
+const cart = useCart()
+
+// other states
+const isActive = ref<boolean | null>(null)
+const isMenu = ref<boolean | null>(null)
+const cartModal = ref<boolean | false>(false)
+
+// scroll event for header
 window.addEventListener('scroll', () => {
-  window.scrollY > 590 ? (isActive.value = 'true') : (isActive.value = false)
+  window.scrollY > 590 ? (isActive.value = true) : (isActive.value = false)
 })
-
-const handleMenuOpen = () => {
-  isMenu.value = 'true'
-}
-
-const handleMenuClose = () => {
-  isMenu.value = false
-}
-
-const handleCartModal = () => {
-  cartModal.value = 'true'
-}
 </script>
+
+
+
+
+
 <style>
 .header.active {
   backdrop-filter: blur(12px);
-  box-shadow: 0px 3px 4px #dddddd82;
+  box-shadow: 0px 3px 4px #dddddd97;
+}
+
+.router-link-active {
+  text-decoration: underline goldenrod 2px;
 }
 
 .link {
@@ -212,7 +231,7 @@ const handleCartModal = () => {
   font-size: 0.8rem;
 }
 .link:hover {
-  text-decoration: underline rgba(40, 7, 7, 0.737) 2px;
+  text-decoration: underline #0e166b 2px;
   scale: 0.95;
 }
 

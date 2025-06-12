@@ -65,6 +65,9 @@ const productShowCase: Products[] = computed(() => useStore.products)
 // console.log(productShowCase)
 
 // static image
-import imageBundle from '../assets/images/bundle.jpg'
+// import imageBundle from '../assets/images/bundle.jpg'
+// import imageBundle from '../assets/images/showcase.jpg'
+import imageBundle from '../assets/images/bg-one.jpg'
+
 import { computed } from 'vue'
 </script>

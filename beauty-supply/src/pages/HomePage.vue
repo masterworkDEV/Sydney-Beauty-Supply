@@ -24,14 +24,4 @@ import Footer from '../components/Footer.vue'
 .line-through {
   text-decoration: line-through;
 }
-
-.card > .image {
-  overflow: hidden;
-}
-.card img {
-  transition: 0.25s ease-in-out;
-}
-.card:hover .image > img {
-  scale: 1.2;
-}
 </style>

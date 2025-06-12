@@ -1,23 +1,22 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-// Define the Product interface
-interface Products {
-  id: number
+interface Product {
+  id: string | number
   title: string
   price: number
   description?: string
+  discount: number
   image?: string
 }
 
-// API URL here
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL: string = import.meta.env.VITE_API_URL as string
 
 export const dataStore = defineStore('data', () => {
-  const products = ref<Products | null>(null)
+  const products = ref<Product[] | null>(null)
   const isLoading = ref<boolean>(false)
-  const error = ref<string | null>(null)
+  const error = ref<any | null>(null)
   const errorMessage = ref<string | null>(null)
 
   const fetchProducts = async () => {
@@ -25,23 +24,28 @@ export const dataStore = defineStore('data', () => {
     error.value = null
     errorMessage.value = null
     try {
-      const response: Products[] = await axios.get(`${API_URL}/products`)
+      const response = await axios.get<Product[]>(`${API_URL}/products`)
       products.value = response.data
+      console.log(response.data)
     } catch (err: any) {
       console.error('Error fetching products:', err)
-      errorMessage.value = `Sorry, there was an error fetching products at this time
-        kindly reload or check your network:
-        ${err.message}! `
+      error.value = err
+      errorMessage.value = `Sorry, there was an error fetching products at this time.
+        Kindly reload or check your network:
+        ${err.message || 'Unknown error'}! `
     } finally {
       isLoading.value = false
     }
   }
-  ;(async () => await fetchProducts())()
+  ;(async () => {
+    await fetchProducts()
+  })()
 
   return {
     products,
     isLoading,
     error,
     errorMessage,
+    fetchProducts,
   }
 })

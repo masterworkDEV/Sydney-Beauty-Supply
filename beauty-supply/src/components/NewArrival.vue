@@ -19,7 +19,16 @@
     </div>
 
     <div v-else class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3">
-      <ProductCard :products="newArrival.slice(0, 8)" />
+      <ProductCard
+        v-for="product in newArrival"
+        :key="product.id"
+        :id="product.id"
+        :description="product.description"
+        :discount="product.discount"
+        :image="product.image"
+        :price="product.price"
+        :title="product.title"
+      />
     </div>
   </section>
 </template>
@@ -31,6 +40,8 @@ import { dataStore } from '../stores/dataStore'
 //  components
 import ProductCard from './ProductCard.vue'
 import LoadingCard from './LoadingCard.vue'
+
+// interface
 
 const useStore = dataStore()
 const newArrival = computed(() => useStore.products || [])

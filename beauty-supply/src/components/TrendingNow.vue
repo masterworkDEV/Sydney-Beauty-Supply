@@ -19,7 +19,16 @@
     </div>
 
     <div class="mt-5 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-3">
-      <ProductCard :products="trendingProducts.slice(12, 20).reverse()" />
+      <ProductCard
+        v-for="product in trendingProducts.slice(12, 20).reverse()"
+        :key="product.id"
+        :id="product.id"
+        :description="product.description"
+        :discount="product.discount"
+        :image="product.image"
+        :price="product.price"
+        :title="product.title"
+      />
     </div>
   </section>
 </template>
