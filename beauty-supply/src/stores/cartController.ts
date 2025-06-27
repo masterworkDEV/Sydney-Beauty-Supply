@@ -14,7 +14,7 @@ interface CartItem extends Product {
   quantity: number
 }
 
-export const useCart = defineStore('add-to-cart', () => {
+export const useCart = defineStore('cart', () => {
   const cartItems = ref<CartItem[]>([])
 
   const addToCart = (productToAdd: Product) => {

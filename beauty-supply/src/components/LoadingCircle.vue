@@ -19,7 +19,7 @@
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid goldenrod;
+  border: 5px solid orange;
   animation: prixClipFix 2s linear infinite;
 }
 

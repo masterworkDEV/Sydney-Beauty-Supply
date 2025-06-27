@@ -52,7 +52,10 @@
 
 <script setup lang="ts">
 import { dataStore } from '@/stores/dataStore'
-import LoadingCard from './LoadingCard.vue'
+import LoadingCard from '../LoadingCard.vue'
+// static image
+
+import imageBundle from '../../assets/images/new.jpg'
 
 const useStore = dataStore()
 
@@ -63,11 +66,6 @@ interface Products {
 }
 const productShowCase: Products[] = computed(() => useStore.products)
 // console.log(productShowCase)
-
-// static image
-// import imageBundle from '../assets/images/bundle.jpg'
-// import imageBundle from '../assets/images/showcase.jpg'
-import imageBundle from '../assets/images/bg-one.jpg'
 
 import { computed } from 'vue'
 </script>

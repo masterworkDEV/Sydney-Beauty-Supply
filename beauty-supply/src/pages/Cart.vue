@@ -148,14 +148,14 @@
             </div>
             <div class="action">
               <button
-                class="bg-blue-600 w-full p-2 rounded-full text-white text-sm mb-4 hover:opacity-90"
+                class="bg-[#E78F2D] w-full p-2 rounded-full text-white text-sm mb-4 hover:opacity-90"
               >
                 Proceed to checkout
               </button>
               <button
                 class="bg-[#ddd] w-full p-2 rounded-full text-black text-sm hover:bg-opacity-90"
               >
-                <router-link to="/"> Continue Shopping </router-link>
+                <router-link to="/store"> Continue Shopping </router-link>
               </button>
             </div>
           </div>

@@ -15,14 +15,34 @@ const router = createRouter({
       component: () => import('@/pages/HomePage.vue'),
     },
     {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('@/components/Dashboard.vue'),
+    },
+    {
       path: '/product-details/:productID',
       name: 'product-details',
       component: () => import('@/pages/productDetails.vue'),
     },
     {
+      path: '/store',
+      name: 'store',
+      component: () => import('@/pages/Store.vue'),
+    },
+    {
       path: '/cart-store',
       name: 'cart',
       component: () => import('@/pages/Cart.vue'),
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/components/auth/Register.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/auth/Login.vue'),
     },
   ],
 })

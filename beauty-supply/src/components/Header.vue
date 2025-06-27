@@ -1,8 +1,8 @@
 <template>
-  <header>
+  <header v-if="header.headerState">
     <div
       :class="isActive && 'active'"
-      class="header bg-white fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
+      class="header bg-[#fff] fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
     >
       <button
         class="menu-btn hidden absolute right-3 max-sm:block hover:border active:animate__animated animate__fadeIn"
@@ -50,11 +50,14 @@
         </svg>
       </button>
 
-      <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <a href="/" class="flex justify-end items-center space-x-2 rtl:space-x-reverse">
         <span
-          class="self-center text-xl max-xl:text-[1rem] font-semibold whitespace-nowrap text-yellow-600"
-          >Costmetica</span
-        >
+          class="self-center text-xl max-xl:text-[1rem] font-bold whitespace-nowrap border-b-2 border-[#E78F2D] hover:translate-x-[40%] transition-all"
+          >Sk
+        </span>
+        <span class="max-sm:text-sm hover:translate-x-[-50%] transition-all">
+          <FontAwesomeIcon :icon="faScissors" rotation="180" size="sm" />
+        </span>
       </a>
       <nav class="p-1">
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -62,15 +65,16 @@
             <li class="link text-sm transition-all">
               <router-link to="/" aria-current="page">Home</router-link>
             </li>
+
             <li class="link text-sm">
-              <a href="#shop">Hair Care</a>
+              <router-link to="/store"> Store </router-link>
             </li>
 
             <li class="link text-sm">
-              <a href="#service">Skin </a>
+              <a href="#shop">Clothing</a>
             </li>
             <li class="link text-sm">
-              <a href="#projects">Clothing</a>
+              <a href="#service">Footwares</a>
             </li>
             <li class="link text-sm">
               <a href="#contact">Accessories</a>
@@ -111,9 +115,9 @@
           <li class="flex items-center gap-2 cursor-pointer">
             <small>Sign up</small>
             <button
-              class="w-20 max-lg:w-14 max-lg:p-2.5 cursor-pointer flex justify-center text-center bg-black text-white p-3 rounded-full hover:opacity-80"
+              class="w-20 max-lg:w-14 max-lg:p-2 cursor-pointer flex justify-center text-center bg-[#4A5559] text-white p-2.5 rounded-full hover:opacity-80"
             >
-              <small> Login </small>
+              <router-link to="/login" class="text-sm"> Login </router-link>
             </button>
           </li>
         </ul>
@@ -131,41 +135,36 @@
         v-if="isMenu"
         class="hidden max-sm:block w-3/4 h-full bg-white fixed top-[45px] right-0 z-40"
       >
-        <ul class="my-10 mx-5">
+        <ul class="m-10 flex flex-col justify-center text-center items-center">
           <li
-            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all"
             @click="isMenu = !isMenu"
           >
             <router-link to="/"> Home </router-link>
           </li>
           <li
-            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all"
             @click="isMenu = !isMenu"
           >
-            <a href="#about">Hair Care</a>
+            <router-link to="/store">Store </router-link>
           </li>
+
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
-          >
-            <a href="#service">Skin & Beauty</a>
-          </li>
-          <li
-            @click="isMenu = !isMenu"
-            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__slideInRight"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all"
           >
             <a href="#projects">Clothing</a>
           </li>
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp animate__delay-1s"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all"
           >
             <a href="#contact"> Accessories </a>
           </li>
 
           <li
             @click="isMenu = !isMenu"
-            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all animate__animated animate__fadeInUp animate__delay-2s"
+            class="text-sm mb-7 active:scale-105 active:bg-gray-100 active:text-white transition-all"
           >
             <Router-link to="/cart-store"> Shopping Cart </Router-link>
           </li>
@@ -186,8 +185,18 @@
 import { ref, computed } from 'vue'
 
 // fontawesome
-import { faArrowDown, faBagShopping, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowDown,
+  faBagShopping,
+  faScissors,
+  faSearch,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import { navState } from '@/stores/navState'
+
+const header = navState()
 
 // cart store
 import { useCart } from '@/stores/cartController'
@@ -222,7 +231,7 @@ window.addEventListener('scroll', () => {
 }
 
 .router-link-active {
-  text-decoration: underline goldenrod 2px;
+  text-decoration: underline #e78f2d 2px;
 }
 
 .link {
@@ -231,7 +240,7 @@ window.addEventListener('scroll', () => {
   font-size: 0.8rem;
 }
 .link:hover {
-  text-decoration: underline #0e166b 2px;
+  text-decoration: underline #e78f2d 2px;
   scale: 0.95;
 }
 

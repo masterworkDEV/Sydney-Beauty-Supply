@@ -18,7 +18,7 @@
 
         <div class="flex justify-center items-center absolute right-0 left-0 bottom-0 z-50">
           <button
-            class="flex justify-center items-center gap-1 cursor-pointer bg-yellow-800 text-white text-[.65rem] p-3.5 max-sm:p-2.5 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 w-[84%]"
+            class="flex justify-center items-center gap-1 cursor-pointer bg-[#4A5559] text-white text-[.65rem] p-3.5 max-sm:p-2.5 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 w-[84%]"
             @click="cart.addToCart(props)"
           >
             <span> <b>ADD TO CART</b> </span>

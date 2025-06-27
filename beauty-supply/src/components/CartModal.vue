@@ -85,7 +85,7 @@
             </h5>
           </div>
           <Router-link to="/cart-store" @click="emits('handleCartModalState', props.cartModal)">
-            <button class="bg-yellow-600 w-full p-2.5 text-center text-white text-sm rounded-md">
+            <button class="bg-[#4A5559] w-full p-2.5 text-center text-white text-sm rounded-md">
               Continue To Cart
             </button>
           </Router-link>

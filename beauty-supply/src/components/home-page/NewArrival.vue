@@ -1,6 +1,6 @@
 <template>
   <!-- new arrival -->
-  <section class="mt-20 ml-12 max-xl:ml-7 max-sm:mx-5 max-sm:mt-16">
+  <section class="mt-20 ml-12 max-xl:ml-7 max-sm:mx-5 max-sm:mt-14">
     <button
       class="bg-gray-100 border border-gray-300 w-full text-start p-2 flex items-center gap-10 max-sm:p-1"
     >
@@ -35,11 +35,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { dataStore } from '../stores/dataStore'
+import { dataStore } from '../../stores/dataStore'
 
 //  components
-import ProductCard from './ProductCard.vue'
-import LoadingCard from './LoadingCard.vue'
+import ProductCard from '../ProductCard.vue'
+import LoadingCard from '../LoadingCard.vue'
 
 // interface
 

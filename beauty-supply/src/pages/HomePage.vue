@@ -11,12 +11,12 @@
 
 <script setup lang="ts">
 // Other components
-import Hero from '../components/Hero.vue'
-import TrendingNow from '../components/TrendingNow.vue'
-import NewArrival from '../components/NewArrival.vue'
-import SelectCategory from '../components/SelectCategory.vue'
-import ShowCase from '../components/ShowCase.vue'
-import Contact from '../components/Contact.vue'
+import Hero from '@/components/home-page/Hero.vue'
+import TrendingNow from '@/components/home-page/TrendingNow.vue'
+import NewArrival from '@/components/home-page/NewArrival.vue'
+import SelectCategory from '@/components/home-page/SelectCategory.vue'
+import ShowCase from '@/components/home-page/ShowCase.vue'
+import Contact from '@/components/home-page/Contact.vue'
 import Footer from '../components/Footer.vue'
 </script>
 

@@ -1,5 +1,8 @@
 <template>
-  <footer class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:pt-10 max-sm:border-t border-[#ccc]">
+  <footer 
+  
+  v-if="footer.footerState"
+  class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:pt-10 max-sm:border-t border-[#ccc]">
     <div
       class="flex justify-start gap-24 px-12 max-xl:gap-10 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
     >
@@ -63,6 +66,16 @@
 </template>
 
 <script setup lang="ts">
+
+import { navState } from '@/stores/navState'
+
+
+const footer = navState()
+
+
+
+
+
 import {
   faFacebook,
   faInstagram,
