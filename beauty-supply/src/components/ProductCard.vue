@@ -1,17 +1,19 @@
 <!-- reusable card -->
 
 <template>
-  <article class="card bg-white w-full h-[350px] max-sm:h-80 pb-1" :key="props.id">
+  <article class="card w-full bg-[#ffffff9d] h-[350px] max-sm:h-80 pb-1" :key="props._id">
     <div class="image w-full h-[68%] max-sm:h-[64%] relative">
       <!-- main image -->
-      <img :src="props.image" :alt="props.title" class="w-full h-full object-contain" />
+
+      <span class="bg-white p-2 text-sm text-[#e78f2d] absolute left-3 top-3 z-30"> 20% OFF </span>
+      <img :src="props.image" :alt="props.name" class="w-full h-full object-contain" />
 
       <!-- overlay -->
       <div class="overlay opacity-0 absolute bg-white top-0 right-0 left-0 bottom-0 w-full h-full">
-        <RouterLink :to="{ name: 'product-details', params: { productID: props?.id?.toString() } }">
+        <RouterLink :to="{ name: 'product-details', params: { productID: props._id } }">
           <img
             :src="props.image"
-            :alt="props.title"
+            :alt="props.name"
             class="w-full h-full object-contain transform -scale-x-100 transition-all relative"
           />
         </RouterLink>
@@ -29,14 +31,14 @@
     </div>
     <span class="flex justify-between items-center my-2 mx-2 pl-2 max-sm:pl-0">
       <h6 class="text-sm max-sm:text-[.7rem]">
-        {{ props.title?.length < 50 ? props.title : props.title?.slice(0, 50).concat('...') }}
+        {{ props.name?.length < 50 ? props.name : props.name?.slice(0, 50).concat('...') }}
       </h6>
     </span>
     <div
       class="flex justify-between items-center mx-2 pl-2 max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:pl-0"
     >
       <span class="max-sm:flex gap-2">
-        <h6 class="text-sm max-sm:text-[.8rem]">{{ props.price }} USD</h6>
+        <h6 class="text-sm max-sm:text-[.8rem]">{{ props.price }} NGN</h6>
         <p class="text-gray-500 text-sm">
           <span class="line-through max-sm:text-[.5rem]">{{ (props.price * 150) / 100 }}</span>
           NGN
@@ -57,12 +59,13 @@ const cart = useCart()
 // interface product
 
 interface Products {
-  id: any
-  title: string
+  _id: number | string
+  name: string
   image?: string
   discount: number | undefined
-  description: string
+  description: string[] | undefined
   price: number
+  currency: string
 }
 const props = defineProps<Products>()
 </script>

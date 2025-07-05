@@ -20,7 +20,7 @@ html {
   height: 100%;
 }
 body {
-  background: #fff;
+  background: #fafafa;
   width: 100%;
   height: 100vh;
 }

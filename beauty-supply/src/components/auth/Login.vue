@@ -1,6 +1,6 @@
 <template>
-  <main class="flex flex-row-reverse">
-    <div class="w-3/4 h-full m-20">
+  <main class="flex flex-row-reverse items-center">
+    <div class="w-full h-full mx-14 max-xl:mx-7 max-sm:mx-4">
       <a href="/" class="flex justify-end items-center space-x-2 rtl:space-x-reverse">
         <span
           class="self-center text-xl max-xl:text-[1rem] font-bold whitespace-nowrap border-b-2 border-[#E78F2D] hover:translate-x-[40%] transition-all"
@@ -11,22 +11,24 @@
         </span>
       </a>
       <div class="my-10">
-        <h1 class="text-5xl">Hello,<br />Welcome Back</h1>
+        <h1 class="text-5xl max-xl:text-4xl max-sm:text-2xl">Hello,<br />Welcome Back</h1>
         <small class="text-[#333]">Hello welcome back to your special place.</small>
       </div>
 
-      <form class="flex justify-center flex-col w-3/4">
+      <form class="flex justify-center flex-col w-3/4 max-xl:w-full" @submit.prevent="handleLogin">
         <input
           type="text"
           name="email"
           minlength="5"
           maxlength="50"
+          v-model="email"
           class="p-2 text-[1rem] placeholder:text-sm w-full mb-3 border border-gray-400 rounded hover:bg-[#ff95001e] focus:outline-yellow-900 transition-all"
           placeholder="Email address"
         />
         <input
           type="password"
           name="password"
+          v-model="password"
           id="currentPassword"
           autocomplete="current-password"
           minlength="8"
@@ -50,7 +52,7 @@
         </div>
         <button
           type="submit"
-          class="w-1/4 my-10 p-2.5 text-amber-50 rounded text-sm bg-[#4A5559] hover:opacity-90"
+          class="w-1/4 max-sm:w-full my-10 p-2.5 text-amber-50 rounded text-sm bg-[#4A5559] hover:opacity-90"
         >
           Sign In
         </button>
@@ -64,14 +66,14 @@
         >
       </div>
     </div>
-    <div class="w-full h-screen relative">
-      <img :src="image" alt="login background image" class="w-full h-full" />
+    <div class="w-full h-screen relative max-sm:hidden">
+      <img :src="image" alt="login background image" class="w-full h-full object-cover" />
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import image from '../../assets/images/login.jpg'
@@ -90,7 +92,23 @@ onUnmounted(() => {
   updateNavState.headerState = true
   updateNavState.footerState = true
 })
-</script>
 
-<style>
-</style>
+// use auth store
+import { authStore } from '@/stores/authStore'
+
+const store = authStore()
+
+const email = ref<string>()
+const password = ref<string>()
+
+const handleLogin = async () => {
+  if (email.value && password.value) {
+    await store.handleLogin({
+      email: email.value,
+      password: password.value,
+    })
+  } else {
+    console.error('Something went wrong')
+  }
+}
+</script>

@@ -3,10 +3,12 @@ import axios from 'axios'
 import { ref, watch } from 'vue'
 
 interface Product {
-  id: string | number
-  title: string
+  _id: string | number
+  name: string
   price: number
-  description?: string
+  currency: string
+
+  description?: string[] | undefined
   discount: number
   image?: string
 }
@@ -24,8 +26,9 @@ export const dataStore = defineStore('data', () => {
     error.value = null
     errorMessage.value = null
     try {
-      const response = await axios.get<Product[]>(`${API_URL}/products`)
-      products.value = response.data
+      // const response = await axios.get<Product[]>(`${API_URL}/products`)
+      const response = await axios.get('http://localhost:3500/products')
+      products.value = response.data.data
       console.log(response.data)
     } catch (err: any) {
       console.error('Error fetching products:', err)

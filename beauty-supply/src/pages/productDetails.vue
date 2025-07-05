@@ -10,12 +10,12 @@
   </div>
 
   <!-- if there is an error show error -->
-  <div v-else-if="error" class="min-h-screen flex items-center text-center justify-center">
+  <div v-else-if="error" class="min-h-screen flex items-center text-center justify-center flex-col">
     <p class="text-center">Something went wrong cannot fetch product at this time{{ error }}</p>
     <a href="/">Go back home</a>
   </div>
 
-  <main class="min-h-screen w-full mt-22 max-xl:mt-18 max-sm:mt-16" v-else>
+  <main class="min-h-screen w-full mt-22 max-sm:mt-20" v-else>
     <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
       <small class="flex items-center gap-2">
         <RouterLink to="/">Home</RouterLink>
@@ -37,13 +37,18 @@
           </g>
         </svg>
       </small>
-      <small>Shop</small>
+      <RouterLink to="/store"><small>Store</small></RouterLink>
     </nav>
 
     <!-- else just display data -->
     <div class="mx-12 mt-7 flex gap-5 max-xl:mx-7 max-sm:mx-5 max-sm:flex-col">
-      <div class="w-full max-h-[525px] max-sm:h-96 static">
-        <img :src="product?.image" :alt="product?.title" class="h-full w-full" />
+      <div class="flex gap-2 w-full max-h-[525px] max-sm:h-96">
+        <img
+          :src="product?.image"
+          :alt="product?.name"
+          class="h-20 max-sm:h-16 w-[12%] object-cover border"
+        />
+        <img :src="product?.image" :alt="product?.name" class="h-full w-[85%] object-cover" />
       </div>
 
       <div class="w-full">
@@ -55,9 +60,9 @@
             <small class="text-gray-700 underline text-xs">(156 reviews)</small>
           </span>
         </ul>
-        <h2 class="text-2xl text-wrap">{{ product?.title }}</h2>
+        <h2 class="text-2xl text-wrap">{{ product?.name }}</h2>
         <h4 class="my-2 text-xl">
-          <b> ${{ product?.price }}</b>
+          <b> {{ product?.currency }}{{ product?.price }}</b>
         </h4>
         <p class="my-4 text-gray-600 uppercase">
           color
@@ -122,14 +127,15 @@
         <h2 class="text-2xl text-wrap">Complete This Look</h2>
         <div class="flex gap-5 w-full mt-5 overflow-auto">
           <ProductCard
-            v-for="product in store.products?.slice(2, 4)"
-            :key="product.id"
-            :id="product.id"
+            v-for="product in store.products?.slice(0, 2)"
+            :key="product._id"
+            :_id="product._id"
+            :currency="product.currency"
             :description="product.description"
             :discount="product.discount"
             :image="product.image"
             :price="product.price"
-            :title="product.title"
+            :name="product.name"
           />
         </div>
       </div>
@@ -201,14 +207,14 @@
               <div class="card flex gap-3 mt-2">
                 <img
                   :src="product?.image"
-                  :alt="product?.title"
+                  :alt="product?.name"
                   class="w-16 h-17 border border-gray-300 object-cover max-sm:w-10 max-sm:h-10"
                 />
                 <div class="flex flex-col justify-center items-start">
                   <small class="my-2 max-sm:my-0">
                     <b> Reviewing</b>
                   </small>
-                  <small class="text-xs">{{ product?.title }}</small>
+                  <small class="text-xs">{{ product?.name }}</small>
                 </div>
               </div>
             </div>
@@ -241,7 +247,7 @@
             <div class="my-5 flex text-start items-start gap-3">
               <img
                 :src="product?.image"
-                :alt="product?.title"
+                :alt="product?.name"
                 class="h-10 w-10 max-sm:w-7 max-sm:h-7 rounded-full border border-gray-300"
               />
               <div class="">
@@ -272,14 +278,14 @@
               <div class="card flex gap-3 mt-2">
                 <img
                   :src="product?.image"
-                  :alt="product?.title"
+                  :alt="product?.name"
                   class="w-16 h-17 border border-gray-300 object-cover max-sm:w-10 max-sm:h-10"
                 />
                 <div class="flex flex-col justify-center items-start">
                   <small class="my-2 max-sm:mt-0">
                     <b> Reviewing</b>
                   </small>
-                  <small class="text-xs">{{ product?.title }}</small>
+                  <small class="text-xs">{{ product?.name }}</small>
                 </div>
               </div>
             </div>
@@ -348,8 +354,9 @@ const cartStore = useCart()
 
 // Define the Product interface
 interface Product {
-  id: number
-  title: string
+  _id: number
+  currency: string
+  name: string
   price: number
   description?: string
   image?: string
@@ -366,10 +373,12 @@ const fetchProductById = async () => {
   isLoading.value = true
   error.value = null
   try {
-    const response: AxiosResponse<Product> = await axios.get(
-      `${API_URL}/products/${route.params.productID}`
-    )
-    product.value = response.data
+    // const response: AxiosResponse<Product> = await axios.get(
+    //   `${API_URL}/products/${route.params.productID}`
+    // )
+    const response = await axios.get(`http://localhost:3500/products/${route.params.productID}`)
+
+    product.value = response.data.data
   } catch (err: any) {
     error.value = err.message || 'An unexpected error occurred'
     console.error(err)

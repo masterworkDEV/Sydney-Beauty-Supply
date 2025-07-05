@@ -1,13 +1,13 @@
 <template>
-  <footer 
-  
-  v-if="footer.footerState"
-  class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:pt-10 max-sm:border-t border-[#ccc]">
+  <footer
+    v-if="footer.footerState"
+    class="mt-20 max-sm:mt-0 pt-14 border-t-2 max-sm:pt-10 max-sm:border-t border-[#ccc]"
+  >
     <div
       class="flex justify-start gap-24 px-12 max-xl:gap-10 max-xl:px-10 max-sm:gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:px-5"
     >
       <h3 class="text-4xl max-xl:text-3xl max-sm:text-2xl text-center">
-        Cosmetica Beauty <br />Supply
+        SK Fashion & <br />Design
       </h3>
       <div class="flex justify-center gap-10 max-sm:grid max-sm:grid-cols-2">
         <div class="col">
@@ -47,7 +47,7 @@
           <p class="text-[.8rem] mb-4 uppercase">Follow Us</p>
           <ul class="grid grid-cols-5 max-sm:grid-cols-3 max-sm:flex max-sm:flex-wrap">
             <li
-              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-yellow-600 hover:has-[a]:scale-[1.1] overflow-hidden transition"
+              class="p-2 w-12 flex justify-center border border-[#ccc] max-sm:w-10 hover:bg-[#e78f2d] hover:has-[a]:scale-[1.1] overflow-hidden transition"
               v-for="icon in icons"
               :key="icon"
             >
@@ -66,15 +66,9 @@
 </template>
 
 <script setup lang="ts">
-
 import { navState } from '@/stores/navState'
 
-
 const footer = navState()
-
-
-
-
 
 import {
   faFacebook,
@@ -141,7 +135,7 @@ const icons = ref([
 
 <style scoped>
 .quick-links:hover {
-  text-decoration: underline goldenrod 2px;
+  text-decoration: underline #e78f2d 2px;
   opacity: 0.9;
 }
 </style>
