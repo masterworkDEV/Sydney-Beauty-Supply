@@ -15,9 +15,9 @@
     <a href="/">Go back home</a>
   </div>
 
-  <main class="min-h-screen w-full mt-22 max-sm:mt-20" v-else>
+  <main class="min-h-screen w-full" v-else>
     <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
-      <small class="flex items-center gap-2">
+      <small class="flex items-center gap-2 mt-22 max-sm:mt-20">
         <RouterLink to="/">Home</RouterLink>
 
         <!-- arrow right -->
@@ -37,7 +37,7 @@
           </g>
         </svg>
       </small>
-      <RouterLink to="/store"><small>Store</small></RouterLink>
+      <small class="mt-22 max-sm:mt-20">Store</small>
     </nav>
 
     <!-- else just display data -->

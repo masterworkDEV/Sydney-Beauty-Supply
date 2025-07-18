@@ -27,7 +27,12 @@ apiClient.interceptors.response.use(
     const originalRequest = error.config
     const store = authStore()
 
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+    if (
+      store.isAuthenticated &&
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true
 
       try {

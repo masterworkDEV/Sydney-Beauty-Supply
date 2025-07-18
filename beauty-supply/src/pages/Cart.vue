@@ -1,7 +1,7 @@
 <template>
-  <main class="min-h-screen w-full mt-22 max-xl:mt-18 max-sm:mt-16">
+  <main class="min-h-screen w-full">
     <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
-      <small class="flex items-center gap-2">
+      <small class="flex items-center gap-2 mt-22 max-xl:mt-20">
         <RouterLink to="/">Home</RouterLink>
 
         <!-- arrow right -->
@@ -21,7 +21,7 @@
           </g>
         </svg>
       </small>
-      <small>Shopping Bag</small>
+      <small class="mt-22 max-xl:mt-20">Shopping Bag</small>
     </nav>
     <div class="my-7 mx-12 max-xl:mx-7 max-sm:mx-5">
       <div class="flex items-end gap-2 bg-white rounded-md p-5 max-xl:p-3 max-sm:p-2.5 shadow">
@@ -41,17 +41,17 @@
         <ul class="bg-white p-5 w-full shadow-lg" v-if="Object.values(cart.cartItems).length > 0">
           <li
             v-for="item in cart.cartItems"
-            :key="item.id"
+            :key="item._id"
             class="flex justify-between items-center border-b border-gray-300 mb-2 pb-7"
           >
             <div class="flex justify-start items-start">
-              <img :src="item.image" :alt="item.title" class="w-10 h-10" />
+              <img :src="item.image" :alt="item.name" class="w-10 h-10" />
               <span>
-                <h4 class="ml-2 text-sm">{{ item.title }}</h4>
+                <h4 class="ml-2 text-sm">{{ item.name }}</h4>
                 <small>{{ item.discount }}</small>
                 <RouterLink
                   class="ml-2 text-blue-500 text-xs"
-                  :to="{ name: 'product-details', params: { productID: item.id } }"
+                  :to="{ name: 'product-details', params: { productID: item._id } }"
                 >
                   View specs
                   <FontAwesomeIcon :icon="faArrowAltCircleDown" />
@@ -67,7 +67,7 @@
                   color="red"
                   class="cursor-pointer"
                   title="remove from cart"
-                  @click="toggleDeleteModal(item.id)"
+                  @click="toggleDeleteModal(item._id)"
                 />
               </div>
 
@@ -76,7 +76,7 @@
 
               <div
                 v-if="deleteModal"
-                class="animate__animated animate__bounceIn rounded w-1/4 max-sm:w-[90%] h-40 flex justify-center items-center flex-col p-5 bg-white shadow fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-40"
+                class="animate__animated animate__bounceIn rounded w-1/4 max-xl:w-[45%] max-md:w-2/4 max-sm:w-[90%] h-40 flex justify-center items-center flex-col p-5 bg-white shadow fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-40"
               >
                 <div class="text-center">
                   <h3 class="mb-2">
@@ -222,7 +222,7 @@ const itemIdToDelete = ref<number | string | null>(null)
 
 const toggleDeleteModal = (id: number | string | null = null) => {
   if (id !== null) {
-    const checkExistence = cart.cartItems.find((item) => item.id === id)
+    const checkExistence = cart.cartItems.find((item) => item._id === id)
     // Now product with the associated ID exists. We can then move on.
     if (checkExistence) {
       itemIdToDelete.value = id // storing id in a variable
@@ -243,7 +243,7 @@ const toggleDeleteModal = (id: number | string | null = null) => {
 const deleteFromCart = () => {
   // Now using the ID we've stored
   if (!itemIdToDelete.value !== null) {
-    cart.cartItems = cart.cartItems.filter((item) => item.id !== itemIdToDelete.value)
+    cart.cartItems = cart.cartItems.filter((item) => item._id !== itemIdToDelete.value)
     itemIdToDelete.value = null
     deleteModal.value = false
   } else {

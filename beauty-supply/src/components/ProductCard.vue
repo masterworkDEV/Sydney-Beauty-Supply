@@ -1,18 +1,18 @@
 <!-- reusable card -->
 
 <template>
-  <article class="card w-full bg-[#ffffff9d] h-[350px] max-sm:h-80 pb-1" :key="props._id">
-    <div class="image w-full h-[68%] max-sm:h-[64%] relative">
+  <article class="card w-full bg-[#f0dddd9d] h-[350px] max-sm:h-80 pb-1" :key="props._id">
+    <div class="image w-full h-[70%] max-sm:h-[65%] relative">
       <!-- main image -->
 
       <span class="bg-white p-2 text-sm text-[#e78f2d] absolute left-3 top-3 z-30"> 20% OFF </span>
-      <img :src="props.image" :alt="props.name" class="w-full h-full object-contain" />
+      <img :src="imageone" :alt="props.name" class="w-full h-full object-contain" />
 
       <!-- overlay -->
       <div class="overlay opacity-0 absolute bg-white top-0 right-0 left-0 bottom-0 w-full h-full">
         <RouterLink :to="{ name: 'product-details', params: { productID: props._id } }">
           <img
-            :src="props.image"
+            :src="imageone"
             :alt="props.name"
             class="w-full h-full object-contain transform -scale-x-100 transition-all relative"
           />
@@ -53,6 +53,8 @@
 import { useCart } from '@/stores/cartController'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import imageone from '../assets/images/hero.jpg'
 
 const cart = useCart()
 

@@ -2,12 +2,13 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 interface Product {
-  id: string | number
-  title: string
+  _id: string | number
+  name: string
   price: number
+  currency: string
+  description?: string[] | undefined
+  discount: number
   image?: string
-  description?: string
-  discount?: number
 }
 
 interface CartItem extends Product {
@@ -19,14 +20,14 @@ export const useCart = defineStore('cart', () => {
 
   const addToCart = (productToAdd: Product) => {
     // 4. Find the existing item. 'find' returns the item or undefined.
-    const existingItem = cartItems.value.find((item) => item.id === productToAdd.id)
+    const existingItem = cartItems.value.find((item) => item._id === productToAdd._id)
     if (existingItem) {
       existingItem.quantity++
-      alert(`Updated quantity for ${existingItem.title}. New quantity: ${existingItem.quantity}`)
+      alert(`Updated quantity for ${existingItem.name}. New quantity: ${existingItem.quantity}`)
     } else {
       const newItem: CartItem = { ...productToAdd, quantity: 1 }
       cartItems.value.push(newItem)
-      alert(`Added ${newItem.title} to cart.`)
+      alert(`Added ${newItem.name} to cart.`)
     }
     console.log('Current Cart:', cartItems.value)
   }
@@ -40,7 +41,7 @@ export const useCart = defineStore('cart', () => {
   }
 
   const deleteFromCart = (productToDelete: Product) => {
-    return (cartItems.value = cartItems.value.filter((item) => item.id !== productToDelete.id))
+    return (cartItems.value = cartItems.value.filter((item) => item._id !== productToDelete._id))
   }
 
   // clear all items in cart

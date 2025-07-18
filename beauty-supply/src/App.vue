@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import HomePage from './pages/HomePage.vue'
-import Header from '././components/Header.vue'
+import Header from './components/header/Header.vue'
 import Footer from '././components/Footer.vue'
 </script>
 

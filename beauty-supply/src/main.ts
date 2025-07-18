@@ -6,7 +6,6 @@ import App from './App.vue'
 import VueLazyload from 'vue-lazyload'
 
 const app = createApp(App)
-app.use(createPinia())
 
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
@@ -46,5 +45,8 @@ app.use(VueLazyload, {
   // ... other options
 })
 
+app.use(createPinia())
+
 app.use(router)
+
 app.mount('#app')

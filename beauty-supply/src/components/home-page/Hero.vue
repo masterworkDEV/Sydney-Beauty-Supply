@@ -4,7 +4,7 @@
     :slide-ratio="1 / 4"
     class="w-full h-screen max-xl:h-auto"
     :arrows="false"
-    :fade="false"
+    :fade="true"
     :touchable="false"
   >
     <vueper-slide v-for="(slide, i) in details" :key="i">
@@ -18,14 +18,14 @@
               lazy
             />
             <div
-              class="bg-black opacity-40 absolute w-full h-full left-0 right-0 bottom-0 top-0 z-0"
+              class="bg-black opacity-70 absolute w-full h-full left-0 right-0 bottom-0 top-0 z-0"
             ></div>
 
             <div
-              class="w-full h-full flex flex-col items-center justify-center text-center max-xl:px-7 max-sm:px-5 max-sm:text-center animate__animated animate__fadeInLeft"
+              class="w-full h-full flex flex-col items-center justify-center text-center max-xl:px-7 max-sm:px-3 max-sm:text-center animate__animated animate__fadeInLeft"
             >
               <h1
-                class="animate__animated animate__fadeIn text-7xl uppercase tracking-normal max-xl:text-5xl max-md:text-4xl text-white"
+                class="animate__animated animate__fadeIn text-6xl uppercase tracking-normal max-xl:text-5xl max-md:text-4xl text-white"
               >
                 {{ slide.title }}
               </h1>
@@ -37,7 +37,7 @@
               </p>
 
               <button
-                class="shop-btn animate__animated animate__fadeInUp animate__delay-4s max-sm:text-[.8rem] shadow rounded-full bg-[#4A5559] text-white hover:text-black p-3 hover:bg-white transition-all"
+                class="shop-btn cursor-pointer animate__animated animate__fadeInUp text-sm w-48 animate__delay-4s max-sm:w-40 max-sm:text-[.8rem] shadow rounded-full bg-transparent border-2 borde-white text-white p-3 hover:bg-[#f1f1f1] hover:text-[#333] transition-all"
               >
                 <router-link to="/store"> {{ slide.buttonText }} </router-link>
               </button>
@@ -58,10 +58,10 @@ import heroImage2 from '../../assets/images/hero.jpg'
 const details = ref([
   {
     image: heroImage2,
-    title: 'Redefining Elegance, One Stitch at a Time.',
+    title: 'Crafting Elegance, Stitch by Stitch.',
     description:
       'Discover timeless sophistication and unparalleled craftsmanship. Indulge in exclusive pieces designed to elevate your wardrobe.',
-    buttonText: 'Explore Collections',
+    buttonText: 'Explore Now',
   },
   {
     image: heroImage,

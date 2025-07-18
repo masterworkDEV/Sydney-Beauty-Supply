@@ -135,7 +135,7 @@ const icons = ref([
 
 <style scoped>
 .quick-links:hover {
-  text-decoration: underline #e78f2d 2px;
+  text-decoration: underline #333 2px;
   opacity: 0.9;
 }
 </style>
