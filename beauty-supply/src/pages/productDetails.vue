@@ -6,7 +6,6 @@
     class="min-h-screen flex flex-col items-center text-center justify-center gap-2"
   >
     <LoadingCircle />
-    <p class="text-center">Loading...</p>
   </div>
 
   <!-- if there is an error show error -->
@@ -17,7 +16,7 @@
 
   <main class="min-h-screen w-full" v-else>
     <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
-      <small class="flex items-center gap-2 mt-22 max-sm:mt-20">
+      <small class="flex items-center gap-2 pt-22 max-sm:pt-20">
         <RouterLink to="/">Home</RouterLink>
 
         <!-- arrow right -->
@@ -37,18 +36,33 @@
           </g>
         </svg>
       </small>
-      <small class="mt-22 max-sm:mt-20">Store</small>
+      <router-link class="pt-22 max-sm:pt-20 text-sm" to="/store">Store</router-link>
     </nav>
 
     <!-- else just display data -->
-    <div class="mx-12 mt-7 flex gap-5 max-xl:mx-7 max-sm:mx-5 max-sm:flex-col">
-      <div class="flex gap-2 w-full max-h-[525px] max-sm:h-96">
-        <img
-          :src="product?.image"
-          :alt="product?.name"
-          class="h-20 max-sm:h-16 w-[12%] object-cover border"
-        />
-        <img :src="product?.image" :alt="product?.name" class="h-full w-[85%] object-cover" />
+    <div
+      class="mx-12 pt-7 flex gap-5 max-lg:grid max-lg:grid-cols-1 max-xl:mx-7 max-sm:mx-5 max-sm:flex-col max-sm:pt-32"
+    >
+      <div class="flex gap-5 w-full max-h-[525px] max-sm:h-96 max-sm:flex-col-reverse">
+        <div class="w-[20%] h-30 max-sm:h-20 flex flex-col gap-5 max-sm:flex-row">
+          <img
+            v-for="(image, index) in product?.images"
+            :key="index"
+            :src="image.imageUrl"
+            class="object-cover border-2 border-gray-300 w-full h-full max-sm:h-20"
+            :class="isActiveThumbnail === index && 'opacity-75'"
+            @click="thumbnailClick(index)"
+          />
+        </div>
+        <div class="w-full h-full">
+          <Transition mode="out-in">
+            <img
+              :src="product?.images[isActiveThumbnail].imageUrl"
+              :alt="product?.name"
+              class="w-full h-full"
+            />
+          </Transition>
+        </div>
       </div>
 
       <div class="w-full">
@@ -57,17 +71,15 @@
             <FontAwesomeIcon :icon="faStar" />
           </li>
           <span>
-            <small class="text-gray-700 underline text-xs">(156 reviews)</small>
+            <small class="text-gray-700 underline text-xs mb-2">(156 reviews)</small>
           </span>
         </ul>
-        <h2 class="text-2xl text-wrap">{{ product?.name }}</h2>
-        <h4 class="my-2 text-xl">
-          <b> {{ product?.currency }}{{ product?.price }}</b>
-        </h4>
-        <p class="my-4 text-gray-600 uppercase">
+        <h1 class="text-3xl text-wrap max-sm:text-2xl font-semibold">{{ product?.name }}</h1>
+        <h4 class="my-2 text-xl font-semibold">NGN{{ product?.price }}</h4>
+        <div class="my-4 text-gray-600 uppercase">
           color
           <span class="text-sm">name</span>
-        </p>
+        </div>
 
         <div></div>
         <div class="mt-6 mb-2 text-gray-600 uppercase flex justify-between">
@@ -85,22 +97,26 @@
         </div>
         <div class="mt-6 mb-2 text-gray-600 uppercase">Quantity</div>
 
-        <div class="flex items-center text-center">
+        <div class="flex items-center text-center gap-3">
           <button
-            class="w-10 h-10 border border-gray-200"
+            class="w-10 h-10 border border-gray-200 cursor-pointer"
             @click="cartStore.decreaseCartQuantity(product)"
           >
             <FontAwesomeIcon :icon="faMinus" />
           </button>
           <input type="text" class="w-10 h-10 text-center" value="1" />
           <button
-            class="w-10 h-10 border border-gray-200 bg-[#f1f1f1]"
+            class="w-10 h-10 border border-gray-200 bg-[#f1f1f1] cursor-pointer"
             @click="cartStore.increaseCartQuantity(product)"
           >
             <FontAwesomeIcon :icon="faPlus" />
           </button>
         </div>
-        <button class="w-full border-2 border-gray-400 p-3 my-5">SELECT SIZE</button>
+        <button
+          class="w-full border-2 border-gray-400 p-3 my-5 hover:bg-[#101010] hover:text-white cursor-pointer"
+        >
+          SELECT SIZE
+        </button>
 
         <div class="relative">
           <div
@@ -126,17 +142,18 @@
 
         <h2 class="text-2xl text-wrap">Complete This Look</h2>
         <div class="flex gap-5 w-full mt-5 overflow-auto">
-          <ProductCard
-            v-for="product in store.products?.slice(0, 2)"
-            :key="product._id"
-            :_id="product._id"
-            :currency="product.currency"
-            :description="product.description"
-            :discount="product.discount"
-            :image="product.image"
-            :price="product.price"
-            :name="product.name"
-          />
+          <div v-for="product in store.products?.slice(0, 2)" :key="product._id">
+            <ProductCard
+              :key="product._id"
+              :_id="product._id"
+              :currency="product.currency"
+              :description="product.description"
+              :discount="product.discount"
+              :thumbnail="product.thumbnail"
+              :price="product.price"
+              :name="product.name"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -190,10 +207,8 @@
           </button>
         </div>
 
-        <div class="text-xs"><b>156 reviews</b></div>
+        <div class="text-xs font-semibold">150 reviews</div>
 
-        <!--
-        this will be in a review component. ##refractoring as soon as am done with the UI and interaction .-->
         <div class="flex justify-between border-t border-gray-300">
           <div
             class="flex items-start gap-16 w-[80%] mt-5 max-sm:gap-5 max-sm:flex-col max-sm:w-full"
@@ -206,7 +221,7 @@
               </small>
               <div class="card flex gap-3 mt-2">
                 <img
-                  :src="product?.image"
+                  :src="product?.thumbnail?.imageUrl"
                   :alt="product?.name"
                   class="w-16 h-17 border border-gray-300 object-cover max-sm:w-10 max-sm:h-10"
                 />
@@ -246,7 +261,7 @@
             <!-- Website Comments -->
             <div class="my-5 flex text-start items-start gap-3">
               <img
-                :src="product?.image"
+                :src="product?.thumbnail"
                 :alt="product?.name"
                 class="h-10 w-10 max-sm:w-7 max-sm:h-7 rounded-full border border-gray-300"
               />
@@ -277,7 +292,7 @@
               </small>
               <div class="card flex gap-3 mt-2">
                 <img
-                  :src="product?.image"
+                  :src="product?.thumbnail?.imageUrl"
                   :alt="product?.name"
                   class="w-16 h-17 border border-gray-300 object-cover max-sm:w-10 max-sm:h-10"
                 />
@@ -342,30 +357,37 @@ import {
   faCheckCircle,
   faThumbsUp,
   faThumbsDown,
+  faImage,
 } from '@fortawesome/free-solid-svg-icons'
 
 //  Components
 import ProductCard from '@/components/ProductCard.vue'
 import LoadingCircle from '@/components/LoadingCircle.vue'
+import apiClient from '../../api-folder/apiClient'
 
 // store
 const store = dataStore()
 const cartStore = useCart()
 
 // Define the Product interface
+interface Thumbnail {
+  imageUrl: string
+  imageId: string
+}
 interface Product {
   _id: number
+
   currency: string
   name: string
   price: number
   description?: string
-  image?: string
+  thumbnail?: Thumbnail
+  images: Thumbnail[]
 }
 
 // Fetch product by id
-const API_URL: string = import.meta.env.VITE_API_URL as string
 const route = useRoute()
-const product = ref<Product | null>(null)
+const product = ref<Product>()
 const isLoading = ref<boolean>(false)
 const error = ref<string | null>(null)
 
@@ -373,10 +395,7 @@ const fetchProductById = async () => {
   isLoading.value = true
   error.value = null
   try {
-    // const response: AxiosResponse<Product> = await axios.get(
-    //   `${API_URL}/products/${route.params.productID}`
-    // )
-    const response = await axios.get(`http://localhost:3500/products/${route.params.productID}`)
+    const response = await apiClient.get(`/products/${route.params.productID}`)
 
     product.value = response.data.data
   } catch (err: any) {
@@ -406,10 +425,35 @@ const handleIsExpanded = () => {
 // get date
 
 const nowTimestamp = Date.now()
-
 const today = new Date(nowTimestamp)
 const todayString = today.toLocaleDateString()
+
+// Handle Image Click
+
+const isActiveThumbnail = ref<number>(0)
+
+const thumbnailClick = (index: number) => {
+  return (isActiveThumbnail.value = index)
+}
 </script>
 
-<style>
+<style scoped>
+/* Add this CSS block to your stylesheet */
+.v-enter-active,
+.v-leave-active {
+  /* Apply the transition property to opacity over 0.3 seconds */
+  transition: opacity 0.7s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  /* Initial state (before enter) and final state (after leave) */
+  opacity: 0;
+}
+
+.v-enter-to,
+.v-leave-from {
+  /* Final state (after enter) and initial state (before leave) */
+  opacity: 1;
+}
 </style>

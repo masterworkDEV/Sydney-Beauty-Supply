@@ -2,46 +2,38 @@
   <vueper-slides
     autoplay
     :slide-ratio="1 / 4"
-    class="w-full h-screen max-xl:h-auto"
+    class="w-full"
     :arrows="false"
     :fade="true"
     :touchable="false"
   >
     <vueper-slide v-for="(slide, i) in details" :key="i">
       <template #content>
-        <div class="vueperslide__content-wrapper h-screen" style="flex-direction: row">
-          <div class="h-full w-full relative max-sm:flex-col-reverse max-sm:gap-5">
-            <img
-              :src="slide.image"
-              alt="this is the first background image"
-              class="absolute right-0 left-0 bottom-0 h-full w-full z-0 max-sm:object-cover"
-              lazy
-            />
-            <div
-              class="bg-black opacity-70 absolute w-full h-full left-0 right-0 bottom-0 top-0 z-0"
-            ></div>
+        <div
+          class="vueperslide__content-wrapper slide-container h-full w-full flex justify-end items-center text-center relative"
+          style="flex-direction: row"
+        >
+          <img
+            :src="heroImage"
+            alt=""
+            class="image h-full w-full absolute right-0 left-0 bottom-0 top-0 z-0 object-cover"
+          />
+          <div class="image-layer"></div>
 
-            <div
-              class="w-full h-full flex flex-col items-center justify-center text-center max-xl:px-7 max-sm:px-3 max-sm:text-center animate__animated animate__fadeInLeft"
+          <div class="mx-24 max-xl:mx-20 max-md:mx-14 max-sm:mx-10 z-20">
+            <h1
+              class="animate__animated animate__fadeIn text-9xl text-white max-xl:text-8xl max-lg:text-7xl max-md:text-6xl mb-3 text-center font-semibold"
             >
-              <h1
-                class="animate__animated animate__fadeIn text-6xl uppercase tracking-normal max-xl:text-5xl max-md:text-4xl text-white"
-              >
-                {{ slide.title }}
-              </h1>
-
-              <p
-                class="tracking-normal mb-3 text-sm text-wrap animate__animated animate__fadeInUp animate__delay-3s text-white"
-              >
-                {{ slide.description }}
-              </p>
-
-              <button
-                class="shop-btn cursor-pointer animate__animated animate__fadeInUp text-sm w-48 animate__delay-4s max-sm:w-40 max-sm:text-[.8rem] shadow rounded-full bg-transparent border-2 borde-white text-white p-3 hover:bg-[#f1f1f1] hover:text-[#333] transition-all"
-              >
-                <router-link to="/store"> {{ slide.buttonText }} </router-link>
-              </button>
-            </div>
+              {{ slide.title }}
+            </h1>
+            <p class="text-white mb-24">
+              {{ slide.description }}
+            </p>
+            <button
+              class="bg-[#007bff] text-white w-1/4 p-3 cursor-pointer max-sm:p-2.5 max-sm:w-2/4 focus:bg-blue-500 focus:ring-3 focus:ring-blue-900 font-semibold"
+            >
+              {{ slide.button }}
+            </button>
           </div>
         </div>
       </template>
@@ -52,31 +44,32 @@
 // static images
 import { ref } from 'vue'
 
-import heroImage from '../../assets/images/ hero3.jpg'
-import heroImage2 from '../../assets/images/hero.jpg'
-
+import heroLayer from '@/assets/images/hero-layer.png'
+import heroImage from '@/assets/images/hero-new.jpg'
 const details = ref([
   {
-    image: heroImage2,
-    title: 'Crafting Elegance, Stitch by Stitch.',
+    title: 'MzChi',
     description:
-      'Discover timeless sophistication and unparalleled craftsmanship. Indulge in exclusive pieces designed to elevate your wardrobe.',
-    buttonText: 'Explore Now',
+      'Your new look is here. Explore fresh drops and unique pieces that express your style.',
+    button: 'Shop Now',
   },
   {
-    image: heroImage,
-    title: 'Your Style Journey Starts Here.',
+    title: 'Collection',
     description:
-      'Effortless chic meets everyday luxury. Discover pieces that seamlessly blend comfort, quality, and contemporary fashion.',
-    buttonText: 'Shop New Arrivals',
+      'Elevate your style with our curated collection of luxury fashion, meticulously designed to empower you.',
+    button: 'Explore Store',
   },
 ])
 
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+import { title } from 'process'
 </script>
 
 <style>
+.slide-container {
+  background: radial-gradient(circle, #389cd4, #0b5983);
+}
 .category::-webkit-scrollbar {
   display: none;
 }
@@ -90,10 +83,10 @@ import 'vueperslides/dist/vueperslides.css'
 
 @media (max-width: 1200px) {
   .vueperslides__inner {
-    height: 55vh;
+    height: 65vh;
   }
   .vueperslides__parallax-wrapper {
-    height: 55vh;
+    height: 65vh;
   }
 }
 @media (max-width: 600px) {
@@ -104,13 +97,16 @@ import 'vueperslides/dist/vueperslides.css'
     height: 70vh;
   }
 }
-@media (max-width: 376px) {
-  .vueperslides__inner {
-    height: 70vh;
-  }
-  .vueperslides__parallax-wrapper {
-    height: 70vh;
-  }
+
+.image-layer {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
 }
 </style>
 

@@ -1,8 +1,9 @@
 <template>
-  <header v-if="header.headerState">
+  <header v-if="header.navState">
     <div
-      :class="isActive && 'active'"
-      class="header bg-[#fff] fixed right-0 left-0 top-0 py-4 max-sm:py-3 flex items-center justify-between px-12 max-xl:px-7 max-sm:px-5 transition-all z-20"
+      :class="headerState && 'active'"
+      class="header bg-transparent fixed right-0 left-0 top-0 py-6 max-sm:py-4 flex items-center justify-between px-24 max-xl:px-20 max-md:px-14 max-sm:px-10 transition-all duration-300 ease-in-out z-20"
+      ref="headerRef"
     >
       <button
         class="menu-btn hidden absolute right-3 max-sm:block hover:border active:animate__animated animate__fadeIn"
@@ -10,8 +11,8 @@
         <svg
           @click="isMenu = !isMenu"
           viewBox="0 0 24 24"
-          fill="#000"
-          stroke="#000"
+          :fill="headerState ? `black` : `white`"
+          :stroke="headerState ? `black` : `white`"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -24,71 +25,66 @@
         </svg>
       </button>
 
-      <router-link
-        name="logo"
-        to="/"
-        class="flex justify-end items-center space-x-2 rtl:space-x-reverse"
+      <a
+        href="/"
+        class="flex justify-end items-center space-x-2 rtl:space-x-reverse font-larger"
+        :class="headerState ? 'text-black' : 'text-white'"
       >
-        <span
-          class="self-center text-xl max-xl:text-[1rem] font-bold whitespace-nowrap border-b-2 border-[#4A5559]"
-          >Sk
-        </span>
-        <span class="max-sm:text-sm hover:translate-x-[-50%] transition-all">
-          <FontAwesomeIcon :icon="faScissors" rotation="180" size="sm" />
-        </span>
-      </router-link>
+        <b class="flex flex-col items-center">MzChi </b>
+      </a>
       <nav class="p-1">
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul class="nav-links flex justify-center gap-10 max-xl:gap-2">
+          <ul class="nav-links flex justify-center gap-10 max-xl:gap-7">
             <li class="link text-sm transition-all">
-              <router-link to="/" name="link" active-class="link-active">Home</router-link>
+              <router-link
+                to="/"
+                name="link"
+                active-class="link-active"
+                :class="headerState ? 'text-black' : 'text-white'"
+                >Home</router-link
+              >
             </li>
 
             <li class="link text-sm">
-              <router-link to="/store" name="link" active-class="link-active"> Store </router-link>
+              <router-link
+                to="/store"
+                name="link"
+                active-class="link-active"
+                :class="headerState ? 'text-black' : 'text-white'"
+              >
+                Store
+              </router-link>
             </li>
 
             <li class="link text-sm">
-              <a href="#shop">Clothing</a>
+              <a href="#shop" :class="headerState ? 'text-black' : 'text-white'">Clothing</a>
             </li>
             <li class="link text-sm">
-              <a href="#service">Footwares</a>
-            </li>
-            <li class="link text-sm">
-              <a href="#contact">Accessories</a>
+              <a href="#service" :class="headerState ? 'text-black' : 'text-white'">Footwares</a>
             </li>
           </ul>
         </div>
       </nav>
       <div class="max-sm:hidden">
         <ul class="flex items-center gap-5">
-          <li>
-            <FontAwesomeIcon
-              :icon="faSearch"
-              class="cursor-pointer hover:scale-110 transition-all"
-              title="Search"
-            />
-          </li>
           <li
             @click="cartModal = !cartModal"
             class="relative cursor-pointer hover:scale-110 flex items-center justify-center gap-1 transition-all"
-            :class="
-              Object.values(cart.cartItems).reduce((acc, product) => {
-                return acc + product.quantity
-              }, 0) &&
-              ' scale-110 animate__animated animate__delay-5s animate-bounce hover:animate-none'
-            "
             title="Cart"
           >
-            <FontAwesomeIcon :icon="faCartShopping" />
+            <FontAwesomeIcon :icon="faCartShopping" :color="headerState ? 'black' : 'white'" />
             <div
-              class="absolute p-1 right-[-20%] top-0 bg-red-500 rounded-full"
-              v-if="
-                Object.values(cart.cartItems).reduce((acc, product) => {
-                  return acc + product.quantity
-                }, 0)
-              "
-            ></div>
+              class="absolute w-full h-full p-2 right-[-60%] top-[-70%] bg-red-500 rounded-full text-white flex items-center justify-center"
+              v-if="Object.values(cart.cartItems).length"
+            >
+              <small class="font-semibold text-[.5rem]">
+                {{
+                  Object.values(cart.cartItems).reduce((acc, product) => {
+                    return acc + product.quantity
+                  }, 0)
+                }}
+              </small>
+            </div>
           </li>
 
           <li v-if="useAuthStore.isAuthenticated" @click="toggleAvatarModal">
@@ -112,6 +108,7 @@
               class="absolute top-16 right-10 bg-white p-4 rounded shadow-2xl"
               v-if="profileModal"
             >
+              <FontAwesomeIcon :icon="faTimes" @click="toggleAvatarModal" />
               <div class="flex items-center gap-5 border-b border-[#ddd] py-4">
                 <img
                   :src="useAuthStore.user.image"
@@ -121,7 +118,7 @@
 
                 <div
                   v-else-if="useAuthStore.isAuthenticated && !useAuthStore.user?.image"
-                  class="relative bg-gray-700 w-8 h-8 border-2 border-black text-white uppercase rounded-full flex justify-center items-center text-center"
+                  class="relative bg-gray-700 border-2 border-black p-1 text-xl text-white uppercase rounded-full flex justify-center items-center text-center"
                 >
                   {{ useAuthStore.user?.firstName.slice(0, 1)
                   }}{{ useAuthStore.user?.lastName.slice(0, 1) }}
@@ -136,22 +133,26 @@
               </div>
               <div class="flex flex-col border-b border-[#ddd] py-4">
                 <router-link
+                  @click="toggleAvatarModal"
                   to="/"
                   class="flex gap-2 p-2 hover:bg-[#ddd] hover:text-[#333] items-center"
                 >
-                  <FontAwesomeIcon :icon="faUser" />
+                  <FontAwesomeIcon :icon="faUser" :color="headerState ? 'black' : 'white'" />
                   <small> Account </small>
                 </router-link>
 
-                <router-link
-                  to="/dashboard"
+                <a
+                  @click="profileModal = !profileModal"
+                  href="/dashboard"
+                  target="_blank"
                   class="flex gap-2 p-2 hover:bg-[#ddd] hover:text-[#333] items-center"
                 >
                   <FontAwesomeIcon :icon="faDashboard" />
 
                   <small> Dashbord </small>
-                </router-link>
+                </a>
                 <router-link
+                  @click="profileModal = !profileModal"
                   to="/"
                   class="flex gap-2 p-2 hover:bg-[#ddd] hover:text-[#333] items-center"
                 >
@@ -161,6 +162,7 @@
                 </router-link>
 
                 <router-link
+                  @click="profileModal = !profileModal"
                   to="/"
                   class="flex gap-2 p-2 hover:bg-[#ddd] hover:text-[#333] items-center"
                 >
@@ -182,34 +184,33 @@
           </transition>
 
           <li v-if="!useAuthStore.isAuthenticated" class="flex items-center gap-2 cursor-pointer">
-            <small>Sign up</small>
-
             <router-link
               to="/login"
-              class="w-20 text-sm max-lg:w-14 max-lg:p-2 cursor-pointer flex justify-center text-center bg-black text-white p-2.5 rounded-full hover:opacity-80"
+              class="p-2.5 text-sm cursor-pointer flex justify-center text-center rounded-full hover:opacity-80"
             >
-              Login
+              <FontAwesomeIcon :icon="faUser" :color="headerState ? 'black' : 'white'" />
             </router-link>
           </li>
         </ul>
       </div>
     </div>
 
-    <!-- cartModal -->
-    <Overlay v-if="cartModal" />
+    <!-- cartModal for bigger screen -->
+
     <CartModal
       :cart-modal="cartModal"
       @handle-cart-modal-state="cartModal = !cartModal"
       @delete-cart-item="cart.deleteFromCart"
     />
+    <Overlay v-if="cartModal" @click="profileModal = !profileModal" />
 
     <!-- mobile  view-->
-    <Overlay v-if="isMenu" />
     <MobileMenu :isMenu="isMenu" @menuState="updateMenuState" />
+    <Overlay v-if="isMenu" @click="updateMenuState" />
   </header>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 // fontawesome
 import {
@@ -238,14 +239,12 @@ import MobileMenu from './MobileMenu.vue'
 import { faFirstOrder, faPaypal } from '@fortawesome/free-brands-svg-icons'
 
 const useAuthStore = authStore()
-console.log(useAuthStore.user)
 const cart = useCart()
 
 const header = navState()
 const profileModal = ref<boolean>(false)
 
 // other states
-const isActive = ref<boolean | null>(null)
 const isMenu = ref<boolean>(false)
 const cartModal = ref<boolean | false>(false)
 
@@ -257,9 +256,34 @@ const toggleAvatarModal = () => {
   profileModal.value = !profileModal.value
 }
 
-// scroll event for header
+const headerState = ref<boolean>(false)
+const headerRef = ref<HTMLElement | null>(null)
+const initialScrollValue = ref<number>(0)
+const scrollThreshold = 100
+
+// scroll event for navstate
 window.addEventListener('scroll', () => {
-  window.scrollY > 590 ? (isActive.value = true) : (isActive.value = false)
+  window.scrollY > 100 ? (headerState.value = true) : (headerState.value = false)
+})
+
+const handleNavScroll = () => {
+  if (!headerRef.value) return
+
+  const currentScroll = window.scrollY
+
+  if (currentScroll > initialScrollValue.value && initialScrollValue.value > scrollThreshold) {
+    headerRef.value.classList.add('-translate-y-full')
+  } else {
+    headerRef.value.classList.remove('-translate-y-full')
+  }
+  initialScrollValue.value = currentScroll
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleNavScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleNavScroll)
 })
 </script>
 
@@ -271,6 +295,7 @@ window.addEventListener('scroll', () => {
 .header.active {
   backdrop-filter: blur(12px);
   box-shadow: 0px 3px 4px #dddddd97;
+  background: white;
 }
 
 .link {
@@ -287,35 +312,13 @@ window.addEventListener('scroll', () => {
 /* Add these CSS rules */
 .router-link-active,
 .router-link-exact-active {
-  text-decoration: underline #333 2px;
+  border-bottom: 2px solid orange;
   scale: 0.95;
 }
 
-.link-active {
-  text-decoration: underline #333 2px;
-}
-
-.menu-enter-active {
-  transition: all 0.25s ease;
-  transition-delay: 100ms;
-}
-.menu-leave-active {
-  transition: all 0.3s ease;
-}
-
-.menu-enter-from {
-  transform: translateX(400px);
-  opacity: 0;
-}
-
-.menu-leave-to {
-  opacity: 0.2;
-  transform: translateX(400px);
-}
-
 .menu-btn {
-  width: 35px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -323,7 +326,7 @@ window.addEventListener('scroll', () => {
 }
 
 .menu-btn > svg {
-  width: 80%;
+  width: 100%;
   height: 100%;
 }
 

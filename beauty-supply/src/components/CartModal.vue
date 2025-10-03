@@ -24,15 +24,13 @@
             class="animate__animated animate__zoomIn flex justify-between my-5 p-2 hover:bg-[#ddd]"
             :class="!props && 'animate__animated animate__zoomOut'"
             v-for="item in cart.cartItems"
-            :key="item.id"
+            :key="item._id"
           >
             <div class="flex justify-center gap-2">
-              <img :src="item.image" :alt="item.title" class="w-20 h-full rounded-lg shadow" />
+              <img :src="item.image" :alt="item.name" class="w-20 h-full rounded-lg shadow" />
               <div>
                 <h5 class="text-xs my-1">
-                  {{
-                    item.title?.length < 25 ? item.title : item.title?.slice(0, 25).concat('...')
-                  }}
+                  {{ item.name?.length < 25 ? item.name : item.name?.slice(0, 25).concat('...') }}
                 </h5>
                 <h5 class="text-xs my-1">Color: Color</h5>
                 <h5 class="text-xs my-1">Size: XS</h5>
@@ -85,7 +83,7 @@
             </h5>
           </div>
           <Router-link to="/cart-store" @click="emits('handleCartModalState', props.cartModal)">
-            <button class="bg-[#4A5559] w-full p-2.5 text-center text-white text-sm rounded-md">
+            <button class="bg-[#007bff] w-full p-2.5 text-center text-white text-sm rounded-md">
               Continue To Cart
             </button>
           </Router-link>

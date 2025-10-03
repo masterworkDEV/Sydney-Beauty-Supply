@@ -1,26 +1,28 @@
 <!-- reusable card -->
 
 <template>
-  <article class="card w-full bg-[#f0dddd9d] h-[350px] max-sm:h-80 pb-1" :key="props._id">
-    <div class="image w-full h-[70%] max-sm:h-[65%] relative">
+  <article class="card w-full max-h-96 h-full pb-1" :key="props._id">
+    <div class="image w-full h-3/4 relative">
       <!-- main image -->
 
-      <span class="bg-white p-2 text-sm text-[#e78f2d] absolute left-3 top-3 z-30"> 20% OFF </span>
-      <img :src="imageone" :alt="props.name" class="w-full h-full object-contain" />
-
+      <img
+        :src="props.thumbnail?.imageUrl || '/images/placeholder.jpg'"
+        :alt="props.name"
+        class="w-full h-full object-cover"
+      />
       <!-- overlay -->
       <div class="overlay opacity-0 absolute bg-white top-0 right-0 left-0 bottom-0 w-full h-full">
         <RouterLink :to="{ name: 'product-details', params: { productID: props._id } }">
           <img
-            :src="imageone"
+            :src="props.thumbnail?.imageUrl || '/images/placeholder.jpg'"
             :alt="props.name"
-            class="w-full h-full object-contain transform -scale-x-100 transition-all relative"
+            class="w-full h-full object-contain"
           />
         </RouterLink>
 
         <div class="flex justify-center items-center absolute right-0 left-0 bottom-0 z-50">
           <button
-            class="flex justify-center items-center gap-1 cursor-pointer bg-[#4A5559] text-white text-[.65rem] p-3.5 max-sm:p-2.5 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 w-[84%]"
+            class="flex justify-center items-center gap-1 cursor-pointer bg-[#101010] text-white text-[.65rem] p-3.5 max-sm:p-2.5 max-sm:text-[.55rem] font-semibold hover:scale-105 hover:scale-3d hover:opacity-90 w-[84%]"
             @click="cart.addToCart(props)"
           >
             <span> <b>ADD TO CART</b> </span>
@@ -29,21 +31,15 @@
         </div>
       </div>
     </div>
-    <span class="flex justify-between items-center my-2 mx-2 pl-2 max-sm:pl-0">
-      <h6 class="text-sm max-sm:text-[.7rem]">
-        {{ props.name?.length < 50 ? props.name : props.name?.slice(0, 50).concat('...') }}
+    <span class="flex justify-between items-center mt-5 mb-1 max-sm:pl-0">
+      <h6 class="font-normal">
+        {{ props.name }}
       </h6>
     </span>
     <div
-      class="flex justify-between items-center mx-2 pl-2 max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:pl-0"
+      class="flex justify-between items-center max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:pl-0"
     >
-      <span class="max-sm:flex gap-2">
-        <h6 class="text-sm max-sm:text-[.8rem]">{{ props.price }} NGN</h6>
-        <p class="text-gray-500 text-sm">
-          <span class="line-through max-sm:text-[.5rem]">{{ (props.price * 150) / 100 }}</span>
-          NGN
-        </p>
-      </span>
+      <h6 class="max-sm:text-sm font-semibold">{{ props.currency }}{{ props.price }}</h6>
     </div>
   </article>
 </template>
@@ -54,21 +50,25 @@ import { useCart } from '@/stores/cartController'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import imageone from '../assets/images/hero.jpg'
-
 const cart = useCart()
 
 // interface product
+interface Thumbnail {
+  imageUrl: string
+  imageId: string
+}
 
 interface Products {
-  _id: number | string
+  _id: string
+  key: string
   name: string
-  image?: string
+  thumbnail?: Thumbnail
   discount: number | undefined
   description: string[] | undefined
   price: number
   currency: string
 }
+
 const props = defineProps<Products>()
 </script>
 

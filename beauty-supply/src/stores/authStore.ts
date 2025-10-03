@@ -3,6 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import apiClient from '../../api-folder/apiClient'
 import { AxiosError } from 'axios'
+import { jwtDecode } from 'jwt-decode'
 
 interface User {
   _id: string
@@ -30,11 +31,41 @@ interface RegisterCredentials {
 
 export const authStore = defineStore('auth-store', () => {
   const accessToken = ref<string | null>(localStorage.getItem('accessToken'))
+
   const refreshToken = ref<string | null>(localStorage.getItem('refreshToken'))
   const storedUser = localStorage.getItem('user')
+  // Vue router
+  const router = useRouter()
+  onMounted(() => {
+    console.log(accessToken.value)
+  })
 
   const user = ref<User | null>(storedUser ? JSON.parse(storedUser) : null)
-  const isAuthenticated = computed<boolean>(() => !!accessToken.value)
+
+  // --- NEW: A helper function to check if a JWT is expired ---
+  const isTokenExpired = (token: string): boolean => {
+    try {
+      const decodedToken = jwtDecode(token)
+      if (!decodedToken.exp) {
+        return true // No expiration date, consider it expired for safety
+      }
+      const currentTime = Date.now() / 1000 // Convert to seconds
+      return decodedToken.exp < currentTime
+    } catch (error) {
+      // If decoding fails, the token is invalid, so consider it expired
+      console.error('Error decoding token:', error)
+      return true
+    }
+  }
+
+  // --- UPDATED: isAuthenticated now uses isTokenExpired ---
+  const isAuthenticated = computed<boolean>(() => {
+    const token = accessToken.value
+    if (!token) {
+      return false // No token, not authenticated
+    }
+    return !isTokenExpired(token)
+  })
 
   const userRoles = computed<object>(() => user.value?.roles || {})
 
@@ -56,6 +87,8 @@ export const authStore = defineStore('auth-store', () => {
       localStorage.removeItem('accessToken')
     }
   })
+
+  // Watch accessToken, refreshToken and isAuthenticated.
 
   watch(refreshToken, (newValue) => {
     if (newValue) {
@@ -87,14 +120,12 @@ export const authStore = defineStore('auth-store', () => {
     user.value = null
   }
 
-  // Vue router
-  const router = useRouter()
-
   const handleRegisteration = async (credentials: RegisterCredentials) => {
     try {
       const response = await apiClient.post('/register', credentials)
       await response.data
       window.location.href = '/login'
+      alert('Account was created successfully')
       return
     } catch (error: any) {
       handleAuthError(error)
@@ -109,21 +140,23 @@ export const authStore = defineStore('auth-store', () => {
       const newRefreshToken = userData.data.refreshToken
       user.value = userData.data.userInfo
       setTokens(newAccessToken, newRefreshToken)
-      router.push('/')
       alert(`Welcome back ${user.value?.username}`)
+      window.location.href = '/'
     } catch (error: any) {
       handleAuthError(error)
     }
   }
 
   const sendRefreshToken = async () => {
+    if (!accessToken.value) {
+      throw new Error('No refresh token available.')
+    }
     try {
-      const response = await apiClient.post('/refresh')
-      const userData = await response.data
+      const response = await apiClient.get('/refresh')
+      const userData = response.data
       const newAccessToken = userData.data.accessToken
-      const newRefreshToken = userData.data.refreshToken
-      setTokens(newAccessToken, newRefreshToken || refreshToken.value)
-      console.log('Access token refreshed successfully')
+      console.log('Access token refreshed successfully:', newAccessToken)
+      return newAccessToken
     } catch (error) {
       console.error('Failed to refresh access token:', error)
       handleLogout()
@@ -146,6 +179,8 @@ export const authStore = defineStore('auth-store', () => {
         )
         authErrorMessage.value = (error.response.data as any)?.message
         alert(authErrorMessage.value)
+        localStorage.removeItem('accessToken') //clear access token
+
         return
       } else if (error.response.status === 409) {
         console.warn(

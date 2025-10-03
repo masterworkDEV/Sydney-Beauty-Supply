@@ -1,20 +1,44 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { ref, watch } from 'vue'
-
-interface Product {
-  _id: string | number
-  name: string
-  price: number
-  currency: string
-
-  description?: string[] | undefined
-  discount: number
-  image?: string
-}
+import { ref, watch, type SVGAttributes } from 'vue'
 
 const API_URL: string = import.meta.env.VITE_API_URL as string
 
+interface Thumbnail {
+  imageUrl: string
+  imageId: string
+}
+
+interface Images {
+  images: Thumbnail
+}
+
+interface Product {
+  _id: string
+  name: string
+  price: number
+  currency: string
+  category: string
+  isActive: boolean
+  season: string[]
+  dateAdded: Date
+  reviews: number | null
+  description?: string[]
+  discount: number
+  gender: string
+  countInStock: number | null
+  sizes: string[]
+  materials: string
+  style: string
+  collection: string
+  designer: string
+  rating: number | null
+  numReviews: number | null
+  subCategory: string
+  brand: string
+  thumbnail?: Thumbnail | any
+  images: Images[]
+}
 export const dataStore = defineStore('data', () => {
   const products = ref<Product[] | null>(null)
   const isLoading = ref<boolean>(false)

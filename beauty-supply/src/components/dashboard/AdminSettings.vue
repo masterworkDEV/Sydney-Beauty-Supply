@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <h1>Admin settings</h1>
-  </main>
+  <h2>This is the admin setting panel</h2>
 </template>
 
 <script setup lang="ts">

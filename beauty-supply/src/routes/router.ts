@@ -31,13 +31,9 @@ const router = createRouter({
         requiresAuth: true,
         roles: ['Admin', 'Editor'], // Only 'admin' and 'editor' can access
       },
-      component: () => import('@/components/Dashboard.vue'),
+      component: () => import('@/components/dashboard/Dashboard.vue'),
     },
-    {
-      path: '/product-details/:productID',
-      name: 'product-details',
-      component: () => import('@/pages/productDetails.vue'),
-    },
+
     {
       path: '/admin-settings',
       name: 'admin-settings',
@@ -45,8 +41,60 @@ const router = createRouter({
         requiresAuth: true,
         roles: ['Admin'], // Only 'admin' can access
       },
-      component: () => import('@/components/AdminSettings.vue'),
+      component: () => import('@/components/dashboard/AdminSettings.vue'),
     },
+    {
+      path: '/overview',
+      name: 'overview',
+      meta: {
+        requiresAuth: true,
+        roles: ['Admin'], // Only 'admin' can access
+      },
+      component: () => import('@/components/dashboard/Overview.vue'),
+    },
+    {
+      path: '/manage-orders',
+      name: 'manage-orders',
+      meta: {
+        requiresAuth: true,
+        roles: ['Admin'], // Only 'admin' can access
+      },
+      component: () => import('@/components/dashboard/Orders.vue'),
+    },
+    {
+      path: '/manage-products',
+      name: 'manage-products',
+      meta: {
+        requiresAuth: true,
+        roles: ['Admin'], // Only 'admin' can access
+      },
+      component: () => import('@/components/dashboard/Products.vue'),
+    },
+    {
+      path: '/manage-customers',
+      name: 'manage-products',
+      meta: {
+        requiresAuth: true,
+        roles: ['Admin'], // Only 'admin' can access
+      },
+      component: () => import('@/components/dashboard/Customers.vue'),
+    },
+    {
+      path: '/manage-messages',
+      name: 'manage-messages',
+      meta: {
+        requiresAuth: true,
+        roles: ['Admin'], // Only 'admin' can access
+      },
+      component: () => import('@/components/dashboard/Messages.vue'),
+    },
+
+    {
+      path: '/product-details/:productID',
+      name: 'product-details',
+      component: () => import('@/pages/productDetails.vue'),
+    },
+    ,
     {
       path: '/store',
       name: 'store',
