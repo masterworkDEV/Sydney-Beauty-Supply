@@ -10,7 +10,7 @@ interface Thumbnail {
 }
 
 interface Images {
-  images: Thumbnail
+  images: Thumbnail[]
 }
 
 interface Product {
@@ -37,7 +37,7 @@ interface Product {
   subCategory: string
   brand: string
   thumbnail?: Thumbnail | any
-  images: Images[]
+  images: Images
 }
 export const dataStore = defineStore('data', () => {
   const products = ref<Product[] | null>(null)
@@ -50,8 +50,7 @@ export const dataStore = defineStore('data', () => {
     error.value = null
     errorMessage.value = null
     try {
-      // const response = await axios.get<Product[]>(`${API_URL}/products`)
-      const response = await axios.get('http://localhost:3500/products')
+      const response = await axios.get(`${API_URL}/products`)
       products.value = response.data.data
       console.log(response.data)
     } catch (err: any) {

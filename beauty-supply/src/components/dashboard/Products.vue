@@ -28,12 +28,55 @@
         v-model="searchProducts"
       />
 
-      <table class="table-auto">
+      <div
+        v-if="isLoading"
+        role="status"
+        class="max-w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded-sm shadow-sm animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+          </div>
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4">
+          <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+          </div>
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4">
+          <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+          </div>
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4">
+          <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+          </div>
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4">
+          <div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+            <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+          </div>
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <table class="table-auto" v-else>
         <thead>
           <tr class="bg-[#f1f1f1] w-full text-start">
             <th class="px-4 py-2"><input type="checkbox" checked="true" /></th>
             <th class="px-4 py-2 w-full">Product</th>
-            <th class="px-4 py-2 w-full">Created at</th>
+            <th class="px-4 py-2 w-full">Created</th>
             <th class="px-4 py-2 w-full">Status</th>
             <th class="px-4 py-2 w-full">Amount</th>
             <th class="px-4 py-2 w-full">Actions</th>

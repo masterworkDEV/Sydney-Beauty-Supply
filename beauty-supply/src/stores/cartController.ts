@@ -1,16 +1,41 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+interface Thumbnail {
+  imageUrl: string
+  imageId: string
+}
+
+interface Images {
+  images: Thumbnail[]
+}
+
 interface Product {
-  _id: string | number
+  _id: string
   name: string
   price: number
   currency: string
-  description?: string[] | undefined
+  category: string
+  isActive: boolean
+  season: string[]
+  dateAdded: Date
+  reviews: number | null
+  description?: string[]
   discount: number
-  image?: string
+  gender: string
+  countInStock: number | null
+  sizes: string[]
+  materials: string
+  style: string
+  collection: string
+  designer: string
+  rating: number | null
+  numReviews: number | null
+  subCategory: string
+  brand: string
+  thumbnail?: Thumbnail | any
+  images: Images
 }
-
 interface CartItem extends Product {
   quantity: number
 }
@@ -18,7 +43,7 @@ interface CartItem extends Product {
 export const useCart = defineStore('cart', () => {
   const cartItems = ref<CartItem[]>([])
 
-  const addToCart = (productToAdd: Product) => {
+  const addToCart = (productToAdd: any) => {
     // 4. Find the existing item. 'find' returns the item or undefined.
     const existingItem = cartItems.value.find((item) => item._id === productToAdd._id)
     if (existingItem) {

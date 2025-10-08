@@ -27,11 +27,15 @@
             :key="item._id"
           >
             <div class="flex justify-center gap-2">
-              <img :src="item.image" :alt="item.name" class="w-20 h-full rounded-lg shadow" />
+              <img
+                :src="item.thumbnail.imageUrl"
+                :alt="item.name"
+                class="w-20 h-full rounded-lg shadow"
+              />
               <div>
-                <h5 class="text-xs my-1">
+                <h4 class="my-1">
                   {{ item.name?.length < 25 ? item.name : item.name?.slice(0, 25).concat('...') }}
-                </h5>
+                </h4>
                 <h5 class="text-xs my-1">Color: Color</h5>
                 <h5 class="text-xs my-1">Size: XS</h5>
                 <div class="quantity-adjustment flex gap-2">
@@ -56,7 +60,9 @@
               </div>
             </div>
             <div class="text-xs flex flex-col items-end justify-between">
-              <b> ${{ parseInt(item.price.toFixed(2)) * item.quantity }} </b>
+              <span class="font-semibold">
+                NGN {{ parseInt(item.price.toFixed(2)) * item.quantity }}
+              </span>
 
               <FontAwesomeIcon
                 :icon="faTrashAlt"
@@ -73,7 +79,8 @@
             <h5>Subtotal:</h5>
             <h5>
               <strong
-                >${{
+                >NGN
+                {{
                   cart.cartItems.reduce(
                     (acc, product) => acc + parseInt(product.price.toFixed(2)) * product.quantity,
                     0
@@ -83,7 +90,9 @@
             </h5>
           </div>
           <Router-link to="/cart-store" @click="emits('handleCartModalState', props.cartModal)">
-            <button class="bg-[#007bff] w-full p-2.5 text-center text-white text-sm rounded-md">
+            <button
+              class="bg-blue-600 hover:bg-blue-700 transition-all w-full p-2.5 text-center text-white text-sm rounded-md"
+            >
               Continue To Cart
             </button>
           </Router-link>
@@ -123,4 +132,5 @@ const props = defineProps({
 
 const emits = defineEmits(['handleCartModalState', 'deleteCartItem'])
 </script>
-
+<style scoped>
+</style>

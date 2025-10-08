@@ -1,11 +1,14 @@
 <template>
   <!-- loading -->
-
   <div
     v-if="isLoading"
     class="min-h-screen flex flex-col items-center text-center justify-center gap-2"
   >
-    <LoadingCircle />
+    <!-- From Uiverse.io by barisdogansutcu -->
+    <svg viewBox="25 25 50 50" class="loader-svg">
+      <circle r="20" cy="50" cx="50"></circle>
+    </svg>
+    <p class="text-[#333] font-semibold">Loading...</p>
   </div>
 
   <!-- if there is an error show error -->
@@ -16,12 +19,11 @@
 
   <main class="min-h-screen w-full" v-else>
     <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
-      <small class="flex items-center gap-2 pt-22 max-sm:pt-20">
+      <small class="flex items-center gap-2 pt-20 max-sm:pt-16">
         <RouterLink to="/">Home</RouterLink>
-
         <!-- arrow right -->
         <svg
-          class="w-3 h-3"
+          class="greater-than-svg"
           fill="#000000"
           viewBox="0 0 32 32"
           version="1.1"
@@ -36,7 +38,7 @@
           </g>
         </svg>
       </small>
-      <router-link class="pt-22 max-sm:pt-20 text-sm" to="/store">Store</router-link>
+      <router-link class="pt-20 max-sm:pt-16 text-sm" to="/store">Store</router-link>
     </nav>
 
     <!-- else just display data -->
@@ -438,22 +440,61 @@ const thumbnailClick = (index: number) => {
 </script>
 
 <style scoped>
-/* Add this CSS block to your stylesheet */
 .v-enter-active,
 .v-leave-active {
-  /* Apply the transition property to opacity over 0.3 seconds */
   transition: opacity 0.7s ease-in-out;
 }
 
 .v-enter-from,
 .v-leave-to {
-  /* Initial state (before enter) and final state (after leave) */
   opacity: 0;
 }
 
 .v-enter-to,
 .v-leave-from {
-  /* Final state (after enter) and initial state (before leave) */
   opacity: 1;
+}
+
+.loader-svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+circle {
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+.greater-than-svg {
+  width: 16px;
+  height: 16px;
 }
 </style>

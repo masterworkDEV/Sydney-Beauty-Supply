@@ -1,7 +1,16 @@
 <template>
   <section class="my-20 mx-24 max-xl:mx-20 max-md:mx-14 max-sm:mx-0 max-sm:my-14">
-    <div class="text-center">
-      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl">Best Sellers</h2>
+    <div
+      class="text-center transition-all duration-1000 ease-in-out"
+      :class="{
+        'is-visible': intersectionObserver.isVisible,
+        'not-visible': !intersectionObserver.isVisible,
+      }"
+      ref="sectionElementRef"
+    >
+      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl font-semibold">
+        Best Sellers
+      </h2>
       <p class="mb-5 tracking-normal leading-relaxed max-sm:text-sm capitalize max-sm:mx-5">
         Discover what our customers are saying about us - from designs to unmatched comfort and
         quality. their words reflect the love for our collections.
@@ -20,7 +29,12 @@
 
     <div
       v-else
-      class="mt-10 mb-20 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-10 max-sm:mx-5"
+      class="mt-10 mb-20 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-10 max-sm:gap-5 max-sm:mx-5 transition-all duration-1500 ease-in-out"
+      :class="{
+        'is-visible': intersectionObserver.isVisible,
+        'not-visible': !intersectionObserver.isVisible,
+      }"
+      ref="sectionElementRef"
     >
       <div v-for="product in bestSellers" :key="product._id">
         <ProductCard
@@ -35,8 +49,17 @@
         />
       </div>
     </div>
-    <div class="bg-[#022436] w-full p-14 rounded-md max-sm:rounded-none">
-      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl text-center text-white">
+    <div
+      class="bg-[#03045e] w-full p-14 transition-all duration-2500 ease-in-out"
+      :class="{
+        'is-visible': intersectionObserver.isVisible,
+        'not-visible': !intersectionObserver.isVisible,
+      }"
+      ref="sectionElementRef"
+    >
+      <h2
+        class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl text-center text-white font-semibold"
+      >
         Christmas Collection <br />Arriving Soon
       </h2>
       <div class="flex justify-center gap-5 max-sm:flex-col">
@@ -59,13 +82,33 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, computed } from 'vue'
-import ProductCard from '@/components/ProductCard.vue'
+import { useInterSectionObserver } from '@/stores/intersectionObserver'
 import { dataStore } from '@/stores/dataStore'
+import ProductCard from '@/components/ProductCard.vue'
 
 const useDataStore = dataStore()
 
 const bestSellers = computed(() => useDataStore.products?.slice(0, 4) || [])
+
+// Intersection Observer
+const intersectionObserver = useInterSectionObserver()
+
+const sectionElementRef = ref<Element | null>(null)
+
+intersectionObserver.element = sectionElementRef.value
 </script>
 
-<style>
+<style  scoped>
+.not-visible {
+  /* Initial (Hidden) State */
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.is-visible {
+  /* Final (Visible) State */
+  opacity: 1;
+  transform: translateY(0px);
+}
+/* Keep other styles */
 </style>

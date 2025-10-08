@@ -82,8 +82,8 @@
           </div>
         </div>
 
-        <div v-if="isLoading" class="text-center mt-10">
-          <p class="text-lg text-gray-600">Loading products... ⏳</p>
+        <div v-if="store.isLoading" class="w-full mt-5 grid grid-cols-3 max-sm:grid-cols-2 gap-3">
+          <LoadingCard v-for="loader in new Array(8)" :key="loader" />
         </div>
 
         <div v-else-if="error" class="text-center mt-10">
@@ -116,6 +116,7 @@
 
 <script setup lang="ts">
 import ProductCard from '@/components/ProductCard.vue'
+import LoadingCard from '@/components/LoadingCard.vue'
 import { dataStore } from '@/stores/dataStore'
 import { navState } from '@/stores/navState'
 import { ref, onMounted, onUnmounted, watch } from 'vue' // Import watch
@@ -177,5 +178,10 @@ watch(
 ) // Use deep: true for watching array changes
 </script>
 
-<style>
+<style scoped>
+.router-link-active,
+.router-link-exact-active {
+  padding: 0.3rem;
+  background: linear-gradient(315deg, orange, goldenrod);
+}
 </style>

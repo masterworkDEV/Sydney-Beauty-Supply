@@ -33,7 +33,7 @@ onMounted(() => {
   // Simulate data fetching or component loading
   setTimeout(() => {
     isLoading.value = false
-  }, 1000) // Adjust this timeout
+  }, 3000) // Adjust this timeout
 })
 </script>
 

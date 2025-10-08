@@ -90,7 +90,7 @@ const router = createRouter({
     },
 
     {
-      path: '/product-details/:productID',
+      path: '/product-details/:productID?/:productName?',
       name: 'product-details',
       component: () => import('@/pages/productDetails.vue'),
     },

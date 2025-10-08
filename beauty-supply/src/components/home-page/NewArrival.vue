@@ -1,8 +1,10 @@
 <template>
   <!-- new arrival -->
   <section class="mt-20 mx-20 max-xl:mx-20 max-md:mx-14 max-sm:mx-5 max-sm:mt-14">
-    <div class="text-center">
-      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl">New Arrival</h2>
+    <div class="text-center transition-all ease-in-out duration-500">
+      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl font-semibold">
+        New Arrival
+      </h2>
       <p class="mb-5 tracking-normal leading-relaxed max-sm:text-sm">
         Discover The Latest Styles Fresh Off The Rack. From Everyday Essentials To Statement Pieces-
         New Trends, Updated Weekly
@@ -27,7 +29,10 @@
       <!-- <p class="text-center my-5 text-sm">{{ store.errorMessage }}</p> -->
     </div>
 
-    <div v-else class="mt-10 grid grid-cols-3 max-sm:grid-cols-2 gap-10">
+    <div
+      v-else
+      class="mt-10 grid grid-cols-3 max-lg:grid-cols-2 gap-10 max-sm:gap-5 transition-all duration-1000"
+    >
       <div v-for="product in filteredList" :key="product._id">
         <ProductCard
           :key="product._id"
@@ -46,6 +51,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useInterSectionObserver } from '@/stores/intersectionObserver'
 import { dataStore } from '../../stores/dataStore'
 
 //  components
@@ -54,6 +60,14 @@ import LoadingCard from '../LoadingCard.vue'
 
 // interface
 
+// Intersection Observer
+const intersectionObserver = useInterSectionObserver()
+
+const sectionElementRef = ref<Element | null>(null)
+
+intersectionObserver.element = sectionElementRef.value
+
+// Data store
 const store = dataStore()
 
 interface Button {
@@ -110,40 +124,39 @@ const filteredList = computed(() => {
 })
 </script>
 
-<style>
+<style scoped >
 .gradient-black-btn {
-  /* Core Styles */
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: bold;
-  color: #fff; /* White text for contrast */
+  color: #fff;
   border: none;
-  border-radius: 8px; /* Rounded corners */
+  border-radius: 8px;
   cursor: pointer;
-
-  /* Gradient and Background */
-  /* Transitions from a dark gray (#333) to black (#000) */
-  background-image: linear-gradient(to bottom, #333, #000);
-  background-color: #000; /* Fallback for older browsers */
-
-  /* Shadow for Depth */
+  background: linear-gradient(315deg, orange, goldenrod);
+  background-color: #000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-
-  /* Smooth transition for hover effect */
   transition: all 0.2s ease-in-out;
 }
 
-/* Hover Effect: Lighten the gradient slightly and increase the lift */
 .gradient-black-btn:hover {
-  background-image: linear-gradient(to top, #1c1b1b, #111);
+  background: linear-gradient(315deg, orange, goldenrod);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
   transform: translateY(-2px);
 }
 
-/* Active Effect: Push the button down */
 .gradient-black-btn:active {
-  background-image: linear-gradient(to bottom, #111, #444); /* Reverse gradient */
+  background: linear-gradient(315deg, orange, goldenrod);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transform: translateY(0);
+}
+
+.not-visible {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translateY(0px);
 }
 </style>

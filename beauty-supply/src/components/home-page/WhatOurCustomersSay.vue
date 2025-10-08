@@ -1,7 +1,14 @@
 <template>
   <section class="bg-[#f1f1f1] mt-20 p-20 max-sm:p-10 max-sm:mt-14 w-full">
-    <div class="text-center">
-      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl">
+    <div
+      class="text-center transition-all duration-1000"
+      :class="{
+        'is-active': intersectionObserver.isVisible,
+        'not-active': !intersectionObserver.isVisible,
+      }"
+      ref="sectionElementRef"
+    >
+      <h2 class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl font-semibold">
         What Our Customers Say
       </h2>
       <p class="mb-5 tracking-normal leading-relaxed max-sm:text-sm capitalize">
@@ -9,7 +16,14 @@
         quality. their words reflect the love for our collections.
       </p>
     </div>
-    <div class="mt-10 mx-auto max-w-7xl">
+    <div
+      :class="{
+        'is-visible': intersectionObserver.isVisible,
+        'intersection-observer': !intersectionObserver.isVisible,
+      }"
+      ref="sectionElementRef"
+      class="mt-10 mx-auto max-w-7xl transition-all duration-1500 ease-in-out"
+    >
       <swiper
         class="no-shadow"
         :slides-per-view="3"
@@ -71,8 +85,10 @@
 
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import customersAvatar from '@/assets/images/new.jpg'
+import { useInterSectionObserver } from '@/stores/intersectionObserver'
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
 // import required modules
 import { Navigation, Pagination } from 'swiper/modules'
@@ -127,11 +143,43 @@ const onSwiper = (swiper: any) => {
 const onSlideChange = () => {
   console.log('slide change')
 }
+
+// Intersection Observer
+const intersectionObserver = useInterSectionObserver()
+
+const sectionElementRef = ref<Element | null>(null)
+
+onMounted(() => {
+  intersectionObserver.element = sectionElementRef.value
+})
 </script>
 
-<style scoped>
+
+
+
+
+<style  >
 svg {
   width: 30px;
   height: 30px;
+}
+
+.intersection-observer {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.is-active {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.not-active {
+  opacity: 0;
+  transform: translateX(100px);
 }
 </style>

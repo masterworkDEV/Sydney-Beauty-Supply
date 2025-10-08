@@ -14,7 +14,7 @@
           style="flex-direction: row"
         >
           <img
-            :src="heroImage"
+            :src="slide.image"
             alt=""
             class="image h-full w-full absolute right-0 left-0 bottom-0 top-0 z-0 object-cover"
           />
@@ -29,11 +29,18 @@
             <p class="text-white mb-24">
               {{ slide.description }}
             </p>
-            <button
-              class="bg-[#007bff] text-white w-1/4 p-3 cursor-pointer max-sm:p-2.5 max-sm:w-2/4 focus:bg-blue-500 focus:ring-3 focus:ring-blue-900 font-semibold"
+            <router-link
+              to="/store"
+              class="relative inline-flex items-center justify-start inline-block w-2/4 px-5 py-4 overflow-hidden font-medium transition-all rounded-full bg-blue-600 hover:bg-white group"
             >
-              {{ slide.button }}
-            </button>
+              <span
+                class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"
+              ></span>
+              <span
+                class="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-[#219ebc]"
+                >{{ slide.button }}</span
+              >
+            </router-link>
           </div>
         </div>
       </template>
@@ -46,27 +53,29 @@ import { ref } from 'vue'
 
 import heroLayer from '@/assets/images/hero-layer.png'
 import heroImage from '@/assets/images/hero-new.jpg'
+import heroImage2 from '@/assets/images/hero-new-2.jpg'
 const details = ref([
   {
     title: 'MzChi',
     description:
       'Your new look is here. Explore fresh drops and unique pieces that express your style.',
     button: 'Shop Now',
+    image: heroImage,
   },
   {
     title: 'Collection',
     description:
       'Elevate your style with our curated collection of luxury fashion, meticulously designed to empower you.',
     button: 'Explore Store',
+    image: heroImage2,
   },
 ])
 
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
-import { title } from 'process'
 </script>
 
-<style>
+<style >
 .slide-container {
   background: radial-gradient(circle, #389cd4, #0b5983);
 }
@@ -83,23 +92,22 @@ import { title } from 'process'
 
 @media (max-width: 1200px) {
   .vueperslides__inner {
-    height: 65vh;
+    height: 70vh;
   }
   .vueperslides__parallax-wrapper {
-    height: 65vh;
+    height: 70vh;
   }
 }
 @media (max-width: 600px) {
   .vueperslides__inner {
-    height: 70vh;
+    height: 80vh;
   }
   .vueperslides__parallax-wrapper {
-    height: 70vh;
+    height: 80vh;
   }
 }
-
 .image-layer {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
   height: 100%;
   width: 100%;
   position: absolute;
@@ -107,6 +115,36 @@ import { title } from 'process'
   left: 0;
   bottom: 0;
   top: 0;
+}
+
+.gradient-blue-btn {
+  /* Core Styles */
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
+  background-color: #000; /* Fallback for older browsers */
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.gradient-blue-btn:hover {
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.gradient-blue-btn:active {
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transform: translateY(0);
 }
 </style>
 

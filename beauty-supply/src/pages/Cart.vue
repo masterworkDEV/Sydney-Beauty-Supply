@@ -1,12 +1,11 @@
 <template>
   <main class="min-h-screen w-full">
-    <nav class="flex items-center gap-5 ml-12 max-xl:ml-7 max-sm:ml-5">
+    <nav class="flex items-center gap-2 mx-20 max-xl:mx-20 max-md:mx-14 max-sm:mx-5">
       <small class="flex items-center gap-2 mt-22 max-xl:mt-20">
-        <RouterLink to="/">Home</RouterLink>
-
+        <RouterLink class="font-semibold text-gray-500" to="/store">Store</RouterLink>
         <!-- arrow right -->
         <svg
-          class="w-3 h-3"
+          class="link-svg"
           fill="#000000"
           viewBox="0 0 32 32"
           version="1.1"
@@ -21,184 +20,361 @@
           </g>
         </svg>
       </small>
-      <small class="mt-22 max-xl:mt-20">Shopping Bag</small>
+
+      <small class="mt-22 max-xl:mt-20 font-semibold text-gray-500">Shopping Bag</small>
     </nav>
-    <div class="my-7 mx-12 max-xl:mx-7 max-sm:mx-5">
-      <div class="flex items-end gap-2 bg-white rounded-md p-5 max-xl:p-3 max-sm:p-2.5 shadow">
-        <h2 class="text-2xl max-xl:text-2xl max-sm:text-[1rem]">Shopping Bag</h2>
-        <small
-          >({{
-            cart.cartItems.length > 1
-              ? cart.cartItems.length + ' ' + 'items'
-              : cart.cartItems.length + ' ' + 'item'
-          }})
-        </small>
+
+    <section
+      class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 mx-20 max-xl:mx-20 max-md:mx-14 max-sm:mx-5"
+    >
+      <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+          Shopping Cart
+        </h2>
       </div>
 
-      <div
-        class="cart-items w-full h-full flex justify-between items-start my-7 gap-7 max-sm:flex-col"
-      >
-        <ul class="bg-white p-5 w-full shadow-lg" v-if="Object.values(cart.cartItems).length > 0">
-          <li
-            v-for="item in cart.cartItems"
-            :key="item._id"
-            class="flex justify-between items-center border-b border-gray-300 mb-2 pb-7"
-          >
-            <div class="flex justify-start items-start">
-              <img :src="item.image" :alt="item.name" class="w-10 h-10" />
-              <span>
-                <h4 class="ml-2 text-sm">{{ item.name }}</h4>
-                <small>{{ item.discount }}</small>
-                <RouterLink
-                  class="ml-2 text-blue-500 text-xs"
-                  :to="{ name: 'product-details', params: { productID: item._id } }"
-                >
-                  View specs
-                  <FontAwesomeIcon :icon="faArrowAltCircleDown" />
-                </RouterLink>
-              </span>
-            </div>
-
-            <div>
-              <div class="flex justify-end gap-5 mb-5">
-                <FontAwesomeIcon :icon="faHeart" />
-                <FontAwesomeIcon
-                  :icon="faTrashAlt"
-                  color="red"
-                  class="cursor-pointer"
-                  title="remove from cart"
-                  @click="toggleDeleteModal(item._id)"
-                />
-              </div>
-
-              <!-- delete controller -->
-              <Overlay v-if="deleteModal" />
-
+      <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+        <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+          <div class="space-y-6">
+            <div
+              class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6"
+              v-for="item in cart.cartItems"
+              :key="item._id"
+            >
               <div
-                v-if="deleteModal"
-                class="animate__animated animate__bounceIn rounded w-1/4 max-xl:w-[45%] max-md:w-2/4 max-sm:w-[90%] h-40 flex justify-center items-center flex-col p-5 bg-white shadow fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-40"
+                class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0"
               >
-                <div class="text-center">
-                  <h3 class="mb-2">
-                    <b> You are about to delete a product </b>
-                  </h3>
-                  <p class="text-sm text-[#777]">This will delete your product from cart <br /></p>
-                  <p class="text-sm text-[#777]">Are you sure?</p>
-                </div>
-                <div class="actions w-full flex justify-end gap-5 mt-2">
-                  <button @click="deleteModal = !deleteModal" class="text-sm">Cancel</button>
-                  <button
-                    @click="deleteFromCart"
-                    class="bg-red-600 p-2 w-1/4 text-white text-xs rounded hover:opacity-80 cursor-pointer"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-              <!-- delete controller -->
-
-              <div class="flex gap-5">
-                <div class="quantity-adjustment flex">
-                  <button
-                    class="w-7 h-7 flex justify-center items-center bg-[#ddd] border border-[#ddd]"
-                    @click="item.quantity < 2 ? 1 : item.quantity--"
-                  >
-                    <FontAwesomeIcon :icon="faMinus" size="xs" v-model="item.quantity" />
-                  </button>
-                  <input
-                    type="text"
-                    :value="item.quantity"
-                    class="w-10 h-7 text-center text-xs bg-[#fff] border border-gray-300"
+                <router-link
+                  :to="{
+                    name: 'product-details',
+                    params: { productID: item._id, productName: item.name },
+                  }"
+                >
+                  <img
+                    class="h-20 w-20 dark:hidden"
+                    :src="item.thumbnail.imageUrl"
+                    :alt="`${item.name} image`"
                   />
-                  <button
-                    @click="item.quantity++"
-                    class="w-7 h-7 flex justify-center items-center bg-[#ddd] border border-[#ddd]"
-                  >
-                    <FontAwesomeIcon :icon="faAdd" size="xs" />
-                  </button>
+                  <img
+                    class="hidden h-20 w-20 dark:block"
+                    :src="item.thumbnail.imageUrl"
+                    :alt="`${item.name} image`"
+                  />
+                </router-link>
+
+                <label for="counter-input" class="sr-only">Choose quantity:</label>
+                <div class="flex items-center justify-between md:order-3 md:justify-end">
+                  <div class="flex items-center">
+                    <button
+                      @click="item.quantity < 2 ? 1 : item.quantity--"
+                      type="button"
+                      id="decrement-button"
+                      data-input-counter-decrement="counter-input"
+                      class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                    >
+                      <svg
+                        class="h-2.5 w-2.5 text-gray-900 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 18 2"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 1h16"
+                        />
+                      </svg>
+                    </button>
+                    <input
+                      type="text"
+                      id="counter-input"
+                      data-input-counter
+                      class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
+                      placeholder=""
+                      :value="item.quantity"
+                      required
+                    />
+                    <button
+                      @click="item.quantity++"
+                      type="button"
+                      id="increment-button"
+                      data-input-counter-increment="counter-input"
+                      class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                    >
+                      <svg
+                        class="h-2.5 w-2.5 text-gray-900 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 18 18"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 1v16M1 9h16"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="text-end md:order-4 md:w-32">
+                    <p class="text-base font-bold text-gray-900 dark:text-white">
+                      NGN{{ item.price * item.quantity }}
+                    </p>
+                  </div>
                 </div>
 
-                <div class="flex flex-col items-end">
-                  <span class="text-sm">${{ item.price * item.quantity }}</span>
+                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                  <a
+                    href="#"
+                    class="text-base font-medium text-gray-900 hover:underline dark:text-white"
+                    >{{
+                      item.description?.length < 100
+                        ? item.description
+                        : item.description?.toString().slice(0, 100)
+                    }}</a
+                  >
 
-                  <small class="text-green-500 text-xs">Save 20%</small>
+                  <div class="flex items-center gap-4">
+                    <button
+                      type="button"
+                      class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white"
+                    >
+                      <svg
+                        class="me-1.5 h-5 w-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
+                        />
+                      </svg>
+                      Add to Favorites
+                    </button>
+
+                    <button
+                      type="button"
+                      class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+                      @click="toggleDeleteModal(item._id)"
+                    >
+                      <svg
+                        class="me-1.5 h-5 w-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M6 18 17.94 6M18 18 6.06 6"
+                        />
+                      </svg>
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </li>
-        </ul>
-        <div v-else class="m-auto w-full flex justify-center items-start">
-          OOps, There Is No Items In Cart!
+            <div class="hidden xl:mt-8 xl:block">
+              <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                People also bought
+              </h3>
+              <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
+                <!-- product card -->
+                <div v-for="product in rawData.products" :key="product._id">
+                  <ProductCard
+                    :key="product._id"
+                    :_id="product._id"
+                    :name="product.name"
+                    :price="product.price"
+                    :currency="product.currency"
+                    :thumbnail="product.thumbnail"
+                    :discount="product.discount"
+                    :description="product.description"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- order summary-->
-        <div class="bg-white h-full w-[40%] max-xl:w-3/4 max-sm:w-full p-5 rounded-md shadow-md">
-          <div class="border border-[#ddd] rounded-md p-5">
-            <h3>Order summary</h3>
-            <div class="flex justify-between my-2 pt-2 border-t border-[#ddd]">
-              <small>Items price:</small>
-              <small
-                >${{
-                  cart.cartItems.reduce(
-                    (acc, product) => acc + parseInt(product.price.toFixed(2)) * product.quantity,
-                    0
-                  )
-                }}</small
+        <!-- delete controller -->
+        <Overlay v-if="deleteModal" />
+
+        <div
+          v-if="deleteModal"
+          class="animate__animated animate__bounceIn rounded max-sm:w-[90%] flex justify-center flex-col p-7 bg-white shadow fixed top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-40"
+        >
+          <FontAwesomeIcon
+            @click="deleteModal = !deleteModal"
+            :icon="faTimes"
+            class="absolute top-2 right-2 cursor-pointer text-xl text-gray-500 hover:scale-90 hover:text-gray-900 transition-all duration-300"
+          />
+
+          <div class="text-center">
+            <h3 class="text-xl max-sm:text-[1rem] mb-2 font-semibold">
+              You are about to delete "{{ productName }}"
+            </h3>
+            <p class="max-sm:text-sm text-[#777]">This will delete your product from cart</p>
+            <p class="text-sm text-[#777]">Are you sure?</p>
+          </div>
+          <div class="actions w-full flex justify-end gap-5 mt-2">
+            <button
+              @click="deleteModal = !deleteModal"
+              class="bg-gray-200 p-2 font-semibold text-slate-800 rounded hover:bg-gray-300 transition-all"
+            >
+              Cancel
+            </button>
+            <button
+              @click="deleteFromCart"
+              class="bg-red-600 w-1/4 p-2 text-white rounded hover:opacity-80 font-semibold cursor-pointer"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- delete controller -->
+
+        <!-- summary -->
+        <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+          <div
+            class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6"
+          >
+            <p class="text-xl font-semibold text-gray-900 dark:text-white">Order summary</p>
+
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <dl class="flex items-center justify-between gap-4">
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-400">
+                    Original price
+                  </dt>
+                  <dd class="text-base font-medium text-gray-900 dark:text-white">
+                    {{
+                      cart.cartItems.reduce(
+                        (acc, product) =>
+                          acc + parseInt(product.price.toFixed(2)) * product.quantity,
+                        0
+                      )
+                    }}
+                  </dd>
+                </dl>
+
+                <dl class="flex items-center justify-between gap-4">
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
+                  <dd class="text-base font-medium text-green-600">-$299.00</dd>
+                </dl>
+
+                <dl class="flex items-center justify-between gap-4">
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-400">
+                    Store Pickup
+                  </dt>
+                  <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>
+                </dl>
+
+                <dl class="flex items-center justify-between gap-4">
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
+                  <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
+                </dl>
+              </div>
+
+              <dl
+                class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700"
               >
-            </div>
-            <div class="flex justify-between border-b border-[#ddd] pb-2 mb-2">
-              <small>Delivery charge:</small>
-              <small> FREE </small>
-            </div>
-            <div class="my-5 w-full flex items-center gap-3">
-              <input
-                type="text "
-                placeholder="Enter coupon No."
-                class="border border-[#ddd] w-3/4 h-8 text-[1rem] placeholder:p-2 placeholder:text-sm rounded-lg"
-              />
-              <button class="w-1/4 h-8 bg-[#ddd] rounded-lg text-sm">Apply</button>
-            </div>
-            <div class="flex justify-between my-3">
-              <small>Subtotal:</small>
-              <small
-                >${{
-                  cart.cartItems.reduce(
-                    (acc, product) => acc + parseInt(product.price.toFixed(2)) * product.quantity,
-                    0
-                  )
-                }}</small
-              >
-            </div>
-            <div class="flex justify-between my-3">
-              <small>Total:</small>
-              <div class="flex flex-col items-end">
-                <small class="text-red-400"
-                  >${{
+                <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                <dd class="text-base font-bold text-gray-900 dark:text-white">
+                  $
+
+                  {{
                     cart.cartItems.reduce(
                       (acc, product) => acc + parseInt(product.price.toFixed(2)) * product.quantity,
                       0
                     )
-                  }}</small
+                  }}
+                </dd>
+              </dl>
+            </div>
+
+            <a
+              href="#"
+              class="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >Proceed to Checkout</a
+            >
+
+            <div class="flex items-center justify-center gap-2">
+              <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
+              <a
+                href="#"
+                title=""
+                class="inline-flex items-center gap-2 text-sm font-medium text-orange-600 underline hover:no-underline dark:text-orange-500"
+              >
+                Continue Shopping
+                <svg
+                  class="h-5 w-5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
                 >
-                <small class="text-[.6rem]">Price inclusive of VAT </small>
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 12H5m14 0-4 4m4-4-4-4"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6"
+          >
+            <form class="space-y-4">
+              <div>
+                <label
+                  for="voucher"
+                  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Do you have a voucher or gift card?
+                </label>
+                <input
+                  type="text"
+                  id="voucher"
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                  placeholder=""
+                  required
+                />
               </div>
-            </div>
-            <div class="action">
               <button
-                class="bg-[#E78F2D] w-full p-2 rounded-full text-white text-sm mb-4 hover:opacity-90"
+                type="submit"
+                class="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-800 dark:focus:ring-primary-800"
               >
-                Proceed to checkout
+                Apply Code
               </button>
-              <button
-                class="bg-[#ddd] w-full p-2 rounded-full text-black text-sm hover:bg-opacity-90"
-              >
-                <router-link to="/store"> Continue Shopping </router-link>
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 </template>
 
@@ -210,15 +386,22 @@ import {
   faArrowAltCircleDown,
   faHeart,
   faMinus,
+  faTimes,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useRoute } from 'vue-router'
+
+// components
 import Overlay from '@/components/Overlay.vue'
+import ProductCard from '@/components/ProductCard.vue'
+import { dataStore } from '@/stores/dataStore'
 
 const cart = useCart()
+const rawData = dataStore()
 const deleteModal = ref<boolean | null>(false)
 const itemIdToDelete = ref<number | string | null>(null)
+const productName = ref<string | null>('')
 
 const toggleDeleteModal = (id: number | string | null = null) => {
   if (id !== null) {
@@ -226,6 +409,7 @@ const toggleDeleteModal = (id: number | string | null = null) => {
     // Now product with the associated ID exists. We can then move on.
     if (checkExistence) {
       itemIdToDelete.value = id // storing id in a variable
+      productName.value = checkExistence.name
       deleteModal.value = true
     } else {
       deleteModal.value = false
@@ -236,6 +420,7 @@ const toggleDeleteModal = (id: number | string | null = null) => {
     deleteModal.value = !deleteModal.value
     if (!deleteModal.value) {
       itemIdToDelete.value = null
+      productName.value = null
     }
   }
 }
@@ -245,6 +430,8 @@ const deleteFromCart = () => {
   if (!itemIdToDelete.value !== null) {
     cart.cartItems = cart.cartItems.filter((item) => item._id !== itemIdToDelete.value)
     itemIdToDelete.value = null
+    productName.value = null
+
     deleteModal.value = false
   } else {
     console.log('Something went wrong!!')
@@ -252,3 +439,12 @@ const deleteFromCart = () => {
 }
 </script>
 
+
+
+
+<style>
+.link-svg {
+  width: 14px;
+  height: 14px;
+}
+</style>

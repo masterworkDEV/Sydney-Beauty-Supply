@@ -2,7 +2,7 @@
   <transition name="menu">
     <div
       v-if="props.isMenu"
-      class="hidden max-sm:flex flex-col justify-between w-full h-full bg-[#007bff] fixed right-0 z-40 overflow-auto pb-30"
+      class="mobile-menu hidden max-sm:flex flex-col justify-between w-full h-full fixed right-0 z-40 overflow-auto pb-30"
     >
       <!-- close menu -->
       <button
@@ -53,11 +53,10 @@
           <router-link
             to="/"
             @click="emits('menuState', props.isMenu)"
-            class="block p-2 text-sm mb-6 active:scale-105 active:bg-orange-300 transition-all hover:bg-orange-400 hover:text-white rounded font-semibold"
-            active-class="bg-orange-400 text-white"
+            class="text-white block text-sm mb-6 transition-all rounded"
           >
             <div class="flex gap-5">
-              <FontAwesomeIcon :icon="faHome" size="xl" />
+              <FontAwesomeIcon :icon="faHome" size="xl" color="text-white" />
 
               <span> Home </span>
             </div>
@@ -67,8 +66,7 @@
           <Router-link
             to="/dashboard"
             @click="emits('menuState', props.isMenu)"
-            class="block p-2 text-sm mb-6 active:scale-105 active:bg-orange-300 transition-all hover:bg-orange-400 hover:text-white rounded font-semibold"
-            active-class="bg-orange-400 text-white"
+            class="block text-sm mb-6 transition-all rounded text-white"
           >
             <div class="flex gap-5 items-center">
               <svg
@@ -82,7 +80,7 @@
                 <g id="SVGRepo_iconCarrier">
                   <path
                     d="M9.5 5.75C9.91421 5.75 10.25 5.41421 10.25 5C10.25 4.58579 9.91421 4.25 9.5 4.25V5.75ZM4.75 11C4.75 11.4142 5.08579 11.75 5.5 11.75C5.91421 11.75 6.25 11.4142 6.25 11H4.75ZM9.5 4.25C9.08579 4.25 8.75 4.58579 8.75 5C8.75 5.41421 9.08579 5.75 9.5 5.75V4.25ZM18.75 11C18.75 11.4142 19.0858 11.75 19.5 11.75C19.9142 11.75 20.25 11.4142 20.25 11H18.75ZM10.25 5C10.25 4.58579 9.91421 4.25 9.5 4.25C9.08579 4.25 8.75 4.58579 8.75 5H10.25ZM8.75 11C8.75 11.4142 9.08579 11.75 9.5 11.75C9.91421 11.75 10.25 11.4142 10.25 11H8.75ZM9.5 11.75C9.91421 11.75 10.25 11.4142 10.25 11C10.25 10.5858 9.91421 10.25 9.5 10.25V11.75ZM5.5 10.25C5.08579 10.25 4.75 10.5858 4.75 11C4.75 11.4142 5.08579 11.75 5.5 11.75V10.25ZM9.5 10.25C9.08579 10.25 8.75 10.5858 8.75 11C8.75 11.4142 9.08579 11.75 9.5 11.75V10.25ZM19.5 11.75C19.9142 11.75 20.25 11.4142 20.25 11C20.25 10.5858 19.9142 10.25 19.5 10.25V11.75ZM6.25 11C6.25 10.5858 5.91421 10.25 5.5 10.25C5.08579 10.25 4.75 10.5858 4.75 11H6.25ZM20.25 11C20.25 10.5858 19.9142 10.25 19.5 10.25C19.0858 10.25 18.75 10.5858 18.75 11H20.25ZM9.5 4.25C6.87665 4.25 4.75 6.37665 4.75 9H6.25C6.25 7.20507 7.70507 5.75 9.5 5.75V4.25ZM4.75 9V11H6.25V9H4.75ZM9.5 5.75H15.5V4.25H9.5V5.75ZM15.5 5.75C17.2949 5.75 18.75 7.20507 18.75 9H20.25C20.25 6.37665 18.1234 4.25 15.5 4.25V5.75ZM18.75 9V11H20.25V9H18.75ZM8.75 5V11H10.25V5H8.75ZM9.5 10.25H5.5V11.75H9.5V10.25ZM9.5 11.75H19.5V10.25H9.5V11.75ZM4.75 11V15H6.25V11H4.75ZM4.75 15C4.75 17.6234 6.87665 19.75 9.5 19.75V18.25C7.70507 18.25 6.25 16.7949 6.25 15H4.75ZM9.5 19.75H15.5V18.25H9.5V19.75ZM15.5 19.75C18.1234 19.75 20.25 17.6234 20.25 15H18.75C18.75 16.7949 17.2949 18.25 15.5 18.25V19.75ZM20.25 15V11H18.75V15H20.25Z"
-                    fill="#000000"
+                    fill="#fff"
                   ></path>
                 </g>
               </svg>
@@ -94,20 +92,19 @@
           <Router-link
             to="/store"
             @click="emits('menuState', props.isMenu)"
-            class="block p-2 text-sm mb-6 active:scale-105 active:bg-orange-300 transition-all hover:bg-orange-400 hover:text-white rounded font-semibold"
-            active-class="bg-orange-400 text-white"
+            class="block p-2 text-sm mb-6 transition- rounded text-white"
           >
             <div class="flex gap-5">
-              <FontAwesomeIcon :icon="faStore" size="xl" />
+              <FontAwesomeIcon :icon="faStore" size="xl" color="text-white" />
 
               <span> Store </span>
             </div>
           </Router-link>
         </li>
-        <li class="collections pl-2 mb-6 w-full transition-all duration-300 ease-in-out">
+        <li class="collections pl-2 mb-6 w-full transition- duration-300 ease-in-out">
           <div class="flex gap-5 items-center">
-            <FontAwesomeIcon :icon="faCartShopping" size="xl" />
-            <span class="text-sm font-semibold"> Collections </span>
+            <FontAwesomeIcon :icon="faShirt" size="xl" color="white" />
+            <span class="text-sm text-white"> Collections </span>
             <svg
               class="mobile-svgs"
               viewBox="0 0 32 32"
@@ -123,26 +120,25 @@
                 <g id="icomoon-ignore"></g>
                 <path
                   d="M19.159 16.767l0.754-0.754-6.035-6.035-0.754 0.754 5.281 5.281-5.256 5.256 0.754 0.754 3.013-3.013z"
-                  fill="#000000"
+                  fill="#fff"
                 ></path>
               </g>
             </svg>
           </div>
           <!-- Wrapped/Nested (Men and Women) route-->
           <ul class="hidden mt-2">
-            <li class="mb-2 p-2">Men</li>
-            <li class="mb-2 p-2">Women</li>
+            <li class="mb-2 p-2 text-white">Men</li>
+            <li class="mb-2 p-2 text-white">Women</li>
           </ul>
         </li>
         <li class="w-full">
           <Router-link
             to="/cart-store"
             @click="emits('menuState', props.isMenu)"
-            class="block p-2 text-sm mb-6 active:scale-105 active:bg-orange-300 transition-all hover:bg-orange-400 hover:text-white rounded font-semibold"
-            active-class="bg-orange-400 text-white"
+            class="block p-2 text-sm mb-6 transition- rounded text-white"
           >
             <div class="flex gap-5">
-              <FontAwesomeIcon :icon="faShoePrints" size="xl" />
+              <FontAwesomeIcon :icon="faShoePrints" size="xl" color="text-white" />
 
               <span> Footwares </span>
             </div>
@@ -152,11 +148,10 @@
           <Router-link
             to="/cart-store"
             @click="emits('menuState', props.isMenu)"
-            class="block p-2 text-sm mb-6 active:scale-105 active:bg-orange-300 transition-all hover:bg-orange-400 hover:text-white rounded font-semibold"
-            active-class="bg-orange-400 text-white"
+            class="block p-2 text-sm mb-6 transition- rounded text-white"
           >
             <div class="flex gap-5">
-              <FontAwesomeIcon :icon="faCartShopping" size="xl" />
+              <FontAwesomeIcon :icon="faCartShopping" size="xl" color="text-white" />
 
               <span> Shopping Cart </span>
             </div>
@@ -189,12 +184,13 @@
         <p class="text-sm font-semibold">Sign Out</p>
       </div>
       <div class="flex text-center justify-center mx-5" v-else>
-        <router-link
-          name="login"
-          to="/login"
-          class="bg-black text-white text-sm w-full p-2 hover:opacity-90 rounded"
-          >Sign In</router-link
+        <button
+          title="Sign In"
+          class="bg-blue-600 text-white text-sm w-full p-3 text-semibold rounded"
+          @click="handleLoginRoute"
         >
+          Sign In
+        </button>
       </div>
     </div>
   </transition>
@@ -226,6 +222,10 @@ const emits = defineEmits(['menuState'])
 
 // Auth store
 const store = authStore()
+
+const handleLoginRoute = () => {
+  window.location.href = '/login'
+}
 </script>
 
 
@@ -255,10 +255,33 @@ const store = authStore()
 .collections:hover .mobile-svgs {
   rotate: 90deg;
 }
+a {
+  padding: 0.5rem;
+}
+
+a:hover {
+  background: linear-gradient(315deg, orange, goldenrod);
+  color: #fff;
+}
+.router-link-active,
+.router-link-exact-active {
+  background: linear-gradient(315deg, orange, goldenrod);
+  color: #fff;
+}
+
+.mobile-menu {
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
 .collections:hover .hidden {
   display: block;
+
   li:hover {
-    background: rgb(237, 126, 30);
+    background: linear-gradient(315deg, orange, goldenrod);
     border-radius: 0.32rem;
     color: #fff;
   }
