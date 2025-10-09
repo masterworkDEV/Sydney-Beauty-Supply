@@ -37,7 +37,7 @@
                 class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"
               ></span>
               <span
-                class="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-[#219ebc]"
+                class="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-blue-600"
                 >{{ slide.button }}</span
               >
             </router-link>

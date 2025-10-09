@@ -4,11 +4,14 @@ import { createPinia } from 'pinia'
 import router from './routes/router'
 import App from './App.vue'
 import VueLazyload from 'vue-lazyload'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 const app = createApp(App)
 
-import Toast from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
+app.use(createPinia())
+
+app.use(router)
 
 const options = {
   position: 'top-right',
@@ -42,11 +45,5 @@ app.use(VueLazyload, {
     'touchmove',
     'animationend',
   ],
-  // ... other options
 })
-
-app.use(createPinia())
-
-app.use(router)
-
 app.mount('#app')

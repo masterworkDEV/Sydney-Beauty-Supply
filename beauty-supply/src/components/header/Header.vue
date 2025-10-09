@@ -1,7 +1,7 @@
 <template>
   <header v-if="header.navState">
     <div
-      :class="headerState && 'active'"
+      :class="headerState && 'bg-white dark:bg-[#121212]'"
       class="header bg-transparent fixed right-0 left-0 top-0 py-6 max-sm:py-4 flex items-center justify-between px-24 max-xl:px-20 max-md:px-14 max-sm:px-10 transition-all duration-300 ease-in-out z-20"
       ref="headerRef"
     >

@@ -313,6 +313,7 @@
             </div>
 
             <a
+              @click.prevent="handleProductOrder"
               href="#"
               class="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >Proceed to Checkout</a
@@ -381,6 +382,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useCart } from '@/stores/cartController'
+import { dataStore } from '@/stores/dataStore'
+
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
+
+const handleProductOrder = () => {
+  toast.warning('Sorry, this app is still under development')
+}
+
+// Fontawesome Icon
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faAdd,
   faArrowAltCircleDown,
@@ -389,13 +402,10 @@ import {
   faTimes,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { useRoute } from 'vue-router'
 
 // components
 import Overlay from '@/components/Overlay.vue'
 import ProductCard from '@/components/ProductCard.vue'
-import { dataStore } from '@/stores/dataStore'
 
 const cart = useCart()
 const rawData = dataStore()

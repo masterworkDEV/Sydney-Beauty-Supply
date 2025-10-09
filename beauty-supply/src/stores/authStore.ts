@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 import apiClient from '../../api-folder/apiClient'
 import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-decode'
@@ -30,15 +31,13 @@ interface RegisterCredentials {
 }
 
 export const authStore = defineStore('auth-store', () => {
+  const toast = useToast()
   const accessToken = ref<string | null>(localStorage.getItem('accessToken'))
 
   const refreshToken = ref<string | null>(localStorage.getItem('refreshToken'))
   const storedUser = localStorage.getItem('user')
   // Vue router
   const router = useRouter()
-  onMounted(() => {
-    console.log(accessToken.value)
-  })
 
   const user = ref<User | null>(storedUser ? JSON.parse(storedUser) : null)
 
@@ -78,7 +77,7 @@ export const authStore = defineStore('auth-store', () => {
     })
   })
 
-  const authErrorMessage = ref<string | null>(null)
+  const authErrorMessage = ref<string | null>('')
 
   watch(accessToken, (newValue) => {
     if (newValue) {
@@ -125,7 +124,7 @@ export const authStore = defineStore('auth-store', () => {
       const response = await apiClient.post('/register', credentials)
       await response.data
       window.location.href = '/login'
-      alert('Account was created successfully')
+      toast.success(`Account created successfully `)
       return
     } catch (error: any) {
       handleAuthError(error)
@@ -140,8 +139,8 @@ export const authStore = defineStore('auth-store', () => {
       const newRefreshToken = userData.data.refreshToken
       user.value = userData.data.userInfo
       setTokens(newAccessToken, newRefreshToken)
-      alert(`Welcome back ${user.value?.username}`)
-      window.location.href = '/'
+      toast.success(`Welcome back ${user.value?.username}`)
+      router.push('/')
     } catch (error: any) {
       handleAuthError(error)
     }
@@ -155,7 +154,6 @@ export const authStore = defineStore('auth-store', () => {
       const response = await apiClient.get('/refresh')
       const userData = response.data
       const newAccessToken = userData.data.accessToken
-      console.log('Access token refreshed successfully:', newAccessToken)
       return newAccessToken
     } catch (error) {
       console.error('Failed to refresh access token:', error)
@@ -178,35 +176,36 @@ export const authStore = defineStore('auth-store', () => {
           (error.response.data as any)?.message || error.message,
         )
         authErrorMessage.value = (error.response.data as any)?.message
-        alert(authErrorMessage.value)
+
+        // ✅ FIX 2: Pass the string value (.value)
+        toast.error(authErrorMessage.value)
+
         localStorage.removeItem('accessToken') //clear access token
 
         return
       } else if (error.response.status === 409) {
-        console.warn(
-          'Registration/Login Error (409 Conflict):',
-          (error.response.data as any)?.message || error.message,
-        )
+        // ...
         authErrorMessage.value = (error.response.data as any)?.message
-        alert(authErrorMessage.value)
+        // ✅ FIX 2: Pass the string value (.value)
+        toast.error(authErrorMessage.value)
       }
       if (error.response.status === 404) {
         authErrorMessage.value = `This user does not exist: ${error.message}`
-        alert(authErrorMessage.value)
+        // ✅ FIX 2: Pass the string value (.value)
+        toast.error(authErrorMessage.value)
       } else {
-        console.error(
-          'Unhandled API Error (Status ' + error.response.status + '):',
-          error.response.data || error.message,
-        )
+        // ...
       }
     } else if (error.request) {
-      console.error('Network Error (No response received):', error.message, error)
+      // ...
       authErrorMessage.value = error.message
-      alert(authErrorMessage.value)
+      // ✅ FIX 2: Pass the string value (.value)
+      toast.error(authErrorMessage.value)
     } else {
-      console.error('Request Setup Error:', error.message, error)
+      // ...
       authErrorMessage.value = error.message
-      alert(authErrorMessage.value)
+      // ✅ FIX 2: Pass the string value (.value)
+      toast.error(authErrorMessage.value)
     }
   }
 

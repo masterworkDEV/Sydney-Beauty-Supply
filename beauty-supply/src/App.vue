@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoading" class="loader"></div>
 
-  <div class="app" v-else>
+  <div class="app bg-[#fff] dark:bg-[#121212] dark:text-white" v-else>
     <Header />
     <RouterView />
     <Footer />
@@ -46,10 +46,5 @@ html {
   font-weight: 400;
   scroll-behavior: smooth;
   height: 100%;
-}
-body {
-  background: #fff;
-  width: 100%;
-  height: 100vh;
 }
 </style>

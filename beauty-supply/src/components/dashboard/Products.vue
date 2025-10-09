@@ -225,9 +225,15 @@
               required
             >
               <option value="">Select category</option>
-              <option value="electronics">Electronics</option>
               <option value="apparel">Apparel</option>
-              <option value="books">Books</option>
+              <option value="footwear">Footwear</option>
+              <option value="accessories">Accessories</option>
+              <option value="casual">Casual Wear</option>
+              <option value="formal">Formal Wear/Attire</option>
+              <option value="sport">Sportswear/Activewear</option>
+              <option value="sleep">Sleepwear/Nightwear</option>
+              <option value="uniform">Workwear/Uniforms</option>
+              <option value="traditional">Ethnic/Traditional Clothing</option>
             </select>
           </div>
         </div>
@@ -489,7 +495,7 @@
             v-model="product.description"
             rows="3"
             placeholder="Write product description here"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            class="mt-1 p-6 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             required
           ></textarea>
         </div>
@@ -566,7 +572,7 @@
         </div>
       </form>
     </div>
-    <Overlay v-if="createProductModal" @click="handleCreateProductModal" />
+    <Overlay v-if="createProductModal"  />
   </main>
 </template>
 

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useToast } from 'vue-toastification'
 import { ref } from 'vue'
 
 interface Thumbnail {
@@ -41,6 +42,7 @@ interface CartItem extends Product {
 }
 
 export const useCart = defineStore('cart', () => {
+  const toast = useToast()
   const cartItems = ref<CartItem[]>([])
 
   const addToCart = (productToAdd: any) => {
@@ -48,13 +50,16 @@ export const useCart = defineStore('cart', () => {
     const existingItem = cartItems.value.find((item) => item._id === productToAdd._id)
     if (existingItem) {
       existingItem.quantity++
-      alert(`Updated quantity for ${existingItem.name}. New quantity: ${existingItem.quantity}`)
+      toast.info(
+        `Updated quantity for ${existingItem.name}, New quantity: ${existingItem.quantity}`,
+      )
+      // alert(`Updated quantity for ${existingItem.name}. New quantity: ${existingItem.quantity}`)
     } else {
       const newItem: CartItem = { ...productToAdd, quantity: 1 }
       cartItems.value.push(newItem)
-      alert(`Added ${newItem.name} to cart.`)
+      // alert(`Added ${newItem.name} to cart.`)
+      toast.success(`Added ${newItem.name} to cart.`)
     }
-    console.log('Current Cart:', cartItems.value)
   }
 
   const increaseCartQuantity = (productToIncrease: CartItem) => {

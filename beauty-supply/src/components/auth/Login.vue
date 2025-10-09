@@ -202,13 +202,20 @@ C318.115,0,375.068,22.126,419.404,58.936z"
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, computed } from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import image from '../../assets/images/login-image.jpg'
-
-// call navstate to toggle both and footer upon mount
+// use stores
+import { authStore } from '@/stores/authStore'
 import { navState } from '@/stores/navState'
+
+// Vue Toast
+import { useToast } from 'vue-toastification'
+
+//  Fontawesome
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faScissors } from '@fortawesome/free-solid-svg-icons'
+
+// Static Image
+import image from '../../assets/images/login-image.jpg'
 
 const updateNavState = navState()
 onMounted(() => {
@@ -223,16 +230,14 @@ onUnmounted(() => {
 
 const showPassword = ref<boolean>(false) // Toggle password type
 
-// use auth store
-import { authStore } from '@/stores/authStore'
-
 const store = authStore()
+const toast = useToast()
 
 const email = ref<string>('')
 const password = ref<string>('')
 const emailError = ref<string | null>(null)
 const passwordError = ref<string | null>(null)
-const isLoading = ref<boolean>(false) // New loading state variable
+const isLoading = ref<boolean>(false)
 
 // --- Validation Functions ---
 
@@ -275,11 +280,13 @@ const handleLogin = async () => {
       })
     } catch (error) {
       // set error comes in here but, i have ones that alerts a user on their auth status.
+      toast.error('Invalid credentials, try again.')
       console.error('Login failed:', error)
     } finally {
       isLoading.value = false
     }
   } else {
+    toast.error('Invalid credentials, try again.')
     console.error('Form has validation errors.')
   }
 }
@@ -291,12 +298,11 @@ svg {
   height: 25px;
 }
 
-/* From Uiverse.io by JohnnyCSilva */
 .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #ffffff;
+
   width: 100%;
   border-radius: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
