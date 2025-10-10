@@ -1,4 +1,3 @@
-// Example inside '@/stores/intersectionObserver.ts' (or similar)
 import { defineStore } from 'pinia'
 import { ref, watch, onUnmounted } from 'vue'
 

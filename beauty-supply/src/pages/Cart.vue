@@ -198,7 +198,7 @@
               </h3>
               <div class="mt-6 grid grid-cols-3 gap-4 sm:mt-8">
                 <!-- product card -->
-                <div v-for="product in rawData.products" :key="product._id">
+                <div v-for="product in rawData.products?.slice(0, 3)" :key="product._id">
                   <ProductCard
                     :key="product._id"
                     :_id="product._id"
