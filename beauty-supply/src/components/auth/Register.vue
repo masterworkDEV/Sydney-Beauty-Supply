@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-row-reverse items-center max-sm:pt-10">
+  <main class="h-screen flex flex-row-reverse items-center max-sm:pt-10">
     <div class="w-2/4 max-lg:w-3/4 max-md:w-full h-full mx-10 max-xl:mx-7 max-sm:mx-5">
       <router-link
         name="logo"
@@ -11,7 +11,31 @@
       <div class="my-10">
         <h1 class="text-5xl max-xl:text-4xl max-sm:text-2xl font-semibold">Register An Account</h1>
       </div>
-      <form class="form w-full" @submit.prevent="handleLogin">
+      <form class="form w-full" @submit.prevent="handleNewUser">
+        <div class="flex-column">
+          <label>Username </label>
+        </div>
+        <div class="inputForm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+            <g data-name="Layer 3" id="Layer_3">
+              <path
+                d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z"
+              ></path>
+            </g>
+          </svg>
+          <input
+            placeholder="Enter your Username"
+            class="input"
+            type="text"
+            name="name"
+            v-model="username"
+            :class="usernameError ? 'border-red-500' : 'border-gray-400'"
+            @input="validateUsername"
+            :disabled="isLoading"
+          />
+        </div>
+        <p v-if="usernameError" class="text-red-500 text-xs mb-3">{{ usernameError }}</p>
+
         <div class="flex-column">
           <label>Email </label>
         </div>
@@ -256,7 +280,7 @@ C318.115,0,375.068,22.126,419.404,58.936z"
         </div>
       </form>
     </div>
-    <div class="w-full h-screen relative max-sm:hidden">
+    <div class="w-full h-full relative max-sm:hidden">
       <img :src="image" alt="login background image" class="w-full h-full object-cover" />
     </div>
   </main>
@@ -296,9 +320,11 @@ const confirmShowPassword = ref<boolean>(false) // Toggle password type
 const store = authStore()
 const toast = useToast()
 
+const username = ref<string>('')
 const email = ref<string>('')
 const password = ref<string>('')
 const confirmPassword = ref<string>('')
+const usernameError = ref<string | null>(null)
 const emailError = ref<string | null>(null)
 const passwordError = ref<string | null>(null)
 const confirmPasswordError = ref<string | null>(null)
@@ -306,6 +332,15 @@ const isLoading = ref<boolean>(false)
 
 // --- Validation Functions ---
 
+const validateUsername = () => {
+  if (!username.value) {
+    usernameError.value = 'Username is required.'
+  } else if (username.value.length < 5) {
+    usernameError.value = 'Username cannot be less than 5 characters'
+  } else {
+    usernameError.value = null
+  }
+}
 const validateEmail = () => {
   if (!email.value) {
     emailError.value = 'Email address is required.'
@@ -339,9 +374,11 @@ const handlePasswordConfirm = () => {
 // --- Form Validation Check ---
 const isFormValid = computed(() => {
   return (
+    !usernameError.value &&
     !emailError.value &&
     !passwordError.value &&
     !confirmPasswordError.value &&
+    username.value &&
     email.value &&
     password.value &&
     confirmPassword.value
@@ -349,7 +386,8 @@ const isFormValid = computed(() => {
 })
 
 // --- Login Handler ---
-const handleLogin = async () => {
+const handleNewUser = async () => {
+  validateUsername()
   validateEmail()
   validatePassword()
   handlePasswordConfirm()
@@ -357,7 +395,8 @@ const handleLogin = async () => {
   if (isFormValid.value) {
     isLoading.value = true
     try {
-      await store.handleLogin({
+      await store.handleRegisteration({
+        username: username.value,
         email: email.value,
         password: password.value,
       })

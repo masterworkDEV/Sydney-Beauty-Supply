@@ -97,8 +97,7 @@
               v-else-if="useAuthStore.isAuthenticated && !useAuthStore.user?.image"
               class="relative bg-gray-700 w-8 h-8 border-2 p-2 border-gray-900 text-white text-sm uppercase rounded-full flex justify-center items-center text-center"
             >
-              {{ useAuthStore.user?.firstName.slice(0, 1)
-              }}{{ useAuthStore.user?.lastName.slice(0, 1) }}
+              {{ useAuthStore.user?.email.slice(0, 1) }}{{ useAuthStore.user?.email.slice(1, 2) }}
             </div>
           </li>
 
@@ -120,8 +119,8 @@
                   v-else-if="useAuthStore.isAuthenticated && !useAuthStore.user?.image"
                   class="relative bg-gray-700 border-2 border-black p-1 text-xl text-white uppercase rounded-full flex justify-center items-center text-center"
                 >
-                  {{ useAuthStore.user?.firstName.slice(0, 1)
-                  }}{{ useAuthStore.user?.lastName.slice(0, 1) }}
+                  {{ useAuthStore.user?.email.slice(0, 1)
+                  }}{{ useAuthStore.user?.email.slice(1, 2) }}
                 </div>
                 <div class="flex flex-col">
                   <span class="capitalize">

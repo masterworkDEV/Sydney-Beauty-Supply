@@ -43,7 +43,7 @@
             v-else-if="store.isAuthenticated && !store.user?.image"
             class="bg-orange-300 w-8 h-8 border border-orange-500 text-white uppercase rounded-full flex justify-center items-center text-center"
           >
-            <b> {{ store.user?.firstName.slice(0, 1) }}{{ store.user?.lastName.slice(0, 1) }}</b>
+            <b> {{ store.user?.username.slice(0, 1) }}{{ store.user?.username.slice(1, 2) }}</b>
           </div>
           <a href="#" class="capitalize font-semibold"> {{ store.user?.username }} </a>
         </li>
