@@ -31,13 +31,13 @@
             </p>
             <router-link
               to="/store"
-              class="relative inline-flex items-center justify-start inline-block w-2/4 px-5 py-4 overflow-hidden font-medium transition-all rounded-full bg-blue-600 hover:bg-white group"
+              class="relative inline-flex items-center justify-start inline-block w-2/4 px-5 py-4 overflow-hidden font-medium transition-all rounded-full bg-cyan-900 hover:bg-white group"
             >
               <span
                 class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"
               ></span>
               <span
-                class="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-blue-600"
+                class="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-yellow-500"
                 >{{ slide.button }}</span
               >
             </router-link>

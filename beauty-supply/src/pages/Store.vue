@@ -182,6 +182,6 @@ watch(
 .router-link-active,
 .router-link-exact-active {
   padding: 0.3rem;
-  background: linear-gradient(315deg, orange, goldenrod);
+  background: rgb(255, 225, 0);
 }
 </style>

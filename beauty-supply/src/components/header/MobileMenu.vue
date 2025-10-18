@@ -186,7 +186,7 @@
       <div class="flex text-center justify-center mx-5" v-else>
         <button
           title="Sign In"
-          class="bg-blue-600 text-white text-sm w-full p-3 text-semibold rounded"
+          class="bg-black text-white text-sm w-full p-3 text-semibold rounded"
           @click="handleLoginRoute"
         >
           Sign In
@@ -260,12 +260,12 @@ a {
 }
 
 a:hover {
-  background: linear-gradient(315deg, orange, goldenrod);
+  background: rgb(255, 225, 0);
   color: #fff;
 }
 .router-link-active,
 .router-link-exact-active {
-  background: linear-gradient(315deg, orange, goldenrod);
+  background: rgb(255, 225, 0);
   color: #fff;
 }
 
@@ -281,7 +281,7 @@ a:hover {
   display: block;
 
   li:hover {
-    background: linear-gradient(315deg, orange, goldenrod);
+    background: rgb(255, 225, 0);
     border-radius: 0.32rem;
     color: #fff;
   }

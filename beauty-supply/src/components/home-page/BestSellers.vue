@@ -29,7 +29,7 @@
 
     <div
       v-else
-      class="mt-10 mb-20 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-10 max-sm:gap-5 max-sm:mx-5 transition-all duration-1500 ease-in-out"
+      class="mt-10 mb-20 grid grid-cols-4 max-xl:grid-cols-3 max-sm:grid-cols-2 gap-5 max-sm:mx-5 transition-all duration-1500 ease-in-out"
       :class="{
         'is-visible': intersectionObserver.isVisible,
         'not-visible': !intersectionObserver.isVisible,
@@ -47,34 +47,6 @@
           :discount="product.discount"
           :description="product.description"
         />
-      </div>
-    </div>
-    <div
-      class="bg-[#03045e] w-full p-14 transition-all duration-2500 ease-in-out"
-      :class="{
-        'is-visible': intersectionObserver.isVisible,
-        'not-visible': !intersectionObserver.isVisible,
-      }"
-      ref="sectionElementRef"
-    >
-      <h2
-        class="text-5xl mb-5 max-sm:mb-3 max-lg:text-4xl max-sm:text-3xl text-center text-white font-semibold"
-      >
-        Christmas Collection <br />Arriving Soon
-      </h2>
-      <div class="flex justify-center gap-5 max-sm:flex-col">
-        <div class="border border-gray-300 p-10 text-center rounded-lg">
-          <h3 class="mb-3 text-3xl font-semibold text-white">3</h3>
-          <p class="text-white">Months</p>
-        </div>
-        <div class="border border-gray-300 p-10 text-center rounded-lg">
-          <h3 class="mb-3 text-3xl font-semibold text-white">8</h3>
-          <p class="text-white">Days</p>
-        </div>
-        <div class="border border-gray-300 p-10 text-center rounded-lg">
-          <h3 class="mb-3 text-3xl font-semibold text-white">3</h3>
-          <p class="text-white">Hours</p>
-        </div>
       </div>
     </div>
   </section>

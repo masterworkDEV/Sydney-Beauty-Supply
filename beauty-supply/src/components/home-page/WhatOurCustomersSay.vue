@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-[#f1f1f1] mt-20 p-20 max-sm:p-10 max-sm:mt-14 w-full">
+  <section class="bg-gray-50 mt-20 p-20 max-sm:p-10 max-sm:mt-14 w-full">
     <div
       class="text-center transition-all duration-1000"
       :class="{

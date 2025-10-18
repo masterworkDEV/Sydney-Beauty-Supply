@@ -2,50 +2,52 @@
 
 <template>
   <div
-    class="space-y-4 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+    class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700"
   >
     <router-link
       :to="{ name: 'product-details', params: { productID: props._id, productName: props.name } }"
     >
       <img
-        class="mx-auto h-44 w-full dark:hidden"
+        class="mx-auto h-60 w-full dark:hidden object-cover"
         :src="props.thumbnail?.imageUrl"
         :alt="`${props.name} image`"
       />
       <img
-        class="mx-auto hidden h-1/4 w-full dark:block"
+        class="mx-auto hidden h-60 w-full dark:block object-cover"
         :src="props.thumbnail?.imageUrl"
         :alt="`${props.name} image`"
       />
     </router-link>
 
-    <div class="p-4 max-sm:p-2">
-      <a
+    <div class="px-4 max-sm:px-2 my-2">
+      <router-link
+        :to="{ name: 'product-details', params: { productId: props._id } }"
         href="#"
-        class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
-        >{{ props.name }}</a
+        class="font-semibold leading-tight text-gray-900 hover:underline dark:text-white max-sm:text-sm"
       >
-      <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+        {{ props.name?.length < 15 ? props.name : props.name?.slice(0, 15).concat('...') }}
+      </router-link>
+      <p class="font-normal text-gray-500 dark:text-gray-400 text-sm max-sm:text-xs">
         {{
-          props.description?.length < 50
+          props.description?.length < 40
             ? props.description
-            : props.description?.slice(0, 50).concat('...')
+            : props.description?.slice(0, 40).concat('...')
         }}
       </p>
     </div>
     <div class="px-4 max-sm:px-2">
-      <p class="text-lg font-bold text-gray-900 dark:text-white">
+      <p class="font-bold text-gray-900 dark:text-white max-sm:text-sm">
         <span class="line-through"> NGN {{ props.price }} </span>
       </p>
-      <p class="text-lg font-bold leading-tight text-red-600 dark:text-red-500">
+      <p class="font-bold leading-tight text-red-600 dark:text-red-500 max-sm:text-sm">
         NGN {{ currentPrice(props.price) }}
       </p>
     </div>
-    <div class="flex items-center gap-2.5 p-4 max-sm:p-2">
+    <div class="flex items-center gap-2.5 px-4 max-sm:px-2 my-2">
       <button
         data-tooltip-target="favourites-tooltip-1"
         type="button"
-        class="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white p-2.5 max-sm:p-1.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+        class="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white p-2.5 max-sm:p-1 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
       >
         <svg
           class="h-5 w-5"
@@ -66,7 +68,7 @@
       <div
         id="favourites-tooltip-1"
         role="tooltip"
-        class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
+        class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
       >
         Add to favourites
         <div class="tooltip-arrow" data-popper-arrow></div>
@@ -74,10 +76,10 @@
       <button
         @click="cart.addToCart(props)"
         type="button"
-        class="inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-3 max-sm:py-1.5 text-sm max-sm:text-xs font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+        class="inline-flex w-full items-center justify-center text-center rounded-lg bg-black px-5 max-sm:px-3 py-3 max-sm:py-1 text-sm max-sm:text-xs font-medium text-white hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
       >
         <svg
-          class="-ms-2 me-2 h-5 w-5"
+          class="-ms-2 me-2 h-5 w-5 max-sm:h-3 max-sm:w-3"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="24"

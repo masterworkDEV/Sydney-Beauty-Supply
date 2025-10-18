@@ -219,7 +219,7 @@
               <router-link
                 @click="profileDropdown = !profileDropdown"
                 to="/login"
-                class="block w-full text-center p-2 bg-black text-white rounded hover:bg-black hover:shadow-lg transition-all group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out"
+                class="block w-full text-center p-2 bg-black text-white rounded hover:opacity-90 hover:shadow-lg transition-all group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out"
               >
                 <svg
                   class="animate-spin hidden group-active:block mx-auto"
@@ -352,17 +352,17 @@ onUnmounted(() => {
 }
 
 .link {
-  padding: 0.3rem;
-  font-size: 16px;
+  padding: 0.4rem;
+  font-size: 14px;
   &:hover {
-    background: linear-gradient(315deg, orange, goldenrod);
+    background: rgb(255, 225, 0);
   }
 }
 
 .router-link-active,
 .router-link-exact-active {
-  padding: 0.3rem;
-  background: linear-gradient(315deg, orange, goldenrod);
+  padding: 0.4rem;
+  background: rgb(255, 225, 0);
 }
 
 .menu-btn {
