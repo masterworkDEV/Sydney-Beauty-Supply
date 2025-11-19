@@ -10,7 +10,7 @@
     <vueper-slide v-for="(slide, i) in details" :key="i">
       <template #content>
         <div
-          class="vueperslide__content-wrapper slide-container h-full w-full flex justify-end items-center text-center relative"
+          class="vueperslide__content-wrapper slide-container h-full max-sm:h-2/4 w-full flex justify-end items-center text-center relative"
           style="flex-direction: row"
         >
           <img
@@ -18,15 +18,14 @@
             alt=""
             class="image h-full w-full absolute right-0 left-0 bottom-0 top-0 z-0 object-cover"
           />
-          <div class="image-layer"></div>
 
           <div class="mx-24 max-xl:mx-20 max-md:mx-14 max-sm:mx-10 z-20">
             <h1
-              class="animate__animated animate__fadeIn text-9xl text-white max-xl:text-8xl max-lg:text-7xl max-md:text-6xl mb-3 text-center font-semibold"
+              class="animate__animated animate__fadeIn text-9xl text-white max-xl:text-8xl max-lg:text-7xl max-md:text-6xl mb-3 max-sm:mb-2 max-sm:text-4xl text-center font-bold"
             >
               {{ slide.title }}
             </h1>
-            <p class="text-white mb-24">
+            <p class="text-white mb-24 max-sm:mb-4">
               {{ slide.description }}
             </p>
             <router-link
@@ -100,10 +99,10 @@ import 'vueperslides/dist/vueperslides.css'
 }
 @media (max-width: 600px) {
   .vueperslides__inner {
-    height: 80vh;
+    height: 50vh;
   }
   .vueperslides__parallax-wrapper {
-    height: 80vh;
+    height: 50vh;
   }
 }
 .image-layer {

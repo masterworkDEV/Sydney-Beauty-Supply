@@ -1,7 +1,7 @@
 <template>
   <footer
     v-if="footer.footerState"
-    class="mt-14 pt-24 px-24 pb-0 max-xl:pt-20 max-xl:px-20 max-lg:pt-16 max-lg:px-20 max-md:pt-14 max-md:px-14 max-sm:pt-5 max-sm:px-5 border-t border-[#ddd]"
+    class="mt-14 pt-24 px-24 pb-0 max-xl:pt-20 max-xl:px-20 max-lg:pt-16 max-lg:px-20 max-md:pt-14 max-md:px-14 max-sm:pt-5 max-sm:mt-32 max-sm:px-5 border-t border-[#ddd] sticky"
   >
     <div class="flex gap-40 max-xl:gap-30 max-lg:gap-10 max-lg:flex-col">
       <div>

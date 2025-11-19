@@ -265,7 +265,7 @@ a:hover {
 }
 .router-link-active,
 .router-link-exact-active {
-  background: rgb(255, 225, 0);
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
   color: #fff;
 }
 
@@ -281,7 +281,7 @@ a:hover {
   display: block;
 
   li:hover {
-    background: rgb(255, 225, 0);
+    background: linear-gradient(315deg, #81c3d7, #2f6690);
     border-radius: 0.32rem;
     color: #fff;
   }

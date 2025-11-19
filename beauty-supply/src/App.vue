@@ -45,6 +45,5 @@ html {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   scroll-behavior: smooth;
-  height: 100%;
 }
 </style>

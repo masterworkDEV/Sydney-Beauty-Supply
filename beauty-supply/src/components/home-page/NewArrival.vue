@@ -132,21 +132,21 @@ const filteredList = computed(() => {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background: rgb(255, 225, 0);
-  background-color: rgb(255, 225, 0);
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease-in-out;
 }
 
 .gradient-black-btn:hover {
-  background: rgb(255, 225, 0);
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
   transform: translateY(-2px);
 }
 
 .gradient-black-btn:active {
-  background: rgb(255, 225, 0);
+  background: linear-gradient(315deg, #81c3d7, #2f6690);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transform: translateY(0);
 }

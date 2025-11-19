@@ -303,10 +303,13 @@
                   $
 
                   {{
-                    cart.cartItems.reduce(
-                      (acc, product) => acc + parseInt(product.price.toFixed(2)) * product.quantity,
-                      0
-                    )
+                    !itemIdToDelete === null
+                      ? 0
+                      : cart.cartItems.reduce(
+                          (acc, product) =>
+                            acc + parseInt(product.price.toFixed(2)) * product.quantity,
+                          0
+                        )
                   }}
                 </dd>
               </dl>
